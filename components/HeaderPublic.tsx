@@ -2,8 +2,11 @@ import Image from "next/image";
 
 import { Menubar } from "primereact/menubar";
 import { Button } from "primereact/button";
+import { useRouter } from "next/router";
 
 export default function HeaderPublic(){
+
+    const router = useRouter();
     const items = [
         {
           label: "Sobre Nós",
@@ -29,7 +32,7 @@ export default function HeaderPublic(){
     
       const end = (
         <>
-          <Button className="p-button-primary p-button-sm mr-1" label="Entrar" />
+          <Button className="p-button-primary p-button-sm mr-1" label="Entrar" onClick={ (event)=> {event.preventDefault(); router.push('/login')}} />
         </>
       );
     return (      

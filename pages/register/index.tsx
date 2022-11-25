@@ -1,6 +1,6 @@
 // React e Next
 import Head from "next/head";
-import { useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 
 // Supabase
 import { supabase } from "../../services/SupaBase";
@@ -10,7 +10,6 @@ import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
-import { InputMask } from "primereact/inputmask";
 
 // Models
 import { newUser, User } from "../../models/user_model";
@@ -19,7 +18,7 @@ import { Profile, newProfile } from "../../models/profile_model";
 // Layout
 import { LayoutLoginRegister } from "../../components/LayoutLoginRegister";
 
-export default function Register(props: any) {
+export default function Register() {
   // ref(s)
   const toast = useRef(null);
 
@@ -27,21 +26,21 @@ export default function Register(props: any) {
   const [user, setUser] = useState<User>(newUser);
   const [profile, setProfile] = useState<Profile>(newProfile);
 
-  const handleChangeProfile = (e: any) => {
+  const handleChangeProfile = (e: ChangeEvent<HTMLInputElement>) => {
     setProfile((prev: Profile) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
 
-  const handleChangeUser = (e: any) => {
+  const handleChangeUser = (e: ChangeEvent<HTMLInputElement>) => {
     setUser((prev: User) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(profile);
     console.log(user);
@@ -104,6 +103,7 @@ export default function Register(props: any) {
                   title="senha"
                   toggleMask
                   required
+                  inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
                   feedback={false}
                   value={user.senha}
                   onChange={handleChangeUser}
@@ -125,6 +125,7 @@ export default function Register(props: any) {
                   toggleMask
                   required
                   feedback={false}
+                  inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
                   onChange={handleChangeUser}
                 />
                 <label htmlFor="senha">
@@ -132,13 +133,15 @@ export default function Register(props: any) {
                 </label>
               </span>
             </div>
-            <Button
-              className="p-button-primary"
-              label="Cadastre-se"
-              icon="pi pi-check"
-              iconPos="right"
-              type="submit"
-            />
+            <div className="field col">
+              <Button
+                className="p-button-primary"
+                label="Cadastre-se"
+                icon="pi pi-check"
+                iconPos="right"
+                type="submit"
+              />
+            </div>
           </div>
         </form>
       </LayoutLoginRegister>

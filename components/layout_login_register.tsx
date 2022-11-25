@@ -6,7 +6,11 @@ import Image from "next/image";
 import { Card } from "primereact/card";
 import { Sidebar } from "primereact/sidebar";
 
-export function LayoutLoginRegister({ children }: any) {
+interface LayoutLoginRegisterProps {
+  children: React.ReactNode;
+}
+
+export function LayoutLoginRegister({ children }: LayoutLoginRegisterProps) {
   return (
     <>
       <div style={{ width: "100%", height: "100%", position: "fixed" }}>

@@ -6,7 +6,17 @@ import Image from "next/image";
 import { Card } from "primereact/card";
 import { Sidebar } from "primereact/sidebar";
 
-export function LayoutLoginRegister({ children }: any) {
+interface LayoutLoginRegisterProps {
+  title: string;
+  subtitle: string;
+  children: React.ReactNode;
+}
+
+export function LayoutLoginRegister({
+  children,
+  title,
+  subtitle,
+}: LayoutLoginRegisterProps) {
   return (
     <>
       <div style={{ width: "100%", height: "100%", position: "fixed" }}>
@@ -39,7 +49,18 @@ export function LayoutLoginRegister({ children }: any) {
               />
             </Link>
           </div>
-          <Card className="shadow-none border-noround">{children}</Card>
+          <Card className="shadow-4 flex-column align-items-center justify-content-center ">
+            <h2
+              className="flex justify-content-center mt-0"
+              style={{ color: "#170E49" }}
+            >
+              {title}
+            </h2>
+            <h4 className="flex justify-content-center text-secondary mb-0">
+              {subtitle}
+            </h4>
+            {children}
+          </Card>
         </Sidebar>
       </div>
     </>

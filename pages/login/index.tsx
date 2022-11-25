@@ -1,5 +1,6 @@
-import { useState } from "react";
+import Link from "next/link";
 import Head from "next/head";
+import { FormEvent, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Button } from "primereact/button";
@@ -12,7 +13,7 @@ export default function Login() {
   const [login, setLogin] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(login, senha);
   };
@@ -61,6 +62,7 @@ export default function Login() {
                 required
                 name="password"
                 onChange={(e) => setSenha(e.target.value)}
+                inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
                 feedback={false}
                 toggleMask
               />
@@ -72,7 +74,8 @@ export default function Login() {
           </div>
         </form>
         <p className="flex justify-content-center gap-2">
-          Não possui conta? <a href="/register">Cadastre-se</a>
+          Não possui conta?
+          <Link href="/register">Cadastre-se</Link>
         </p>
       </LayoutLoginRegister>
     </>

@@ -24,6 +24,7 @@ export default function HeaderPublic() {
       alt="Logo ManaMano"
       height={40}
       width={40}
+      priority
       style={{ aspectRatio: 1 }}
     />
   );

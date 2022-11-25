@@ -27,7 +27,7 @@ export function LayoutLoginRegister({
         }}
       >
         <Image
-          src={"/background-manamano.jpg"}
+          src="/background-manamano.jpg"
           alt="background-image"
           fill
           priority

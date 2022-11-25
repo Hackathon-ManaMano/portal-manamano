@@ -19,24 +19,23 @@ export default function HeaderPublic() {
   ];
 
   const start = (
-    <>
-      <Image
-        src="/logo-manamano.png"
-        alt="Logo ManaMano"
-        height={40}
-        width={120}
-      />
-    </>
+    <Image
+      src="/icon-manamano.png"
+      alt="Logo ManaMano"
+      height={40}
+      width={40}
+      style={{ aspectRatio: 1 }}
+    />
   );
 
   const end = (
-    <>
-      <Button
-        className="p-button-primary p-button-sm mr-1"
-        label="Entrar"
-        onClick={() => router.push("/login")}
-      />
-    </>
+    <Button
+    label="Entrar"
+    iconPos="right"
+    icon="pi pi-sign-in"
+    className="p-button-primary"
+      onClick={() => router.push("/login")}
+    />
   );
   return <Menubar model={items} start={start} end={end} />;
 }

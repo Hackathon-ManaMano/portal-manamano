@@ -19,7 +19,13 @@ export function LayoutLoginRegister({
 }: LayoutLoginRegisterProps) {
   return (
     <>
-      <div style={{ width: "100%", height: "100%", position: "fixed" }}>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          position: "fixed",
+        }}
+      >
         <Image
           src={"/background-manamano.jpg"}
           alt="background-image"
@@ -27,42 +33,43 @@ export function LayoutLoginRegister({
           priority
           quality={100}
           sizes="
-            (max-width: 768px) 100vw,
-            (max-width: 1200px) 100vw,
-            100vw"
+          (max-width: 768px) 100vw,
+          (max-width: 1200px) 100vw,
+          100vw"
+          style={{ objectFit: "cover", overflow: "hidden" }}
         />
-        <Sidebar
-          visible={true}
-          modal={false}
-          position="right"
-          onHide={() => {}}
-          showCloseIcon={false}
-          style={{ width: "600px" }}
-        >
-          <div className="flex justify-content-center">
-            <Link href="/">
-              <Image
-                src="/logo-completo-manamano.png"
-                alt="logo"
-                height={130}
-                width={170}
-              />
-            </Link>
-          </div>
-          <Card className="shadow-4 mt-4 flex-column align-items-center justify-content-center ">
-            <h2
-              className="flex justify-content-center mt-0"
-              style={{ color: "#170E49" }}
-            >
-              {title}
-            </h2>
-            <h4 className="flex justify-content-center text-secondary mb-0">
-              {subtitle}
-            </h4>
-            {children}
-          </Card>
-        </Sidebar>
       </div>
+      <Sidebar
+        visible={true}
+        modal={false}
+        position="right"
+        onHide={() => {}}
+        showCloseIcon={false}
+        style={{ width: "500px" }}
+      >
+        <div className="flex justify-content-center">
+          <Link href="/">
+            <Image
+              src="/logo-completo-manamano.png"
+              alt="logo"
+              height={130}
+              width={170}
+            />
+          </Link>
+        </div>
+        <Card className="shadow-4 mt-4 flex-column align-items-center justify-content-center ">
+          <h2
+            className="flex justify-content-center mt-0"
+            style={{ color: "#170E49" }}
+          >
+            {title}
+          </h2>
+          <h4 className="flex justify-content-center text-secondary mb-0">
+            {subtitle}
+          </h4>
+          {children}
+        </Card>
+      </Sidebar>
     </>
   );
 }

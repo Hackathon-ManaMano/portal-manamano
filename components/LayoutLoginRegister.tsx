@@ -8,8 +8,8 @@ import { Sidebar } from "primereact/sidebar";
 
 interface LayoutLoginRegisterProps {
   title: string;
-  subtitle: string;
-  children: React.ReactNode;
+  subtitle?: string;
+  children: React.ReactNode | React.ReactNode[];
 }
 
 export function LayoutLoginRegister({
@@ -49,7 +49,7 @@ export function LayoutLoginRegister({
               />
             </Link>
           </div>
-          <Card className="shadow-4 flex-column align-items-center justify-content-center ">
+          <Card className="shadow-4 mt-4 flex-column align-items-center justify-content-center ">
             <h2
               className="flex justify-content-center mt-0"
               style={{ color: "#170E49" }}

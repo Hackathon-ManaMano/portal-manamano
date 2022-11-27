@@ -3,7 +3,7 @@ import Head from "next/head";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 
 // Supabase
-import { supabase } from "../../services/SupaBase";
+import { supabase } from "../../services/supabse";
 
 // Primereact
 import { Toast } from "primereact/toast";
@@ -11,39 +11,36 @@ import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
 
-// Models
-import { newUser, User } from "../../models/user_model";
-import { Profile, newProfile } from "../../models/profile_model";
+// Service
+import { RegisterService } from "../../services/register_service";
 
+// Models
+import { Register, newRegister } from "../../models/register_model";
 // Layout
 import { LayoutLoginRegister } from "../../components/LayoutLoginRegister";
 
-export default function Register() {
+export default function RegisterScreen() {
   // ref(s)
   const toast = useRef(null);
 
+  // Service(s)
+  const registerService = new RegisterService();
+
   // State(s)
-  const [user, setUser] = useState<User>(newUser);
-  const [profile, setProfile] = useState<Profile>(newProfile);
+  const [register, setRegister] = useState<Register>(newRegister);
 
-  const handleChangeProfile = (e: ChangeEvent<HTMLInputElement>) => {
-    setProfile((prev: Profile) => ({
+  const handleChangeRegister = (e: ChangeEvent<HTMLInputElement>) => {
+    setRegister((prev: Register) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-
-  const handleChangeUser = (e: ChangeEvent<HTMLInputElement>) => {
-    setUser((prev: User) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(profile);
-    console.log(user);
+    console.log(register);
+
+    const response = await registerService.createUser(register);
+    console.log(response);
     return;
   };
 
@@ -62,14 +59,14 @@ export default function Register() {
               </span>
               <span className="p-float-label">
                 <InputText
-                  id="nome"
+                  id="name"
                   type="text"
-                  name="nome"
+                  name="name"
                   required
-                  value={profile.nome}
-                  onChange={handleChangeProfile}
+                  value={register.name}
+                  onChange={handleChangeRegister}
                 />
-                <label htmlFor="nome">
+                <label htmlFor="name">
                   Nome<span style={{ color: "red" }}>*</span>
                 </label>
               </span>
@@ -84,8 +81,8 @@ export default function Register() {
                   type="email"
                   name="email"
                   required
-                  value={profile.email}
-                  onChange={handleChangeProfile}
+                  value={register.email}
+                  onChange={handleChangeRegister}
                 />
                 <label htmlFor="email">
                   Email<span style={{ color: "red" }}>*</span>
@@ -98,17 +95,17 @@ export default function Register() {
               </span>
               <span className="p-float-label">
                 <Password
-                  id="senha"
-                  name="senha"
-                  title="senha"
+                  id="password"
+                  name="password"
+                  title="password"
                   toggleMask
                   required
                   inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
                   feedback={false}
-                  value={user.senha}
-                  onChange={handleChangeUser}
+                  value={register.password}
+                  onChange={handleChangeRegister}
                 />
-                <label htmlFor="senha">
+                <label htmlFor="password">
                   Senha<span style={{ color: "red" }}>*</span>
                 </label>
               </span>
@@ -119,16 +116,16 @@ export default function Register() {
               </span>
               <span className="p-float-label">
                 <Password
-                  id="confirma_senha"
-                  name="confirma_senha"
-                  title="confirma_senha"
+                  id="confirm_password"
+                  name="confirm_password"
+                  title="confirm_password"
                   toggleMask
                   required
                   feedback={false}
                   inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
-                  onChange={handleChangeUser}
+                  onChange={handleChangeRegister}
                 />
-                <label htmlFor="senha">
+                <label htmlFor="confirm_password">
                   Confirmar senha<span style={{ color: "red" }}>*</span>
                 </label>
               </span>

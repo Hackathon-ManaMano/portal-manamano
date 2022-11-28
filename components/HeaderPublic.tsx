@@ -1,8 +1,11 @@
+// React & Next
+import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
+// Primeract
 import { Menubar } from "primereact/menubar";
 import { Button } from "primereact/button";
-import { useRouter } from "next/router";
 
 export default function HeaderPublic() {
   const router = useRouter();
@@ -19,22 +22,25 @@ export default function HeaderPublic() {
   ];
 
   const start = (
-    <Image
-      src="/icon-manamano.png"
-      alt="Logo ManaMano"
-      height={40}
-      width={40}
-      priority
-      style={{ aspectRatio: 1 }}
-    />
+    <Link href="/">
+      <Image
+        src="/logo-manamano.png"
+        alt="Logo ManaMano"
+        height={60}
+        width={140}
+        priority
+        quality={100}
+        style={{ aspectRatio: 1 }}
+      />
+    </Link>
   );
 
   const end = (
     <Button
-    label="Entrar"
-    iconPos="right"
-    icon="pi pi-sign-in"
-    className="p-button-primary"
+      label="Entrar"
+      iconPos="right"
+      icon="pi pi-sign-in"
+      className="p-button-primary"
       onClick={() => router.push("/login")}
     />
   );

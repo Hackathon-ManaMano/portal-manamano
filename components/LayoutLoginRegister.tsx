@@ -32,10 +32,7 @@ export function LayoutLoginRegister({
           fill
           priority
           quality={100}
-          sizes="
-          (max-width: 768px) 100vw,
-          (max-width: 1200px) 100vw,
-          100vw"
+          sizes="100vw"
           style={{ objectFit: "cover", overflow: "hidden" }}
         />
       </div>
@@ -52,6 +49,8 @@ export function LayoutLoginRegister({
             <Image
               src="/logo-completo-manamano.png"
               alt="logo"
+              priority
+              quality={100}
               height={130}
               width={170}
             />

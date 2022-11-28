@@ -7,6 +7,19 @@ import "/node_modules/primeflex/primeflex.css";
 import "../styles/layout.css";
 import "../styles/reset_css_browser.css";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
+import { supabase } from "../services/supabse";
+interface TypeAppProps {
+  initialSession: Session;
+}
+
+export default function App({ Component, pageProps }: AppProps<TypeAppProps>) {
+  return (
+    <SessionContextProvider
+      supabaseClient={supabase}
+      initialSession={pageProps.initialSession}
+    >
+      <Component {...pageProps} />
+    </SessionContextProvider>
+  );
 }

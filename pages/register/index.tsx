@@ -1,19 +1,13 @@
 // React e Next
 import Head from "next/head";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
-
-// Supabase
-import { supabase } from "../../services/supabse";
-
 // Primereact
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
-
 // Service
-import { RegisterService } from "../../services/register_service";
-
+import { ManaManoService } from "../../services/manamano_service";
 // Models
 import { Register, newRegister } from "../../models/register_model";
 // Layout
@@ -24,7 +18,7 @@ export default function RegisterScreen() {
   const toast = useRef(null);
 
   // Service(s)
-  const registerService = new RegisterService();
+  const registerService = new ManaManoService();
 
   // State(s)
   const [register, setRegister] = useState<Register>(newRegister);
@@ -37,9 +31,9 @@ export default function RegisterScreen() {
   };
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(register);
+    //ToDo verify equality between password and confirmPassword
 
-    const response = await registerService.createUser(register);
+    const response = await registerService.SignUp(register);
     console.log(response);
     return;
   };
@@ -86,6 +80,23 @@ export default function RegisterScreen() {
                 />
                 <label htmlFor="email">
                   Email<span style={{ color: "red" }}>*</span>
+                </label>
+              </span>
+            </div>
+            <div className="field col-12 p-inputgroup">
+              <span className="p-inputgroup-addon">
+                <i className="pi pi-phone"></i>
+              </span>
+              <span className="p-float-label">
+                <InputText
+                  id="phone"
+                  name="phone"
+                  required
+                  value={register.phone}
+                  onChange={handleChangeRegister}
+                />
+                <label htmlFor="phone">
+                  Telefone<span style={{ color: "red" }}>*</span>
                 </label>
               </span>
             </div>

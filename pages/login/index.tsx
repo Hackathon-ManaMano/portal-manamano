@@ -1,22 +1,45 @@
+// React & Next
 import Link from "next/link";
 import Head from "next/head";
-import { FormEvent, useState } from "react";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+// Primereact
 import { Button } from "primereact/button";
-
+import { Password } from "primereact/password";
+import { InputText } from "primereact/inputtext";
+// Service
+import { ManaManoService } from "../../services/manamano_service";
+// Models
+import { Login, newLogin } from "../../models/login_model";
+// Layout
 import { LayoutLoginRegister } from "../../components/LayoutLoginRegister";
+import { useUser } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/router";
 
-export default function Login() {
-  const [senha, setSenha] = useState("");
-  const [login, setLogin] = useState("");
+export default function LoginScreen() {
+  // Service(s)
+  const registerService = new ManaManoService();
+  const user = useUser();
   const router = useRouter();
+  const [login, setLogin] = useState<Login>(newLogin);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(login, senha);
+
+    const response = await registerService.SignIn(login);
+    if (response) router.push("/");
+    console.log(response);
   };
+
+  const handleChangeLogin = (e: ChangeEvent<HTMLInputElement>) => {
+    setLogin((prev: Login) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  useEffect(() => {
+    console.log(user);
+  }, []);
 
   return (
     <>
@@ -41,11 +64,11 @@ export default function Login() {
             <span className="p-float-label">
               <InputText
                 id="email"
-                value={login}
+                value={login.email}
                 type="email"
                 required
                 name="email"
-                onChange={(e) => setLogin(e.target.value)}
+                onChange={handleChangeLogin}
               />
               <label htmlFor="email">E-mail</label>
             </span>
@@ -58,10 +81,10 @@ export default function Login() {
             <span className="p-float-label">
               <Password
                 inputId="password"
-                value={senha}
+                value={login.password}
                 required
                 name="password"
-                onChange={(e) => setSenha(e.target.value)}
+                onChange={handleChangeLogin}
                 inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
                 feedback={false}
                 toggleMask

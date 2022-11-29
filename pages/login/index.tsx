@@ -1,8 +1,9 @@
 // React & Next
 import Link from "next/link";
 import Head from "next/head";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 // Primereact
+import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
 import { Password } from "primereact/password";
 import { InputText } from "primereact/inputtext";
@@ -12,22 +13,37 @@ import { ManaManoService } from "../../services/manamano_service";
 import { Login, newLogin } from "../../models/login_model";
 // Layout
 import { LayoutLoginRegister } from "../../components/LayoutLoginRegister";
-import { useUser } from "@supabase/auth-helpers-react";
+
+// Constants
+import C from "../../utils/constants";
 import { useRouter } from "next/router";
 
 export default function LoginScreen() {
-  // Service(s)
-  const registerService = new ManaManoService();
-  const user = useUser();
+  // Toast
+  const toast = useRef(null);
+  // Router
   const router = useRouter();
+  // State(s)
   const [login, setLogin] = useState<Login>(newLogin);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const response = await registerService.SignIn(login);
-    if (response) router.push("/");
-    console.log(response);
+    try {
+      event.preventDefault();
+      setButtonLoading(true);
+      const { data, error } = await ManaManoService.SignIn(login);
+      if (error) {
+        (toast.current as any).show({
+          severity: C.SERVER_ERROR,
+          summary: C.LOGIN_INVALIDO,
+          detail: C.FEEDBACK_PADRAO,
+        });
+        return;
+      }
+      router.push("/");
+    } finally {
+      setButtonLoading(false);
+    }
   };
 
   const handleChangeLogin = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,10 +52,6 @@ export default function LoginScreen() {
       [e.target.name]: e.target.value,
     }));
   };
-
-  useEffect(() => {
-    console.log(user);
-  }, []);
 
   return (
     <>
@@ -54,7 +66,7 @@ export default function LoginScreen() {
       >
         <form
           id="login"
-          className="flex-column p-fluid grid p-4"
+          className="flex-column p-fluid grid p-4 mt-4"
           onSubmit={handleSubmit}
         >
           <div className="field p-inputgroup">
@@ -93,7 +105,12 @@ export default function LoginScreen() {
             </span>
           </div>
           <div className="field">
-            <Button type="submit" label="ENTRAR" />
+            <Button
+              type="submit"
+              label="ENTRAR"
+              loading={buttonLoading}
+              loadingIcon="pi pi-spin pi-sun"
+            />
           </div>
         </form>
         <p className="flex justify-content-center gap-2">
@@ -101,6 +118,7 @@ export default function LoginScreen() {
           <Link href="/register">Cadastre-se</Link>
         </p>
       </LayoutLoginRegister>
+      <Toast ref={toast} position="bottom-right" />
     </>
   );
 }

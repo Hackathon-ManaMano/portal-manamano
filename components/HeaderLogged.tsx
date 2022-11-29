@@ -9,6 +9,9 @@ import { Avatar } from "primereact/avatar";
 import { Menubar } from "primereact/menubar";
 import { TieredMenu } from "primereact/tieredmenu";
 
+// Service
+import { ManaManoService } from "../services/manamano_service";
+
 export default function HeaderLoged() {
   const router = useRouter();
   const menu = useRef(null);
@@ -39,6 +42,9 @@ export default function HeaderLoged() {
     {
       label: "Sair",
       icon: "pi pi-fw pi-power-off",
+      command: () => {
+        ManaManoService.SignOut();
+      },
     },
   ];
 

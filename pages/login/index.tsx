@@ -1,21 +1,56 @@
+// React & Next
 import Link from "next/link";
 import Head from "next/head";
-import { FormEvent, useState } from "react";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
+// Primereact
+import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
-
+import { Password } from "primereact/password";
+import { InputText } from "primereact/inputtext";
+// Service
+import { ManaManoService } from "../../services/manamano_service";
+// Models
+import { Login, newLogin } from "../../models/login_model";
+// Layout
 import { LayoutLoginRegister } from "../../components/LayoutLoginRegister";
+
+// Constants
+import C from "../../utils/constants";
 import { useRouter } from "next/router";
 
-export default function Login() {
-  const [senha, setSenha] = useState("");
-  const [login, setLogin] = useState("");
+export default function LoginScreen() {
+  // Toast
+  const toast = useRef(null);
+  // Router
   const router = useRouter();
+  // State(s)
+  const [login, setLogin] = useState<Login>(newLogin);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(login, senha);
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    try {
+      event.preventDefault();
+      setButtonLoading(true);
+      const { data, error } = await ManaManoService.SignIn(login);
+      if (error) {
+        (toast.current as any).show({
+          severity: C.SERVER_ERROR,
+          summary: C.LOGIN_INVALIDO,
+          detail: C.FEEDBACK_PADRAO,
+        });
+        return;
+      }
+      router.push("/");
+    } finally {
+      setButtonLoading(false);
+    }
+  };
+
+  const handleChangeLogin = (e: ChangeEvent<HTMLInputElement>) => {
+    setLogin((prev: Login) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (
@@ -31,7 +66,7 @@ export default function Login() {
       >
         <form
           id="login"
-          className="flex-column p-fluid grid p-4"
+          className="flex-column p-fluid grid p-4 mt-4"
           onSubmit={handleSubmit}
         >
           <div className="field p-inputgroup">
@@ -41,11 +76,11 @@ export default function Login() {
             <span className="p-float-label">
               <InputText
                 id="email"
-                value={login}
+                value={login.email}
                 type="email"
                 required
                 name="email"
-                onChange={(e) => setLogin(e.target.value)}
+                onChange={handleChangeLogin}
               />
               <label htmlFor="email">E-mail</label>
             </span>
@@ -58,10 +93,10 @@ export default function Login() {
             <span className="p-float-label">
               <Password
                 inputId="password"
-                value={senha}
+                value={login.password}
                 required
                 name="password"
-                onChange={(e) => setSenha(e.target.value)}
+                onChange={handleChangeLogin}
                 inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
                 feedback={false}
                 toggleMask
@@ -70,7 +105,12 @@ export default function Login() {
             </span>
           </div>
           <div className="field">
-            <Button type="submit" label="ENTRAR" />
+            <Button
+              type="submit"
+              label="ENTRAR"
+              loading={buttonLoading}
+              loadingIcon="pi pi-spin pi-sun"
+            />
           </div>
         </form>
         <p className="flex justify-content-center gap-2">
@@ -78,6 +118,7 @@ export default function Login() {
           <Link href="/register">Cadastre-se</Link>
         </p>
       </LayoutLoginRegister>
+      <Toast ref={toast} position="bottom-right" />
     </>
   );
 }

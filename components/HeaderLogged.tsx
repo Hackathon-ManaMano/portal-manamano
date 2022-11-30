@@ -1,7 +1,7 @@
 // React & Next
 import Link from "next/link";
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 
 // Primereact
@@ -11,10 +11,26 @@ import { TieredMenu } from "primereact/tieredmenu";
 
 // Service
 import { ManaManoService } from "../services/manamano_service";
+import { User, useUser } from "@supabase/auth-helpers-react";
+import { supabase } from "../services/supabase";
 
 export default function HeaderLoged() {
   const router = useRouter();
+  const user = useUser();
   const menu = useRef(null);
+  const [nameUser, setNameUser] = useState<string>("");
+
+  useEffect(() => {
+    const getNameUser = async (user: User) => {
+      const response = await supabase
+        .from("empreendedora")
+        .select("nome")
+        .filter("id_emprendedora", "eq", user.id);
+      if (response.data) setNameUser(response.data.shift()?.nome);
+    };
+    if (user) getNameUser(user);
+  }, []);
+
   const items = [
     {
       label: "Materiais de aula",
@@ -23,6 +39,7 @@ export default function HeaderLoged() {
       },
     },
   ];
+
   const profile = [
     {
       label: "Perfil",
@@ -66,9 +83,9 @@ export default function HeaderLoged() {
     <>
       <TieredMenu model={profile} popup ref={menu} id="overlay_tmenu" />
       <Avatar
-        image="/icon-manamano.png"
         className="mr-2"
         size="xlarge"
+        label={nameUser[0]}
         shape="circle"
         onClick={(event) => (menu.current as any).toggle(event)}
         aria-haspopup
@@ -76,5 +93,6 @@ export default function HeaderLoged() {
       />
     </>
   );
+
   return <Menubar model={items} start={start} end={end} />;
 }

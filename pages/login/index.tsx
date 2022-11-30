@@ -17,6 +17,7 @@ import { LayoutLoginRegister } from "../../components/LayoutLoginRegister";
 // Constants
 import C from "../../utils/constants";
 import { useRouter } from "next/router";
+import { showMessage } from "../../utils/utils";
 
 export default function LoginScreen() {
   // Toast
@@ -33,11 +34,20 @@ export default function LoginScreen() {
       setButtonLoading(true);
       const { data, error } = await ManaManoService.SignIn(login);
       if (error) {
-        (toast.current as any).show({
-          severity: C.SERVER_ERROR,
-          summary: C.LOGIN_INVALIDO,
-          detail: C.FEEDBACK_PADRAO,
-        });
+        if (error.message == C.SUPABASE_EMAIL_NAO_CONFIRMADO)
+          showMessage(
+            C.SERVER_ERROR,
+            C.EMAIL_NAO_CONFIRMADO,
+            "Confirme seu e-mail",
+            toast
+          );
+        else
+          showMessage(
+            C.SERVER_ERROR,
+            C.LOGIN_INVALIDO,
+            C.FEEDBACK_PADRAO,
+            toast
+          );
         return;
       }
       router.push("/");

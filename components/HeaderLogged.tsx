@@ -12,7 +12,7 @@ import { TieredMenu } from "primereact/tieredmenu";
 // Service
 import { ManaManoService } from "../services/manamano_service";
 import { User, useUser } from "@supabase/auth-helpers-react";
-import { supabase } from "../services/supabse";
+import { supabase } from "../services/supabase";
 
 export default function HeaderLoged() {
   const router = useRouter();

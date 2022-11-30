@@ -8,7 +8,7 @@ import "../styles/layout.css";
 import "../styles/reset_css_browser.css";
 
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
-import { supabase } from "../services/supabse";
+import { supabase } from "../services/supabase";
 interface TypeAppProps {
   initialSession: Session;
 }

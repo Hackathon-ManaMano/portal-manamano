@@ -1,4 +1,4 @@
-import { supabase } from "./services/supabse";
+import { supabase } from "./services/supabase";
 
 // middleware.ts
 import { NextResponse } from "next/server";

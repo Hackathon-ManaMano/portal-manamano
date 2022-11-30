@@ -1,5 +1,5 @@
 // Supabase
-import { supabase } from "./supabse";
+import { supabase } from "./supabase";
 
 // Models
 import { Login } from "../models/login_model";

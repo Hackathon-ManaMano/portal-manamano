@@ -44,6 +44,9 @@ export default function HeaderLoged() {
     {
       label: "Perfil",
       icon: "pi pi-user",
+      command: () => {
+        router.push("/profile");
+      },
     },
     {
       label: "Validar Cadastros",

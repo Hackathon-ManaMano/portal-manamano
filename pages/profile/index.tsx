@@ -95,7 +95,7 @@ export default function Profile () {
                         <div className="field col-12 md:col-4">
                             <span className="p-float-label">
                                 <InputText id="Setor" value={setor} onChange={(e) => setSetor(e.target.value)} />
-                                <label htmlFor="Setor">Setor</label>
+                                <label htmlFor="Setor">Setore(s)</label>
                             </span>
                         </div>
 

@@ -93,7 +93,7 @@ export default function RegisterScreen() {
       user?.email!,
       user?.id!
     );
-    if (response.error!) {
+    if ((response as any).error) {
       showMessageError(
         "Ocorreu um erro. Não foi possível fazer o cadastro",
         C.FEEDBACK_PADRAO,

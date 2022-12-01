@@ -1,7 +1,7 @@
 // React & Next
 import Link from "next/link";
 import Head from "next/head";
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 // Primereact
 import { Toast } from "primereact/toast";
 import { Button } from "primereact/button";
@@ -50,7 +50,7 @@ export default function LoginScreen() {
           );
         return;
       }
-      router.push("/");
+      router.push("/u/dashboard");
     } finally {
       setButtonLoading(false);
     }

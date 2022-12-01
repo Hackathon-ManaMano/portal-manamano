@@ -1,7 +1,6 @@
 // React e Next
 import Link from "next/link";
 import Image from "next/image";
-
 // Primeract
 import { Card } from "primereact/card";
 import { Sidebar } from "primereact/sidebar";

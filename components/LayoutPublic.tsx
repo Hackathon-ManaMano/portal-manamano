@@ -2,12 +2,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-
 // Primeract
 import { Menubar } from "primereact/menubar";
 import { Button } from "primereact/button";
 
-export default function HeaderPublic() {
+export default function LayoutPublic({ children }: React.PropsWithChildren) {
   const router = useRouter();
   const items = [
     {
@@ -44,5 +43,10 @@ export default function HeaderPublic() {
       onClick={() => router.push("/login")}
     />
   );
-  return <Menubar model={items} start={start} end={end} />;
+  return (
+    <>
+      <Menubar model={items} start={start} end={end} />
+      {children}
+    </>
+  );
 }

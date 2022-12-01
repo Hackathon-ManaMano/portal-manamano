@@ -1,5 +1,6 @@
 // React e Next
 import Head from "next/head";
+import Link from "next/link";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 // Primereact
 import { Toast } from "primereact/toast";
@@ -103,6 +104,16 @@ export default function RegisterScreen() {
     return true;
   };
 
+  const headerDialog = (
+    <div className="flex align-items-center gap-2">
+      <span
+        className="pi pi-send text-primary"
+        style={{ fontSize: "1.8em" }}
+      ></span>
+      <h1 className="text-primary">Confirme seu e-mail</h1>
+    </div>
+  );
+
   return (
     <>
       <Head>
@@ -200,22 +211,24 @@ export default function RegisterScreen() {
             </div>
           </div>
         </form>
+        <p className="flex justify-content-center gap-2">
+          Já possui conta?
+          <Link href="/login">Acesse sua conta</Link>
+        </p>
       </LayoutLoginRegister>
       <Dialog
-        header="Confirmação do e-mail"
+        header={headerDialog}
         visible={dialogVisible}
-        onHide={() => {
-          return;
-        }}
+        modal
+        onHide={() => setDialogVisible(false)}
         blockScroll={true}
         draggable={false}
-        closable={false}
-        breakpoints={{ "960px": "60vw" }}
+        breakpoints={{ "960px": "60vw", "320px": "100vw" }}
       >
-        <p>
-          Enviamos um e-mail de confimação para seu e-mail. Por favor, confirme
-          seu cadastro.
-        </p>
+        <h3>
+          Enviamos um e-mail de confimação. Por favor, confirme seu cadastro
+          através do e-mail.
+        </h3>
       </Dialog>
       <Toast ref={toast} position="bottom-right"></Toast>
     </>

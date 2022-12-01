@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { Avatar } from 'primereact/avatar';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { InputMask } from 'primereact/inputmask';
-import LayoutLogged from '../../components/LayoutLogged';
+import LayoutLogged from '../../../components/LayoutLogged';
 
 
 
@@ -17,7 +17,7 @@ export default function Profile () {
     const [apelido, setApelido] = useState('');
     const [descricao, setDescricao] = useState('');
     const [activeIndex, setActiveIndex] = useState(0);
-    const [empresa, setEmpresa] = useState('');
+    const [negocio, setEmpresa] = useState('');
     const [descricaoNegocio, setDescricaoNegocio] = useState('');
     const [setor, setSetor] = useState('');
 
@@ -86,8 +86,8 @@ export default function Profile () {
                             
                         <div className="field col-12 md:col-4">
                             <span className="p-float-label">
-                                <InputText id="Empresa" value={empresa} onChange={(e) => setNome(e.target.value)} />
-                                <label htmlFor="Empresa">Empresa</label>
+                                <InputText id="Negocio" value={negocio} onChange={(e) => setNome(e.target.value)} />
+                                <label htmlFor="Negocio">Negócio</label>
                             </span>
                         </div>
 
@@ -110,8 +110,8 @@ export default function Profile () {
 
                         <div className="field col-12 md:col-4">
                             <span className="p-float-label">
-                                <InputTextarea rows={5} cols={30} id="Sobre a empresa" value={descricaoNegocio} onChange={(e) => setDescricaoNegocio(e.target.value)} />
-                                <label htmlFor="Sobre a empresa">Sobre a empresa...</label>
+                                <InputTextarea rows={5} cols={30} id="Sobre o negócio" value={descricaoNegocio} onChange={(e) => setDescricaoNegocio(e.target.value)} />
+                                <label htmlFor="Sobre o negócio">Sobre o negócio...</label>
                             </span>
                         </div>
 

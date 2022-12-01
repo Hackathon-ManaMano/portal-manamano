@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { InputText } from 'primereact/inputtext';
-import HeaderLoged from '../../components/HeaderLogged';
 import { TabView, TabPanel } from 'primereact/tabview';
 import Head from 'next/head';
 import { Avatar } from 'primereact/avatar';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { InputMask } from 'primereact/inputmask';
+import LayoutLogged from '../../components/LayoutLogged';
 
 
 
@@ -28,7 +28,7 @@ export default function Profile () {
             <link rel="icon" href="/icon-manamano.png" />
         </Head>
            
-           <HeaderLoged/> 
+           
            
             <div className='flex gap-4 align-items-center p-3 flex-wrap' >
                 
@@ -123,3 +123,11 @@ export default function Profile () {
         </>
     );
 }
+
+Profile.getLayout = function getLayout(page: ReactElement) {
+    return (
+      <>
+        <LayoutLogged>{page}</LayoutLogged>
+      </>
+    );
+  };

@@ -3,18 +3,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
-
 // Primereact
 import { Avatar } from "primereact/avatar";
 import { Menubar } from "primereact/menubar";
 import { TieredMenu } from "primereact/tieredmenu";
-
 // Service
 import { ManaManoService } from "../services/manamano_service";
-import { User, useUser } from "@supabase/auth-helpers-react";
+// Supabase
 import { supabase } from "../services/supabase";
+import { User, useUser } from "@supabase/auth-helpers-react";
 
-export default function HeaderLoged() {
+export default function LayoutLogged({ children }: React.PropsWithChildren) {
   const router = useRouter();
   const user = useUser();
   const menu = useRef(null);
@@ -35,7 +34,7 @@ export default function HeaderLoged() {
     {
       label: "Materiais de aula",
       command: () => {
-        router.push("/classroom");
+        router.push("/u/classroom");
       },
     },
   ];
@@ -61,6 +60,7 @@ export default function HeaderLoged() {
       icon: "pi pi-fw pi-power-off",
       command: () => {
         ManaManoService.SignOut();
+        router.push("/");
       },
     },
   ];
@@ -94,5 +94,10 @@ export default function HeaderLoged() {
     </>
   );
 
-  return <Menubar model={items} start={start} end={end} />;
+  return (
+    <>
+      <Menubar model={items} start={start} end={end} />
+      {children}
+    </>
+  );
 }

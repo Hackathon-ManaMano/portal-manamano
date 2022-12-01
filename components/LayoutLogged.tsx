@@ -20,14 +20,20 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
   const [nameUser, setNameUser] = useState<string>("");
 
   useEffect(() => {
-    const getNameUser = async (user: User) => {
-      const response = await supabase
-        .from("empreendedora")
-        .select("nome")
-        .filter("id_emprendedora", "eq", user.id);
-      if (response.data) setNameUser(response.data.shift()?.nome);
+    const getNameUser = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session) {
+        const response = await supabase
+          .from("empreendedora")
+          .select("nome")
+          .filter("id_emprendedora", "eq", session.user.id);
+        if (response.data) setNameUser(response.data.shift()?.nome);
+      }
     };
-    if (user) getNameUser(user);
+    getNameUser();
   }, []);
 
   const items = [
@@ -44,7 +50,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
       label: "Perfil",
       icon: "pi pi-user",
       command: () => {
-        router.push("/profile");
+        router.push("/u/profile");
       },
     },
     {
@@ -69,7 +75,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
   ];
 
   const start = (
-    <Link href="/">
+    <Link href="/u/dashboard">
       <Image
         src="/logo-manamano.png"
         alt="Logo ManaMano"

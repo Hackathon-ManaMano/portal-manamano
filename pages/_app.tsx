@@ -1,17 +1,41 @@
+import type { NextPage } from "next";
 import type { AppProps } from "next/app";
+import { Montserrat } from "@next/font/google";
+import type { ReactElement, ReactNode } from "react";
 
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css"; //icons
 import "/node_modules/primeflex/primeflex.css";
 import "../styles/layout.css";
-import { Montserrat } from '@next/font/google'
+import "../styles/reset_css_browser.css";
 
-const font = Montserrat({})
+import { supabase } from "../services/supabase";
+import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 
-export default function App({ Component, pageProps }: AppProps) {
+import Auth from "../components/Auth";
+
+export type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+  initialSession: Session;
+};
+const font = Montserrat({});
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  // Use the layout defined at the page level, if available
+  const getLayout = Component.getLayout ?? ((page) => page);
   return (
-  <div className={font.className}> 
-  <Component {...pageProps} />
-  </div>);
+    <SessionContextProvider
+      supabaseClient={supabase}
+      initialSession={pageProps.initialSession}
+    >
+      <div className={font.className}>
+        <Auth>{getLayout(<Component {...pageProps} />)}</Auth>
+      </div>
+    </SessionContextProvider>
+  );
 }

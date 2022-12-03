@@ -5,8 +5,13 @@ import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css"; //icons
 import "/node_modules/primeflex/primeflex.css";
 import "../styles/layout.css";
+import { Montserrat } from '@next/font/google'
 
+const font = Montserrat({})
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+  <div className={font.className}> 
+  <Component {...pageProps} />
+  </div>);
 }

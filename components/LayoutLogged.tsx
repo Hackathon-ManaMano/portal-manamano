@@ -29,7 +29,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
         const response = await supabase
           .from("empreendedora")
           .select("nome")
-          .filter("id_emprendedora", "eq", session.user.id);
+          .filter("id_empreendedora", "eq", session.user.id);
         if (response.data) setNameUser(response.data.shift()?.nome);
       }
     };

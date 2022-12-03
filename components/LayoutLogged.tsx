@@ -11,11 +11,9 @@ import { TieredMenu } from "primereact/tieredmenu";
 import { ManaManoService } from "../services/manamano_service";
 // Supabase
 import { supabase } from "../services/supabase";
-import { User, useUser } from "@supabase/auth-helpers-react";
 
 export default function LayoutLogged({ children }: React.PropsWithChildren) {
   const router = useRouter();
-  const user = useUser();
   const menu = useRef(null);
   const [nameUser, setNameUser] = useState<string>("");
 
@@ -29,7 +27,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
         const response = await supabase
           .from("empreendedora")
           .select("nome")
-          .filter("id_emprendedora", "eq", session.user.id);
+          .filter("id_empreendedora", "eq", session.user.id);
         if (response.data) setNameUser(response.data.shift()?.nome);
       }
     };

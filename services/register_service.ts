@@ -12,12 +12,12 @@ export class RegisterService {
   static async createEmpreendedora(
     nome: string,
     email: string,
-    id_emprendedora: string
+    id_empreendedora: string
   ) {
     const response = await supabase.from("empreendedora").insert({
       email,
       nome,
-      id_emprendedora,
+      id_empreendedora,
     });
     return response.data;
   }

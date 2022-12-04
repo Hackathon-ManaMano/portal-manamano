@@ -212,14 +212,3 @@ export default function ValidateRegistration() {
     </>
   );
 }
-
-ValidateRegistration.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <>
-      <Head>
-        <title>Avaliar cadastros</title>
-      </Head>
-      <LayoutLogged>{page}</LayoutLogged>
-    </>
-  );
-};

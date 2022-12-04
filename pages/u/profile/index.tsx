@@ -16,11 +16,12 @@ import "primeflex/primeflex.css";
 import ReactDOM from "react-dom";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { MultiSelect } from "primereact/multiselect";
+import { Chips } from "primereact/chips";
 
 export default function Profile() {
   const [telefone, setTelefone] = useState("");
   const [nome, setNome] = useState("");
-  const [apelido, setApelido] = useState("");
   const [descricao, setDescricao] = useState("");
   const [facebook, setFacebook] = useState("");
   const [instagram, setInstagram] = useState("");
@@ -31,6 +32,43 @@ export default function Profile() {
   const [setor, setSetor] = useState("");
   const [nameUser, setNameUser] = useState("");
   const router = useRouter();
+  const citySelectItems = [
+    { label: "New York", value: "NY" },
+    { label: "Rome", value: "RM" },
+    { label: "London", value: "LDN" },
+    { label: "Istanbul", value: "IST" },
+    { label: "Paris", value: "PRS" },
+  ];
+  const [lazyItems, setLazyItems] = useState([]);
+  const [lazyLoading, setLazyLoading] = useState(false);
+  const [selectedCities1, setSelectedCities1] = useState(null);
+  const [selectedCities2, setSelectedCities2] = useState(null);
+  const [selectedCountries, setSelectedCountries] = useState(null);
+  const [selectedGroupedCities, setSelectedGroupedCities] = useState(null);
+  const [selectedItems1, setSelectedItems1] = useState(null);
+  const [selectedItems2, setSelectedItems2] = useState(null);
+  const [selectAll, setSelectAll] = useState(false);
+  const [items] = useState(
+    Array.from({ length: 100000 }).map((_, i) => ({
+      label: `Item #${i}`,
+      value: i,
+    }))
+  );
+  const loadLazyTimeout = useRef(null);
+
+  const setores = [
+    { name: "Artesanato" },
+    { name: "Confeitaria" },
+    { name: "Construção" },
+    { name: "Costura" },
+    { name: "Culinária" },
+    { name: "Depilação" },
+    { name: "Designer" },
+    { name: "Design de Sobrancelha" },
+    { name: "Designer de unhas" },
+    { name: "Jardinagem" },
+    { name: "Venda" },
+  ];
 
   useEffect(() => {
     const getNameUser = async () => {
@@ -69,7 +107,7 @@ export default function Profile() {
           <h1 className="ml-3">{nameUser}</h1>
 
           <div className="ml-3 flex gap-2">
-          <a target="_blank" href="https://instagram.com">
+            <a target="_blank" href="https://instagram.com">
               <Button
                 className="Instagram field"
                 //onClick={() => router.push("www.facebook.com")}
@@ -115,17 +153,6 @@ export default function Profile() {
 
               <div className="field col-12 md:col-4">
                 <span className="p-float-label">
-                  <InputText
-                    id="Apelido"
-                    value={apelido}
-                    onChange={(e) => setApelido(e.target.value)}
-                  />
-                  <label htmlFor="Apelido">Apelido</label>
-                </span>
-              </div>
-
-              <div className="field col-12 md:col-4">
-                <span className="p-float-label">
                   <InputMask
                     mask="(99)99999-9999"
                     id="Telefone"
@@ -135,8 +162,7 @@ export default function Profile() {
                   <label htmlFor="Telefone">Telefone</label>
                 </span>
               </div>
-
-              <div className="field col-12 md:col-4">
+              <div className="field col-12 md:col-8">
                 <span className="p-float-label">
                   <InputTextarea
                     rows={5}
@@ -168,10 +194,13 @@ export default function Profile() {
 
               <div className="field col-12 md:col-4">
                 <span className="p-float-label">
-                  <InputText
-                    id="Setor"
-                    value={setor}
-                    onChange={(e) => setSetor(e.target.value)}
+                  <MultiSelect
+                    value={selectedCities2}
+                    options={setores}
+                    onChange={(e) => setSelectedCities2(e.value)}
+                    optionLabel="name"
+                    placeholder="Setore(s)"
+                    display="chip"
                   />
                   <label htmlFor="Setor">Setore(s)</label>
                 </span>

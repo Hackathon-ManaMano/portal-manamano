@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useState, useRef } from "react";
 import { InputText } from "primereact/inputtext";
 import { TabView, TabPanel } from "primereact/tabview";
 import Head from "next/head";
@@ -9,6 +9,13 @@ import LayoutLogged from "../../../components/LayoutLogged";
 import { Button } from "primereact/button";
 import { supabase } from "../../../services/supabase";
 import { Toast } from "primereact/toast";
+import "primeicons/primeicons.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.css";
+import "primeflex/primeflex.css";
+import ReactDOM from "react-dom";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Profile() {
   const [telefone, setTelefone] = useState("");
@@ -18,10 +25,12 @@ export default function Profile() {
   const [facebook, setFacebook] = useState("");
   const [instagram, setInstagram] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
-  const [negocio, setEmpresa] = useState("");
+  const [telefoneNegocio, setTelefoneNegocio] = useState("");
+  const [negocio, setNegocio] = useState("");
   const [descricaoNegocio, setDescricaoNegocio] = useState("");
   const [setor, setSetor] = useState("");
   const [nameUser, setNameUser] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const getNameUser = async () => {
@@ -60,15 +69,27 @@ export default function Profile() {
           <h1 className="ml-3">{nameUser}</h1>
 
           <div className="ml-3 flex gap-2">
-            <Button className="Instagram field col-6" aria-label="Instagram">
-              <i className="pi pi-instagram px-2"></i>
-              <span className="px-3">Instagram</span>
-            </Button>
+          <a target="_blank" href="https://instagram.com">
+              <Button
+                className="Instagram field"
+                //onClick={() => router.push("www.facebook.com")}
+                aria-label="Instagram"
+              >
+                <i className="pi pi-instagram px-2"></i>
+                <span className="px-3">Instagram</span>
+              </Button>
+            </a>
 
-            <Button className="facebook field col-6" aria-label="Facebook">
-              <i className="pi pi-facebook px-2"></i>
-              <span className="px-3">Facebook</span>
-            </Button>
+            <a target="_blank" href="https://pt-br.facebook.com/">
+              <Button
+                className="facebook field "
+                //onClick={() => router.push("www.facebook.com")}
+                aria-label="Facebook"
+              >
+                <i className="pi pi-facebook px-2"></i>
+                <span className="px-3">Facebook</span>
+              </Button>
+            </a>
           </div>
         </div>
       </div>
@@ -91,7 +112,7 @@ export default function Profile() {
                   <label htmlFor="Nome">Nome</label>
                 </span>
               </div>
-          
+
               <div className="field col-12 md:col-4">
                 <span className="p-float-label">
                   <InputText
@@ -127,10 +148,6 @@ export default function Profile() {
                   <label htmlFor="Sobre mim">Sobre mim...</label>
                 </span>
               </div>
-              
-            
-
-
             </div>
             <Button label="Salvar" type="submit" icon="pi pi-check" />
           </form>
@@ -143,7 +160,7 @@ export default function Profile() {
                   <InputText
                     id="Negocio"
                     value={negocio}
-                    onChange={(e) => setNome(e.target.value)}
+                    onChange={(e) => setNegocio(e.target.value)}
                   />
                   <label htmlFor="Negocio">Negócio</label>
                 </span>
@@ -165,8 +182,8 @@ export default function Profile() {
                   <InputMask
                     mask="(99)99999-9999"
                     id="Telefone"
-                    value={telefone}
-                    onChange={(e) => setTelefone(e.target.value)}
+                    value={telefoneNegocio}
+                    onChange={(e) => setTelefoneNegocio(e.target.value)}
                   />
                   <label htmlFor="Telefone">Telefone</label>
                 </span>
@@ -207,7 +224,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="mt-5">
+            <div className="">
               <Button label="Salvar" icon="pi pi-check" />
             </div>
           </form>

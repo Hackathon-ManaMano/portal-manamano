@@ -29,7 +29,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
         const response = await supabase
           .from("empreendedora")
           .select("nome")
-          .filter("id_emprendedora", "eq", session.user.id);
+          .filter("id_empreendedora", "eq", session.user.id);
         if (response.data) setNameUser(response.data.shift()?.nome);
       }
     };
@@ -75,7 +75,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
   ];
 
   const start = (
-    <Link href="/u/dashboard">
+    <Link href="/u/feed">
       <Image
         src="/logo-manamano.png"
         alt="Logo ManaMano"

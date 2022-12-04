@@ -43,3 +43,31 @@ export function showMessageError(
     life: 3000,
   });
 }
+
+/**
+ * Formata as datas no formato ISO para o formato pt-br.
+ *
+ * @param {string} date - Data a ser formatada.
+ * @param {boolean} hour - Parâmetro opcional para formação com horário.
+ *
+ * @return {string} Data formatada para o formato pt-br.
+ */
+export function formatViewDate(date: string, hour?: boolean): string {
+  if (date) {
+    if (hour) {
+      return new Date(date).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+    return new Date(date).toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  }
+  return "";
+}

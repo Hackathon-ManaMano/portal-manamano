@@ -50,7 +50,7 @@ export default function LoginScreen() {
           );
         return;
       }
-      router.push("/u/dashboard");
+      router.push("/u/feed");
     } finally {
       setButtonLoading(false);
     }

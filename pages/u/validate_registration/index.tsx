@@ -9,8 +9,6 @@ import { DataTable } from "primereact/datatable";
 import { InputText } from "primereact/inputtext";
 import { FilterMatchMode } from "primereact/api";
 import { confirmPopup, ConfirmPopup } from "primereact/confirmpopup";
-// Layout
-import LayoutLogged from "../../../components/LayoutLogged";
 // Utis
 import {
   dateBodyTemplate,
@@ -32,14 +30,14 @@ export default function ValidateRegistration() {
   const entrepreneurs: Empreendedora[] = [
     {
       nome: "Ellen Almeida",
-      data_cadastro: new Date('10-10-2022'),
+      data_cadastro: new Date("10-10-2022"),
       email: "ellenas@dcc.ufrj.br",
       telefone: "(21)99999-9999",
       cadastro_aprovado: false,
     },
     {
       nome: "Kevin Sena",
-      data_cadastro: new Date('01-10-2022'),
+      data_cadastro: new Date("01-10-2022"),
       email: "kevinsa@dcc.ufrj.br",
       telefone: "(21)88888-8888",
       cadastro_aprovado: false,
@@ -54,7 +52,7 @@ export default function ValidateRegistration() {
     {
       nome: "Riquelme Gomes",
       data_cadastro: new Date(),
-      email: "riquelmegs@dcc.ufrj.br",
+      email: "riquelmefgomes@gmail.com",
       telefone: "(21)7777-7777",
       cadastro_aprovado: false,
     },
@@ -100,7 +98,7 @@ export default function ValidateRegistration() {
       acceptClassName:
         action == "aprovar" ? "p-button-primary" : "p-button-danger",
       accept: () => showToast(action),
-      reject: () => showToast(action),
+      reject: () => {},
     });
   };
 

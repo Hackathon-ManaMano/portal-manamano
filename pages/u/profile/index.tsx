@@ -143,11 +143,3 @@ export default function Profile() {
     </>
   );
 }
-
-Profile.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <>
-      <LayoutLogged>{page}</LayoutLogged>
-    </>
-  );
-};

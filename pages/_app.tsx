@@ -15,34 +15,38 @@ import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 
 import Auth from "../components/Auth";
 import LayoutLogged from "../components/LayoutLogged";
+import Head from "next/head";
 
 export type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement) => ReactNode;
+    getLayout?: (page: ReactElement) => ReactNode;
 };
 
 type AppPropsWithLayout = AppProps & {
-  Component: NextPageWithLayout;
-  initialSession: Session;
+    Component: NextPageWithLayout;
+    initialSession: Session;
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const router = useRouter();
-  // Use the layout defined at the page level, if available
-  const getLayout = Component.getLayout ?? ((page) => page);
-  return (
-    <SessionContextProvider
-      supabaseClient={supabase}
-      initialSession={pageProps.initialSession}
-    >
-      {router.pathname.startsWith("/u/") ? (
-        <LayoutLogged>
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
-        </LayoutLogged>
-      ) : (
-        <Auth>{getLayout(<Component {...pageProps} />)}</Auth>
-      )}
-    </SessionContextProvider>
-  );
+    const router = useRouter();
+    // Use the layout defined at the page level, if available
+    const getLayout = Component.getLayout ?? ((page) => page);
+    return (
+        <SessionContextProvider
+            supabaseClient={supabase}
+            initialSession={pageProps.initialSession}
+        >
+            <Head>
+                <link rel="icon" href="/icon-manamano.png" />
+            </Head>
+            {router.pathname.startsWith("/u/") ? (
+                <LayoutLogged>
+                    <Auth>
+                        <Component {...pageProps} />
+                    </Auth>
+                </LayoutLogged>
+            ) : (
+                <Auth>{getLayout(<Component {...pageProps} />)}</Auth>
+            )}
+        </SessionContextProvider>
+    );
 }

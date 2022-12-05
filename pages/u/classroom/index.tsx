@@ -1,45 +1,59 @@
+// React & Next
 import Head from "next/head";
-import { Button } from "primereact/button";
-import { Calendar } from "primereact/calendar";
-import { Card } from "primereact/card";
-import { DataView } from "primereact/dataview";
-import { Dialog } from "primereact/dialog";
-import { Divider } from "primereact/divider";
-import { InputText } from "primereact/inputtext";
 import { FormEvent, useState } from "react";
-import { paginatorTemplate } from "../../../components/Templates/templates";
-
+// Primereact
+import { Card } from "primereact/card";
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
+import { DataView } from "primereact/dataview";
+import { Calendar } from "primereact/calendar";
+import { InputText } from "primereact/inputtext";
 // Utils
 import C from "../../../utils/constants";
+// Templates
+import { paginatorTemplate } from "../../../components/Templates/templates";
 
 export default function ClassRoom() {
+    const [endDate, setEndDate] = useState<Date>();
+    const [startDate, setStartDate] = useState<Date>();
+    const [description, setDescription] = useState<string>("");
+    const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
 
-  const    [description, setDescription]=useState<string>("");
-  const    [startDate, setStartDate]=useState<Date>();
-  const    [endDate, setEndDate]=useState<Date>();
-  
-  const [displayBasic, setDispayBasic]= useState(false);
+    const handleCreateClassroomSubmit = (event: FormEvent<HTMLFormElement>) => {
+        console.log("tentou criar turma");
+    };
 
-  const handleCreateClassroomSubmit = (event: FormEvent<HTMLFormElement> )=> {
-      console.log("tentou criar turma");
-  };
-  const openDialog = ()=> {
-      setDispayBasic(true);
-  }
-  const closeDialog = () => {
-      setDispayBasic(false);
-      setDescription("");
-      setStartDate(undefined);
-      setEndDate(undefined);
-  }
-  const renderFooter = () => {
-      return (
-          <div>
-              <Button label="Cancelar" icon="pi pi-times" onClick={() => closeDialog()} className="p-button-text" />
-              <Button label="Confirmar" icon="pi pi-check" onClick={() => closeDialog()} autoFocus />
-          </div>
-      );
-  }
+    const openDialog = () => {
+        setIsDialogVisible(true);
+    };
+
+    const closeDialog = () => {
+        setIsDialogVisible(false);
+        setDescription("");
+        setStartDate(undefined);
+        setEndDate(undefined);
+    };
+
+    const renderFooter = () => {
+        return (
+            <div>
+                <Button
+                    label="Cancelar"
+                    icon="pi pi-times"
+                    onClick={() => closeDialog()}
+                    className="p-button-text p-button-danger"
+                />
+                <Button
+                    type="submit"
+                    label="Confirmar"
+                    icon="pi pi-check"
+                    onClick={() => closeDialog()}
+                    autoFocus
+                />
+            </div>
+        );
+    };
+
     const classes = [
         {
             id_turma: 1,
@@ -79,12 +93,15 @@ export default function ClassRoom() {
     ];
 
     const headerDataView = (
-        <Button
-            label="Adicionar turma"
-            icon="pi pi-plus"
-            className="p-button-text p-button-xl"
-            onClick={() => openDialog()}
-        />
+        <div className="flex justify-content-between align-items-center">
+            <p className="text-xl">Turmas</p>
+            <Button
+                label="Adicionar turma"
+                icon="pi pi-plus"
+                className="p-button-text p-button-sm"
+                onClick={() => openDialog()}
+            />
+        </div>
     );
 
     const itemTemplate = (data: any) => {
@@ -94,7 +111,7 @@ export default function ClassRoom() {
                 title={data.legenda}
                 style={{
                     width: "250px",
-                    color:"white",
+                    color: "white",
                     backgroundColor: `${
                         C.COLORS[data.id_turma % C.COLORS.length]
                     }`,
@@ -117,15 +134,24 @@ export default function ClassRoom() {
                 header={headerDataView}
                 itemTemplate={itemTemplate}
                 paginator
-                rows={9}
+                rows={10}
+                rowsPerPageOptions={[5, 10, 15]}
                 paginatorTemplate={paginatorTemplate}
             />
-            <Dialog header="Criar nova turma" visible={displayBasic} breakpoints={{'960px': '75vw'}} 
-                  style={{width: '50vw'}}onHide={() => closeDialog()} footer={renderFooter()}>
-                <form 
-                id="create-classroom"
-                className="grid flex-column"
-                onSubmit={handleCreateClassroomSubmit}>
+            <Dialog
+                header="Criar nova turma"
+                className="w-10 md:w-6"
+                visible={isDialogVisible}
+                blockScroll
+                draggable={false}
+                onHide={() => closeDialog()}
+                footer={renderFooter()}
+            >
+                <form
+                    id="create-class"
+                    className="grid flex-column"
+                    onSubmit={handleCreateClassroomSubmit}
+                >
                     <div className="field p-inputgroup mt-6">
                         <span className="p-inputgroup-addon">
                             <i className="pi pi-pencil"></i>
@@ -143,33 +169,38 @@ export default function ClassRoom() {
                     </div>
                     <div className="field p-inputgroup mt-4">
                         <span className="p-inputgroup-addon">
-                        <i className="pi pi-calendar"></i>
+                            <i className="pi pi-calendar"></i>
                         </span>
                         <span className="p-float-label">
-                            <Calendar dateFormat="dd/mm/yy" value={startDate} onChange={(e) => {
-                                if (e.value)
-                                setStartDate(e.value as Date)}}/>
+                            <Calendar
+                                dateFormat="dd/mm/yy"
+                                value={startDate}
+                                inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
+                                onChange={(e) => {
+                                    if (e.value) setStartDate(e.value as Date);
+                                }}
+                            />
                             <label htmlFor="startDate">Data de início</label>
                         </span>
                     </div>
                     <div className="field p-inputgroup mt-4">
                         <span className="p-inputgroup-addon">
-                        <i className="pi pi-calendar-times"></i>
+                            <i className="pi pi-calendar-times"></i>
                         </span>
                         <span className="p-float-label">
-                        <Calendar dateFormat="dd/mm/yy" value={endDate} onChange={(e) => {
-                                if (e.value)
-                                    setEndDate(e.value as Date)}}/>
+                            <Calendar
+                                dateFormat="dd/mm/yy"
+                                value={endDate}
+                                inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
+                                onChange={(e) => {
+                                    if (e.value) setEndDate(e.value as Date);
+                                }}
+                            />
                             <label htmlFor="endDate">Data de fim</label>
                         </span>
-                    </div>    
+                    </div>
                 </form>
             </Dialog>
-            {/* <style jsx>{`
-                .card:hover {
-                    box
-                }
-            `}</style> */}
         </>
     );
 }

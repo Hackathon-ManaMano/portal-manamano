@@ -71,3 +71,17 @@ export function formatViewDate(date: string, hour?: boolean): string {
   }
   return "";
 }
+
+/**
+ * converte o formato da data YYYY/MM/DD para DD-MM, ajustando no card
+ *
+ * @param {string} date - Data a ser formatada.
+ *
+ * @return {string} Data formatada para o formato pt-br.
+ */
+export function changeFormatDate(date: string): string {
+  const str = "";
+  const index = parseInt(str.concat(date[5], date[6]));
+  const format = date[8] + date[9] + " " + C.MONTHS[index - 1];
+  return format;
+}

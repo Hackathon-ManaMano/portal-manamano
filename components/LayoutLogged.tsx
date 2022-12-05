@@ -70,7 +70,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
   ];
 
   const start = (
-    <Link href="/u/dashboard">
+    <Link href="/u/feed">
       <Image
         src="/logo-manamano.png"
         alt="Logo ManaMano"

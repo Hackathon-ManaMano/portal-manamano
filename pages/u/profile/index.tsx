@@ -1,23 +1,16 @@
-import React, { ReactElement, useEffect, useState, useRef } from "react";
-import { InputText } from "primereact/inputtext";
-import { TabView, TabPanel } from "primereact/tabview";
+// React & Next
 import Head from "next/head";
+import React, { useEffect, useState } from "react";
+// Primeract
 import { Avatar } from "primereact/avatar";
-import { InputTextarea } from "primereact/inputtextarea";
-import { InputMask } from "primereact/inputmask";
-import LayoutLogged from "../../../components/LayoutLogged";
 import { Button } from "primereact/button";
-import { supabase } from "../../../services/supabase";
-import { Toast } from "primereact/toast";
-import "primeicons/primeicons.css";
-import "primereact/resources/themes/lara-light-indigo/theme.css";
-import "primereact/resources/primereact.css";
-import "primeflex/primeflex.css";
-import ReactDOM from "react-dom";
-import { useRouter } from "next/router";
-import Link from "next/link";
+import { InputText } from "primereact/inputtext";
+import { InputMask } from "primereact/inputmask";
 import { MultiSelect } from "primereact/multiselect";
-import { Chips } from "primereact/chips";
+import { TabView, TabPanel } from "primereact/tabview";
+import { InputTextarea } from "primereact/inputtextarea";
+// Supabase
+import { supabase } from "../../../services/supabase";
 
 export default function Profile() {
   const [telefone, setTelefone] = useState("");
@@ -29,32 +22,8 @@ export default function Profile() {
   const [telefoneNegocio, setTelefoneNegocio] = useState("");
   const [negocio, setNegocio] = useState("");
   const [descricaoNegocio, setDescricaoNegocio] = useState("");
-  const [setor, setSetor] = useState("");
   const [nameUser, setNameUser] = useState("");
-  const router = useRouter();
-  const citySelectItems = [
-    { label: "New York", value: "NY" },
-    { label: "Rome", value: "RM" },
-    { label: "London", value: "LDN" },
-    { label: "Istanbul", value: "IST" },
-    { label: "Paris", value: "PRS" },
-  ];
-  const [lazyItems, setLazyItems] = useState([]);
-  const [lazyLoading, setLazyLoading] = useState(false);
-  const [selectedCities1, setSelectedCities1] = useState(null);
-  const [selectedCities2, setSelectedCities2] = useState(null);
-  const [selectedCountries, setSelectedCountries] = useState(null);
-  const [selectedGroupedCities, setSelectedGroupedCities] = useState(null);
-  const [selectedItems1, setSelectedItems1] = useState(null);
-  const [selectedItems2, setSelectedItems2] = useState(null);
-  const [selectAll, setSelectAll] = useState(false);
-  const [items] = useState(
-    Array.from({ length: 100000 }).map((_, i) => ({
-      label: `Item #${i}`,
-      value: i,
-    }))
-  );
-  const loadLazyTimeout = useRef(null);
+  const [selectedNegocio, setSelectedNegocio] = useState(null);
 
   const setores = [
     { name: "Artesanato" },
@@ -192,9 +161,11 @@ export default function Profile() {
               <div className="field col-12 md:col-4">
                 <span className="p-float-label">
                   <MultiSelect
-                    value={selectedCities2}
+                    value={selectedNegocio}
                     options={setores}
-                    onChange={(e) => setSelectedCities2(e.value)}
+                    filter
+                    filterBy="name"
+                    onChange={(e) => setSelectedNegocio(e.value)}
                     optionLabel="name"
                     placeholder="Setore(s)"
                     display="chip"

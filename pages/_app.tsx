@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
+import { Montserrat } from "@next/font/google";
 import type { ReactElement, ReactNode } from "react";
 
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
@@ -24,6 +25,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
   initialSession: Session;
 };
+const font = Montserrat({});
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();

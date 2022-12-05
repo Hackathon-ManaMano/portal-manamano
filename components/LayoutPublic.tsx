@@ -23,7 +23,7 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
   const start = (
     <Link href="/">
       <Image
-        src="/logo-manamano.png"
+        src="/logo/logo-manamano.png"
         alt="Logo ManaMano"
         height={60}
         width={140}

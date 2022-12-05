@@ -30,7 +30,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
           .filter("id_empreendedora", "eq", session.user.id);
         if (response.data) setNameUser(response.data.shift()?.nome);
       }
-    };
+    };   
     getNameUser();
   }, []);
 

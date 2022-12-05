@@ -14,7 +14,7 @@ import C from "../../../utils/constants";
 
 export default function ClassRoom() {
 
-    const    [description, setDescription]=useState<string>("");
+  const    [description, setDescription]=useState<string>("");
   const    [startDate, setStartDate]=useState<Date>();
   const    [endDate, setEndDate]=useState<Date>();
   
@@ -28,6 +28,9 @@ export default function ClassRoom() {
   }
   const closeDialog = () => {
       setDispayBasic(false);
+      setDescription("");
+      setStartDate(undefined);
+      setEndDate(undefined);
   }
   const renderFooter = () => {
       return (
@@ -91,6 +94,7 @@ export default function ClassRoom() {
                 title={data.legenda}
                 style={{
                     width: "250px",
+                    color:"white",
                     backgroundColor: `${
                         C.COLORS[data.id_turma % C.COLORS.length]
                     }`,
@@ -118,49 +122,49 @@ export default function ClassRoom() {
             />
             <Dialog header="Criar nova turma" visible={displayBasic} breakpoints={{'960px': '75vw'}} 
                   style={{width: '50vw'}}onHide={() => closeDialog()} footer={renderFooter()}>
-          <form 
-          id="create-classroom"
-          className="grid flex-column"
-          onSubmit={handleCreateClassroomSubmit}>
-              <div className="field p-inputgroup mt-6">
-                  <span className="p-inputgroup-addon">
-                      <i className="pi pi-pencil"></i>
-                  </span>
-                  <span className="p-float-label">
-                      <InputText
-                          id="description"
-                          value={description}
-                          required
-                          name="description"
-                          onChange={(e) => setDescription(e.target.value)}
-                      />
-                      <label htmlFor="description">Nome da turma</label>
-                  </span>
-              </div>
-              <div className="field p-inputgroup mt-4">
-                  <span className="p-inputgroup-addon">
-                  <i className="pi pi-calendar"></i>
-                  </span>
-                  <span className="p-float-label">
-                      <Calendar dateFormat="dd/mm/yy" value={startDate} onChange={(e) => {
-                        if (e.value)
-                          setStartDate(e.value as Date)}}/>
-                      <label htmlFor="startDate">Data de início</label>
-                  </span>
-              </div>
-              <div className="field p-inputgroup mt-4">
-                  <span className="p-inputgroup-addon">
-                  <i className="pi pi-calendar-times"></i>
-                  </span>
-                  <span className="p-float-label">
-                  <Calendar dateFormat="dd/mm/yy" value={endDate} onChange={(e) => {
-                        if (e.value)
-                          setEndDate(e.value as Date)}}/>
-                      <label htmlFor="endDate">Data de fim</label>
-                  </span>
-              </div>    
-          </form>
-      </Dialog>
+                <form 
+                id="create-classroom"
+                className="grid flex-column"
+                onSubmit={handleCreateClassroomSubmit}>
+                    <div className="field p-inputgroup mt-6">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-pencil"></i>
+                        </span>
+                        <span className="p-float-label">
+                            <InputText
+                                id="description"
+                                value={description}
+                                required
+                                name="description"
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                            <label htmlFor="description">Nome da turma</label>
+                        </span>
+                    </div>
+                    <div className="field p-inputgroup mt-4">
+                        <span className="p-inputgroup-addon">
+                        <i className="pi pi-calendar"></i>
+                        </span>
+                        <span className="p-float-label">
+                            <Calendar dateFormat="dd/mm/yy" value={startDate} onChange={(e) => {
+                                if (e.value)
+                                setStartDate(e.value as Date)}}/>
+                            <label htmlFor="startDate">Data de início</label>
+                        </span>
+                    </div>
+                    <div className="field p-inputgroup mt-4">
+                        <span className="p-inputgroup-addon">
+                        <i className="pi pi-calendar-times"></i>
+                        </span>
+                        <span className="p-float-label">
+                        <Calendar dateFormat="dd/mm/yy" value={endDate} onChange={(e) => {
+                                if (e.value)
+                                    setEndDate(e.value as Date)}}/>
+                            <label htmlFor="endDate">Data de fim</label>
+                        </span>
+                    </div>    
+                </form>
+            </Dialog>
             {/* <style jsx>{`
                 .card:hover {
                     box

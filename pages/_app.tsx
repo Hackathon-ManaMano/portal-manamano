@@ -12,7 +12,7 @@ import "../styles/reset_css_browser.css";
 
 import { supabase } from "../services/supabase";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
-
+import "../utils/configs";
 import Auth from "../components/Auth";
 import LayoutLogged from "../components/LayoutLogged";
 import Head from "next/head";

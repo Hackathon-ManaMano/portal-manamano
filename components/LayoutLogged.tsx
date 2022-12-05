@@ -37,9 +37,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
   const items = [
     {
       label: "Materiais de aula",
-      command: () => {
-        router.push("/u/classroom");
-      },
+      command: () => router.push("/u/classroom"),
     },
   ];
 
@@ -47,13 +45,12 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
     {
       label: "Perfil",
       icon: "pi pi-user",
-      command: () => {
-        router.push("/u/profile");
-      },
+      command: () => router.push("/u/profile"),
     },
     {
       label: "Validar Cadastros",
       icon: "pi pi-lock-open",
+      command: () => router.push("/u/validate_registration"),
     },
     {
       label: "Configurações",
@@ -92,7 +89,8 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
       <Avatar
         className="mr-2"
         size="xlarge"
-        label={nameUser[0]}
+        aria-label="Foto usuário"
+        label={nameUser.charAt(0)}
         shape="circle"
         onClick={(event) => (menu.current as any).toggle(event)}
         aria-haspopup

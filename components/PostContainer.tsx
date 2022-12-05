@@ -49,7 +49,7 @@ const PostWrapper = {
   marginBottom: "10%",
   backgroundColor: "#170e4935",
   borderRadius: 10,
-  boxShadow: "10px 5px 5px #0000001d",
+  // boxShadow: "10px 5px 5px #0000001d",
 };
 
 const responsiveOptions = [
@@ -78,7 +78,9 @@ function PostContainer(
       .from("comentario_empreendedora_publicacao")
       .select("*")
       .then(
-        (response) => (setComment(response?.data), console.log(response?.data))
+        (response) => (
+          setComment(response?.data as any), console.log(response?.data)
+        )
       );
   }, []);
   const Comment = () => {
@@ -106,13 +108,14 @@ function PostContainer(
   };
   return (
     <div>
-      <div style={PostWrapper}>
+      <div className="shadow-6" style={PostWrapper}>
         <div className="grid">
           <Avatar
+            className="ml-5 mt-3"
             label={empreendedora.nome[0]}
             shape="circle"
-            image=""
-            style={profilePhoto}
+            size="xlarge"
+            style={{ color: "black", backgroundColor: "white" }}
           />
           <p style={info}>{empreendedora.nome}</p>
           <p style={info}>{data_hora}</p>

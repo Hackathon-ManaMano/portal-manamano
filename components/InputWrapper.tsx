@@ -38,7 +38,7 @@ const PostWrapper = {
   marginTop: "3%",
   backgroundColor: "#170e4935",
   borderRadius: 10,
-  boxShadow: "10px 5px 5px #0000001d",
+  // boxShadow: "10px 5px 5px #0000001d",
 };
 
 function InputWrapper({
@@ -68,15 +68,15 @@ function InputWrapper({
   };
   return (
     <div>
-      <div style={PostWrapper}>
+      <div className="shadow-6" style={PostWrapper}>
         <div className="grid">
           <div className="col-fixed" style={{ width: 100 }}>
             <div className="text-center p-3 border-round-sm  font-bold text-white">
               <Avatar
                 label={nome[0]}
                 shape="circle"
-                image=""
-                style={profilePhoto}
+                size="xlarge"
+                style={{color: 'black', backgroundColor: 'white'}}
               />
             </div>
           </div>

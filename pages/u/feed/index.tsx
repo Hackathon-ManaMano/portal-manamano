@@ -1,37 +1,17 @@
-import { ReactElement, useEffect, useState } from "react";
-
+// React & Next
+import { useEffect, useState } from "react";
 // Componentes
 import PostContainer, { PostProps } from "../../../components/PostContainer";
 import InputWrapper, { InputProps } from "../../../components/InputWrapper";
-
+// Supabase
 import { supabase } from "../../../services/supabase";
-import LayoutLogged from "../../../components/LayoutLogged";
+// Utils
+import { changeFormatDate } from "../../../utils/utils";
+import Head from "next/head";
 
 export default function Feed() {
   const [post, setPost] = useState<PostProps[]>([]);
   const [user, setUser] = useState<InputProps[]>([]);
-  var meses = [
-    "Jan",
-    "Fev",
-    "Mar",
-    "Abr",
-    "Mai",
-    "Jun",
-    "Jul",
-    "Ago",
-    "Set",
-    "Out",
-    "Nov",
-    "Dez",
-  ];
-
-  //  Essa função converte o formato da data YYYY/MM/DD para DD-MM, ajustando no card
-  function Date(ent: any) {
-    var str = "";
-    var index = parseInt(str.concat(ent[5], ent[6]));
-    var formatação = ent[8] + ent[9] + " " + meses[index - 1];
-    return formatação;
-  }
 
   useEffect(() => {
     supabase
@@ -46,7 +26,9 @@ export default function Feed() {
       `
       )
       .then(
-        (response) => (setPost(response?.data), console.log(response?.data))
+        (response) => (
+          setPost(response?.data as any), console.log(response?.data)
+        )
       );
   }, []);
 
@@ -59,11 +41,14 @@ export default function Feed() {
           .select("*")
           .eq("id_empreendedora", EmpUser)
           .then(
-            (response) => (setUser(response?.data), console.log(response?.data))
+            (response) => (
+              setUser(response?.data as any), console.log(response?.data)
+            )
           );
     };
     getNomeEmpreendedora();
   }, []);
+
   const userLogged = async () => {
     const usuario = supabase.auth.getSession().then((res) => {
       return res.data.session != null ? res.data.session?.user.id : "";
@@ -87,44 +72,42 @@ export default function Feed() {
   //     .upload("public/avatar1.png", avatarFile);
 
   return (
-    <main className="bg-blue-100">
-      <div className="card">
-        <div className="flex flex-wrap align-items-center justify-content-center card-container blue-container">
-          <div className="border-round p-1 m-1" style={{ width: 850 }}>
-            {user?.map((postInfo, index) => (
-              <InputWrapper
-                key={index}
-                id_empreendedora={postInfo.id_empreendedora}
-                nome={postInfo.nome}
-                email={postInfo.email}
-                postIndex={post.length}
-              />
-            ))}
-            {post?.length > 0
-              ? post
-                  ?.slice(0)
-                  .reverse()
-                  .map((postInfo, index) => (
-                    <PostContainer
-                      key={index}
-                      id_publicacao={postInfo.id_publicacao}
-                      id_usuario={postInfo.id_usuario}
-                      empreendedora={postInfo.empreendedora}
-                      legenda={postInfo.legenda}
-                      data_hora={Date(postInfo.data_hora)}
-                    />
-                  ))
-              : " "}
+    <>
+      <Head>
+        <title>Feed</title>
+      </Head>
+      <main className="bg-blue-100">
+        <div className="card">
+          <div className="flex flex-wrap align-items-center justify-content-center card-container blue-container">
+            <div className="border-round p-1 m-1" style={{ width: 850 }}>
+              {user?.map((postInfo, index) => (
+                <InputWrapper
+                  key={index}
+                  id_empreendedora={postInfo.id_empreendedora}
+                  nome={postInfo.nome}
+                  email={postInfo.email}
+                  postIndex={post.length}
+                />
+              ))}
+              {post?.length > 0
+                ? post
+                    ?.slice(0)
+                    .reverse()
+                    .map((postInfo, index) => (
+                      <PostContainer
+                        key={index}
+                        id_publicacao={postInfo.id_publicacao}
+                        id_usuario={postInfo.id_usuario}
+                        empreendedora={postInfo.empreendedora}
+                        legenda={postInfo.legenda}
+                        data_hora={changeFormatDate(postInfo.data_hora)}
+                      />
+                    ))
+                : " "}
+            </div>
           </div>
         </div>
-      </div>
-    </main>
-  );
-}
-Feed.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <>
-      <LayoutLogged>{page}</LayoutLogged>
+      </main>
     </>
   );
-};
+}

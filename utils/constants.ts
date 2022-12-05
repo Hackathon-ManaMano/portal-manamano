@@ -9,10 +9,23 @@ export default class C {
 
   // Register
   static readonly USUARIO_CRIADO: string = "Usuário criado com sucesso.";
-  
-  
+
   // MESSAGE ERROR SUPABASE
   static readonly SUPABASE_EMAIL_NAO_CONFIRMADO: string = "Email not confirmed";
   static readonly EMAIL_NAO_CONFIRMADO: string = "E-mail não confirmado";
-  
+
+  static readonly MONTHS = [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ];
 }

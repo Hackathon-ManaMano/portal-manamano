@@ -59,13 +59,10 @@ export default function Profile() {
   const setores = [
     { name: "Artesanato" },
     { name: "Confeitaria" },
-    { name: "Construção" },
     { name: "Costura" },
     { name: "Culinária" },
     { name: "Depilação" },
     { name: "Designer" },
-    { name: "Design de Sobrancelha" },
-    { name: "Designer de unhas" },
     { name: "Jardinagem" },
     { name: "Venda" },
   ];

@@ -40,7 +40,8 @@ export default function Feed() {
         `
        *,
         empreendedora(
-          nome
+          nome,
+          id_empreendedora
         )
       `
       )
@@ -79,11 +80,11 @@ export default function Feed() {
     marginTop: 15,
     marginLeft: 30,
   };
-  
-//   const avatarFile = event.target.files[0];
-//   const { data, error } = await supabase.storage
-//     .from("avatars")
-//     .upload("public/avatar1.png", avatarFile);
+
+  //   const avatarFile = event.target.files[0];
+  //   const { data, error } = await supabase.storage
+  //     .from("avatars")
+  //     .upload("public/avatar1.png", avatarFile);
 
   return (
     <main className="bg-blue-100">
@@ -96,7 +97,7 @@ export default function Feed() {
                 id_empreendedora={postInfo.id_empreendedora}
                 nome={postInfo.nome}
                 email={postInfo.email}
-                postIndex = {post.length}
+                postIndex={post.length}
               />
             ))}
             {post?.length > 0

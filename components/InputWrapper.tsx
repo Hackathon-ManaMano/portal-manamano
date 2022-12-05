@@ -87,7 +87,7 @@ function InputWrapper({
             <div className="flex flex-column md:flex-row card-container">
               <InputTextarea
                 style={{
-                  width: "100%",
+                  width: "90%",
                   maxWidth: 450,
                   marginBottom: 25,
                   marginLeft: 10,
@@ -98,8 +98,23 @@ function InputWrapper({
                 value={text}
                 onChange={change}
               />
-              <div style={{ marginLeft: "5%" }}>
-                <Button label="Compartilhar" onClick={Click} />
+              <div
+                className="flex flex-row md:flex-row"
+                style={{
+                  marginLeft: "5%",
+                  marginTop: "1%",
+                  marginBottom: "2%",
+                }}
+              >
+                <div>
+                  <Button label="Compartilhar" onClick={Click} />
+                </div>
+                <div style={{ marginLeft: "3%" }}>
+                  <Button
+                    className="pi pi-images"
+                    style={{ fontSize: "1.4rem" }}
+                  />{" "}
+                </div>
               </div>
             </div>
           </div>

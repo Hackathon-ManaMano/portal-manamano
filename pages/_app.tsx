@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
 import type { ReactElement, ReactNode } from "react";
 
@@ -13,6 +14,7 @@ import { supabase } from "../services/supabase";
 import { SessionContextProvider, Session } from "@supabase/auth-helpers-react";
 
 import Auth from "../components/Auth";
+import LayoutLogged from "../components/LayoutLogged";
 
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -24,6 +26,7 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const router = useRouter();
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
@@ -31,7 +34,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       supabaseClient={supabase}
       initialSession={pageProps.initialSession}
     >
-      <Auth>{getLayout(<Component {...pageProps} />)}</Auth>
+      {router.pathname.startsWith("/u/") ? (
+        <LayoutLogged>
+          <Auth>
+            <Component {...pageProps} />
+          </Auth>
+        </LayoutLogged>
+      ) : (
+        <Auth>{getLayout(<Component {...pageProps} />)}</Auth>
+      )}
     </SessionContextProvider>
   );
 }

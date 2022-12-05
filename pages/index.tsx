@@ -6,6 +6,9 @@ import LayoutPublic from "../components/LayoutPublic";
 export default function Home() {
   return (
     <>
+    <Head>
+      <title>ManaMano</title>
+    </Head>
       <div className="text-indigo-900">
         
         <div  
@@ -30,7 +33,7 @@ export default function Home() {
             
             <div className="field flex col-12 justify-content-center mt-6">
               <Image
-                src="/logo/logo-completo-2.png"
+                src="/logo/logo-manamano-2.png"
                 width={305}
                 height={240}
                 alt="Logotipo ManaMano"

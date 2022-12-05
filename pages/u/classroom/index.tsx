@@ -23,17 +23,17 @@ export default function ClassRoom() {
   const handleCreateClassroomSubmit = (event: FormEvent<HTMLFormElement> )=> {
       console.log("tentou criar turma");
   };
-  const onClick = ()=> {
+  const openDialog = ()=> {
       setDispayBasic(true);
   }
-  const onHide = () => {
+  const closeDialog = () => {
       setDispayBasic(false);
   }
   const renderFooter = () => {
       return (
           <div>
-              <Button label="Cancelar" icon="pi pi-times" onClick={() => onHide()} className="p-button-text" />
-              <Button label="Confirmar" icon="pi pi-check" onClick={() => onHide()} autoFocus />
+              <Button label="Cancelar" icon="pi pi-times" onClick={() => closeDialog()} className="p-button-text" />
+              <Button label="Confirmar" icon="pi pi-check" onClick={() => closeDialog()} autoFocus />
           </div>
       );
   }
@@ -80,7 +80,7 @@ export default function ClassRoom() {
             label="Adicionar turma"
             icon="pi pi-plus"
             className="p-button-text p-button-xl"
-            onClick={() => onClick()}
+            onClick={() => openDialog()}
         />
     );
 
@@ -117,7 +117,7 @@ export default function ClassRoom() {
                 paginatorTemplate={paginatorTemplate}
             />
             <Dialog header="Criar nova turma" visible={displayBasic} breakpoints={{'960px': '75vw'}} 
-                  style={{width: '50vw'}}onHide={() => onHide()} footer={renderFooter()}>
+                  style={{width: '50vw'}}onHide={() => closeDialog()} footer={renderFooter()}>
           <form 
           id="create-classroom"
           className="grid flex-column"
@@ -142,7 +142,7 @@ export default function ClassRoom() {
                   <i className="pi pi-calendar"></i>
                   </span>
                   <span className="p-float-label">
-                      <Calendar value={startDate} onChange={(e) => {
+                      <Calendar dateFormat="dd/mm/yy" value={startDate} onChange={(e) => {
                         if (e.value)
                           setStartDate(e.value as Date)}}/>
                       <label htmlFor="startDate">Data de início</label>
@@ -153,7 +153,7 @@ export default function ClassRoom() {
                   <i className="pi pi-calendar-times"></i>
                   </span>
                   <span className="p-float-label">
-                  <Calendar value={endDate} onChange={(e) => {
+                  <Calendar dateFormat="dd/mm/yy" value={endDate} onChange={(e) => {
                         if (e.value)
                           setEndDate(e.value as Date)}}/>
                       <label htmlFor="endDate">Data de fim</label>

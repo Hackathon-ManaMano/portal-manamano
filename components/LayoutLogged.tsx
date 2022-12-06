@@ -1,8 +1,8 @@
 // React & Next
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
 // Primereact
 import { Avatar } from "primereact/avatar";
 import { Menubar } from "primereact/menubar";
@@ -36,7 +36,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
 
   const items = [
     {
-      label: "Materiais de aula",
+      label: "Turmas",
       command: () => router.push("/u/classroom"),
     },
   ];

@@ -62,17 +62,17 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
     {
       label: "Sair",
       icon: "pi pi-fw pi-power-off",
-      command: () => {
-        ManaManoService.SignOut();
+      command: async () => {
+        await ManaManoService.SignOut();
         router.push("/");
       },
     },
   ];
 
   const start = (
-    <Link href="/u/dashboard">
+    <Link href="/u/feed">
       <Image
-        src="/logo-manamano.png"
+        src="/logo/logo-manamano.png"
         alt="Logo ManaMano"
         height={60}
         width={140}

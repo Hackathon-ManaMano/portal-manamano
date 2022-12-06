@@ -46,7 +46,7 @@ export function LayoutLoginRegister({
         <div className="flex justify-content-center">
           <Link href="/">
             <Image
-              src="/logo-completo-manamano.png"
+              src="/logo/logo-completo-manamano.png"
               alt="logo"
               priority
               quality={100}

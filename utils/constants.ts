@@ -31,4 +31,19 @@ export default class C {
         `var(--gray-500)`,
         //`var(--primary-100)`,
     ];
+
+  static readonly MONTHS = [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez",
+  ];
 }

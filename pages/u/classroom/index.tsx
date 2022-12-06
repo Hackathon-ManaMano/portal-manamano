@@ -12,15 +12,17 @@ import { InputText } from "primereact/inputtext";
 import C from "../../../utils/constants";
 // Templates
 import { paginatorTemplate } from "../../../components/Templates/templates";
+import { useRouter } from "next/router";
 
 export default function ClassRoom() {
+    const router = useRouter();
     const [endDate, setEndDate] = useState<Date>();
     const [startDate, setStartDate] = useState<Date>();
     const [description, setDescription] = useState<string>("");
     const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
 
     const handleCreateClassroomSubmit = (event: FormEvent<HTMLFormElement>) => {
-        console.log("tentou criar turma");
+        // console.log("tentou criar turma");
     };
 
     const openDialog = () => {
@@ -116,6 +118,7 @@ export default function ClassRoom() {
                         C.COLORS[data.id_turma % C.COLORS.length]
                     }`,
                 }}
+                onClick={(e) => router.push(`/u/classroom/${data.id_turma}`)}
             >
                 <span>{data.descricao}</span>
             </Card>

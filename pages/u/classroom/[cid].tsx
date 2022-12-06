@@ -92,9 +92,7 @@ export default function Class() {
             className="mr-2 mb-2 text-white surface-700"
           />
           <div className="flex flex-column gap-2">
-            <p className="text-xl p-1 white-space-nowrap overflow-hidden text-overflow-ellipsis">
-              {posts.titulo}
-            </p>
+            <p className="text-xl p-1">{posts.titulo}</p>
             {/* TODO: Mudar formação para dia e mês abreviado */}
             <p>{formatViewDate(posts.data_inclusao)}</p>
           </div>
@@ -128,10 +126,10 @@ export default function Class() {
                 style={{ width: "150px" }}
               />
             </aside>
-            <section>
+            <section className="flex flex-column gap-5">
               <div className="flex justify-content-between">
                 <Button
-                  className="p-button-outlined p-button-lg"
+                  className="p-button-outlined p-button-sm md:p-button-lg"
                   icon="pi pi-plus"
                   label="Criar nova postagem"
                 />
@@ -149,6 +147,7 @@ export default function Class() {
               </div>
               <DataView
                 value={posts}
+                emptyMessage="Não há postagens para esta turma."
                 dataKey="id_postagem_material"
                 itemTemplate={itemTemplate}
               />

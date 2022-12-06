@@ -76,7 +76,7 @@ export default function Feed() {
       <Head>
         <title>Feed</title>
       </Head>
-      <main className="bg-blue-100">
+      <main>
         <div className="card">
           <div className="flex flex-wrap align-items-center justify-content-center card-container blue-container">
             <div className="border-round p-1 m-1" style={{ width: 850 }}>

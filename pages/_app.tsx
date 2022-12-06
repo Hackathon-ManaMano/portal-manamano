@@ -26,7 +26,7 @@ type AppPropsWithLayout = AppProps & {
     Component: NextPageWithLayout;
     initialSession: Session;
 };
-const font = Montserrat({});
+const font = Montserrat({ style: "normal" });
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
     const router = useRouter();
@@ -37,18 +37,20 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             supabaseClient={supabase}
             initialSession={pageProps.initialSession}
         >
-            <Head>
-                <link rel="icon" href="/icon-manamano.png" />
-            </Head>
-            {router.pathname.startsWith("/u/") ? (
-                <LayoutLogged>
-                    <Auth>
-                        <Component {...pageProps} />
-                    </Auth>
-                </LayoutLogged>
-            ) : (
-                <Auth>{getLayout(<Component {...pageProps} />)}</Auth>
-            )}
+            <div className={font.className}>
+                <Head>
+                    <link rel="icon" href="/icon-manamano.png" />
+                </Head>
+                {router.pathname.startsWith("/u/") ? (
+                    <LayoutLogged>
+                        <Auth>
+                            <Component {...pageProps} />
+                        </Auth>
+                    </LayoutLogged>
+                ) : (
+                    <Auth>{getLayout(<Component {...pageProps} />)}</Auth>
+                )}
+            </div>
         </SessionContextProvider>
     );
 }

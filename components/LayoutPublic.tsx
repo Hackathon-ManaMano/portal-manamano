@@ -48,10 +48,77 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
       <Menubar model={items} start={start} end={end} />
       {children}
 	
-    
       <footer className="site-footer pt-6">
 
-        <div className="flex flex-row">
+        <div className="flex flex-column xl:flex-row justify-content-center align-items-center md:col-10 md:col-offset-1 mt-4">
+
+          <div className="flex flex-column md:flex-row justify-content-center align-items-center">
+
+            <Image 
+                  width={110}
+                  height={150}
+                  src="/parceiros/ashoka.png"
+                  alt="Logo ASHOKA"
+                  priority
+                  quality={100}
+            />
+
+            <Image
+                  width={200}
+                  height={150}
+                  src="/parceiros/ufrj.png"
+                  alt="Logo UFRJ"
+                  priority
+                  quality={100}
+            />
+
+            <Image
+                  width={150}
+                  height={150}
+                  src="/parceiros/asplande.jpg"
+                  alt="Logo Asplande"
+                  priority
+                  quality={100}
+            />
+          </div>
+
+          <div className="flex flex-column md:flex-row justify-content-center align-items-center">
+            <Image
+                  width={120}
+                  height={150}
+                  src="/parceiros/criola.png"
+                  alt="Logo Criola"
+                  priority
+                  quality={100}
+            />
+
+            <Image
+                  width={230}
+                  height={150}
+                  src="/parceiros/institutodara.png"
+                  alt="Logo Instituto Dara"
+                  priority
+                  quality={100}
+            />
+
+          <Image 
+                  width={200}
+                  height={145}
+                  src="/parceiros/gastromotiva.png"
+                  alt="Logo Gastromotiva"
+                  priority
+                  quality={100}
+            />
+
+            <Image 
+                  width={155}
+                  height={150}
+                  src="/parceiros/lutapelapaz.png"
+                  alt="Logo Luta Pela Paz"
+                  priority
+                  quality={100}
+            />
+          </div>
 
         </div>
 

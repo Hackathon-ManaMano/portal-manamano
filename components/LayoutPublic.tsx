@@ -123,41 +123,44 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
 
                         <Link href="https://gastromotiva.org/" legacyBehavior>
                             <a target="blank">
-                              <Image
-                                  width={200}
-                                  height={145}
-                                  src="/parceiros/gastromotiva.png"
-                                  alt="Logo Gastromotiva"
-                                  priority
-                                  quality={100}
-                              />
+                                <Image
+                                    width={200}
+                                    height={145}
+                                    src="/parceiros/gastromotiva.png"
+                                    alt="Logo Gastromotiva"
+                                    priority
+                                    quality={100}
+                                />
                             </a>
                         </Link>
 
                         <Link href="https://lutapelapaz.org/" legacyBehavior>
                             <a target="blank">
-                              <Image
-                                  width={155}
-                                  height={150}
-                                  src="/parceiros/lutapelapaz.png"
-                                  alt="Logo Luta Pela Paz"
-                                  priority
-                                  quality={100}
-                              />
+                                <Image
+                                    width={155}
+                                    height={150}
+                                    src="/parceiros/lutapelapaz.png"
+                                    alt="Logo Luta Pela Paz"
+                                    priority
+                                    quality={100}
+                                />
                             </a>
                         </Link>
-
                     </div>
                 </div>
 
-                <div className="flex flex-row bg-gray-900 text-center">
-                    <div className="col-12 mt-6 mb-6">
-                        <p className="text-xl text-white none">
+                <div className="flex flex-row bg-gray-900 text-center ">
+                    <div className="flex flex-column xl:flex-row justify-content-evenly align-items-center col-12 mt-6 mb-6 line-height-4">
+                        <p className="text-xl text-white">
                             Rua das Palmeiras, 65 - Botafogo, Rio de Janeiro, RJ
-                            - Brasil &emsp;&emsp;&emsp; CEP: 22270-070
-                            &emsp;&emsp;&emsp; Contato: +55 (21) 22869988 /
-                            30821632 &emsp;&emsp;&emsp; Email:
-                            manamano@manamano.org.br
+                            - Brasil
+                        </p>
+                        <p className="text-xl text-white">CEP: 22270-070</p>
+                        <p className="text-xl text-white">
+                            Contato: +55 (21) 22869988 / 30821632
+                        </p>
+                        <p className="text-xl text-white">
+                            Email: manamano@manamano.org.br
                         </p>
                     </div>
                 </div>

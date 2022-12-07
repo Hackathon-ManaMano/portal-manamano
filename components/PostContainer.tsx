@@ -1,8 +1,8 @@
 // React & Next
-import Image from "next/image";
 import { ChangeEvent, useState, useEffect } from "react";
 // Primereact
 import { Card } from "primereact/card";
+import { Image } from "primereact/image";
 import { Avatar } from "primereact/avatar";
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
@@ -106,7 +106,7 @@ function PostContainer(
     };
 
     const cardHeader = (
-        <header className="flex align-items-center gap-6 p-3">
+        <header className="flex align-items-center gap-6 pt-3 pl-3">
             <Avatar
                 label={empreendedora.nome[0]}
                 shape="circle"
@@ -143,42 +143,20 @@ function PostContainer(
             header={cardHeader}
             footer={cardFooter}
         >
-            <p
+            <span>{legenda}</span>
+            <Image
+                className="mt-4"
+                src="/empreendedoras-feira.jpg"
+                alt="Empreendedoras"
+                width="100%"
+                height="100%"
+                preview
                 style={{
-                    marginLeft: 35,
-                    paddingTop: "2%",
-                    paddingBottom: "1%",
+                    width: "100%",
+                    objectFit: "cover",
+                    overflow: "hidden",
                 }}
-            >
-                {legenda}
-            </p>
-            <div
-                className="flex flex-wrap align-items-center justify-content-center card-container blue-container"
-                style={{ marginBottom: "5%" }}
-            >
-                <div
-                    className="border-round p-1 m-1 bg-white"
-                    style={{ width: "90%", height: 400 }}
-                >
-                    <div className="flex justify-content-center">
-                        <Image
-                            alt="image-post"
-                            // src="https://www.melhoresdestinos.com.br/wp-content/uploads/2020/06/praias-brasil-sancho.jpg"
-                            src="/empreendedoras-feira.jpg"
-                            width={600}
-                            height={400}
-                            priority
-                            quality={100}
-                            style={{
-                                width: "100%",
-                                height: 395,
-                                objectFit: "cover",
-                                overflow: "hidden",
-                            }}
-                        />
-                    </div>
-                </div>
-            </div>
+            />
         </Card>
     );
 }

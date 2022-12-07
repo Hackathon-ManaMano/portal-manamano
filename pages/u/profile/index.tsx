@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { MultiSelect } from "primereact/multiselect";
 import { Chips } from "primereact/chips";
+import { Session } from "inspector";
 
 export default function Profile() {
   const [telefone, setTelefone] = useState("");
@@ -85,7 +86,7 @@ export default function Profile() {
 
     getNameUser();
   }, []);
-
+  
   return (
     <>
       <Head>
@@ -95,11 +96,15 @@ export default function Profile() {
 
       <div className="flex gap-4 align-items-center p-3 flex-wrap">
         <Avatar
+        
           style={{ height: "180px", width: "180px" }}
-          image="/background-manamano.jpg"
           size="xlarge"
-          shape="circle"
-        />
+          shape="circle" >
+          <span style={{fontSize:"5rem"}}> {nameUser[0]}
+          </span>
+          </Avatar>
+          
+          
         <div>
           <h1 className="ml-3">{nameUser}</h1>
 

@@ -47,6 +47,24 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
     <>
       <Menubar model={items} start={start} end={end} />
       {children}
+	
+    
+      <footer className="site-footer pt-6">
+
+        <div className="flex flex-row">
+
+        </div>
+
+        <div className="flex flex-row bg-gray-900 text-center">
+          <div className="col-12 mt-6 mb-6">
+            <p className="text-xl text-white none" >
+						  Rua das Palmeiras, 65 - Botafogo, Rio de Janeiro, RJ - Brasil &emsp;&emsp;&emsp; CEP: 22270-070 	
+              &emsp;&emsp;&emsp; Contato: +55 (21)  22869988 / 30821632 &emsp;&emsp;&emsp; Email: manamano@manamano.org.br			
+            </p>
+          </div>
+        </div>
+
+      </footer>
     </>
   );
 }

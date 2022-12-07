@@ -1,5 +1,7 @@
 // React & Next
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+// Primereact
+import { InputText } from "primereact/inputtext";
 // Componentes
 import PostContainer, { PostProps } from "../../../components/PostContainer";
 import InputWrapper, { InputProps } from "../../../components/InputWrapper";
@@ -8,10 +10,12 @@ import { supabase } from "../../../services/supabase";
 // Utils
 import { changeFormatDate } from "../../../utils/utils";
 import Head from "next/head";
+import { Button } from "primereact/button";
 
 export default function Feed() {
     const [post, setPost] = useState<PostProps[]>([]);
     const [user, setUser] = useState<InputProps[]>([]);
+    const [search, setSearch] = useState<string>("");
 
     useEffect(() => {
         supabase
@@ -72,9 +76,19 @@ export default function Feed() {
                 <div className="card">
                     <div className="flex flex-wrap align-items-center justify-content-center card-container blue-container">
                         <div
-                            className="border-round p-1 m-1"
+                            className="flex flex-column border-round p-1 m-1"
                             style={{ width: 850 }}
                         >
+                            <div className="my-4 p-inputgroup">
+                                <InputText
+                                    placeholder="Pesquisar conteúdo"
+                                    value={search}
+                                    onChange={(
+                                        e: ChangeEvent<HTMLInputElement>
+                                    ) => setSearch(e.target.value)}
+                                />
+                                <Button icon="pi pi-search" />
+                            </div>
                             {user?.map((postInfo, index) => (
                                 <InputWrapper
                                     key={index}

@@ -7,6 +7,7 @@ import postServ from "../services/postService";
 
 // Models
 import { newPost, Post } from "../models/PostModel";
+import { Card } from "primereact/card";
 
 export interface InputProps {
   id_empreendedora: string;
@@ -23,23 +24,16 @@ const profilePhoto = {
   marginTop: "20%",
   marginLeft: "5%",
 };
-export const info = {
-  color: "black",
-  paddingLeft: 20,
-  paddingTop: 15,
-  marginLeft: 15,
-  fontFamily: "Roboto sans-serif",
-};
 
-const PostWrapper = {
-  width: "100%",
-  height: "auto",
-  marginBottom: "5%",
-  marginTop: "3%",
-  backgroundColor: "#170e4935",
-  borderRadius: 10,
-  // boxShadow: "10px 5px 5px #0000001d",
-};
+// const PostWrapper = {
+//   width: "100%",
+//   height: "auto",
+//   marginBottom: "5%",
+//   marginTop: "3%",
+//   backgroundColor: "#170e4935",
+//   borderRadius: 10,
+//   boxShadow: "10px 5px 5px #0000001d",
+// };
 
 function InputWrapper({
   nome,
@@ -66,61 +60,59 @@ function InputWrapper({
   const change = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
+
+  const cardHeader = (
+    <header className="flex align-items-center gap-6 p-3">
+      <Avatar
+        label={nome[0]}
+        shape="circle"
+        size="xlarge"
+        style={{ color: "black" }}
+      />
+      <span className="text-lg">{nome}</span>
+    </header>
+  );
+
   return (
-    <div>
-      <div className="shadow-6" style={PostWrapper}>
-        <div className="grid">
-          <div className="col-fixed" style={{ width: 100 }}>
-            <div className="text-center p-3 border-round-sm  font-bold text-white">
-              <Avatar
-                label={nome[0]}
-                shape="circle"
-                size="xlarge"
-                style={{color: 'black', backgroundColor: 'white'}}
-              />
-            </div>
-          </div>
-          <div className="col">
-            <div className="col">
-              <p style={info}>{nome}</p>
-            </div>
-            <div className="flex flex-column md:flex-row card-container">
-              <InputTextarea
-                style={{
-                  width: "90%",
-                  maxWidth: 450,
-                  marginBottom: 25,
-                  marginLeft: 10,
-                  borderRadius: 20,
-                }}
-                placeholder="Compartilhe novidades! Faça uma publicação."
-                autoResize
-                value={text}
-                onChange={change}
-              />
-              <div
-                className="flex flex-row md:flex-row"
-                style={{
-                  marginLeft: "5%",
-                  marginTop: "1%",
-                  marginBottom: "2%",
-                }}
-              >
-                <div>
-                  <Button label="Compartilhar" onClick={Click} />
-                </div>
-                <div style={{ marginLeft: "3%" }}>
-                  <Button
-                    className="pi pi-images"
-                    style={{ fontSize: "1.4rem" }}
-                  />{" "}
-                </div>
+    <Card className="shadow-4" header={cardHeader}>
+      <div className="grid">
+        <div className="col">
+          <div className="flex flex-column md:flex-row card-container">
+            <InputTextarea
+              style={{
+                width: "90%",
+                maxWidth: 450,
+                marginBottom: 25,
+                marginLeft: 10,
+                borderRadius: 20,
+              }}
+              placeholder="Compartilhe novidades! Faça uma publicação."
+              autoResize
+              value={text}
+              onChange={change}
+            />
+            <div
+              className="flex flex-row md:flex-row"
+              style={{
+                marginLeft: "5%",
+                marginTop: "1%",
+                marginBottom: "2%",
+              }}
+            >
+              <div>
+                <Button label="Compartilhar" onClick={Click} />
+              </div>
+              <div style={{ marginLeft: "3%" }}>
+                <Button
+                  className="pi pi-images"
+                  style={{ fontSize: "1.4rem" }}
+                />{" "}
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
 

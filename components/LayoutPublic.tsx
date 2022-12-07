@@ -10,7 +10,8 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
   const router = useRouter();
   const items = [
     {
-      label: "Sobre Nós",
+      label: "Quem Somos",
+      command: () => router.push('/about')
     },
     {
       label: "Quem Apoiamos",
@@ -64,75 +65,148 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
                   quality={100}
             />
 
+    const start = (
+        <Link href="https://portal-manamano.vercel.app/">
             <Image
-                  width={200}
-                  height={150}
-                  src="/parceiros/ufrj.png"
-                  alt="Logo UFRJ"
-                  priority
-                  quality={100}
+                src="/logo/logo-manamano.png"
+                alt="Logo ManaMano"
+                height={60}
+                width={140}
+                priority
+                quality={100}
+                style={{ aspectRatio: 1 }}
             />
+        </Link>
+    );
 
-            <Image
-                  width={150}
-                  height={150}
-                  src="/parceiros/asplande.jpg"
-                  alt="Logo Asplande"
-                  priority
-                  quality={100}
-            />
-          </div>
+    const end = (
+        <Button
+            label="Entrar"
+            iconPos="right"
+            icon="pi pi-sign-in"
+            className="p-button-primary"
+            onClick={() => router.push("/login")}
+        />
+    );
+    return (
+        <>
+            <Menubar model={items} start={start} end={end} />
+            {children}
 
-          <div className="flex flex-column md:flex-row justify-content-center align-items-center">
-            <Image
-                  width={120}
-                  height={150}
-                  src="/parceiros/criola.png"
-                  alt="Logo Criola"
-                  priority
-                  quality={100}
-            />
+            <footer className="site-footer pt-6">
+                <div className="flex flex-column xl:flex-row justify-content-center align-items-center md:col-10 md:col-offset-1 mt-4">
+                    <div className="flex flex-column md:flex-row justify-content-center align-items-center">
+                        <Link
+                            href="https://www.ashoka.org/pt-br"
+                            legacyBehavior
+                        >
+                            <a target="blank">
+                                <Image
+                                    width={110}
+                                    height={150}
+                                    src="/parceiros/ashoka.png"
+                                    alt="Logo ASHOKA"
+                                    priority
+                                    quality={100}
+                                />
+                            </a>
+                        </Link>
 
-            <Image
-                  width={230}
-                  height={150}
-                  src="/parceiros/institutodara.png"
-                  alt="Logo Instituto Dara"
-                  priority
-                  quality={100}
-            />
+                        <Link href="https://ufrj.br/" legacyBehavior>
+                            <a target="blank">
+                                <Image
+                                    width={200}
+                                    height={150}
+                                    src="/parceiros/ufrj.png"
+                                    alt="Logo UFRJ"
+                                    priority
+                                    quality={100}
+                                />
+                            </a>
+                        </Link>
 
-          <Image 
-                  width={200}
-                  height={145}
-                  src="/parceiros/gastromotiva.png"
-                  alt="Logo Gastromotiva"
-                  priority
-                  quality={100}
-            />
+                        <Link href="http://www.asplande.org.br/" legacyBehavior>
+                            <a target="blank">
+                                <Image
+                                    width={150}
+                                    height={150}
+                                    src="/parceiros/asplande.jpg"
+                                    alt="Logo Asplande"
+                                    priority
+                                    quality={100}
+                                />
+                            </a>
+                        </Link>
+                    </div>
 
-            <Image 
-                  width={155}
-                  height={150}
-                  src="/parceiros/lutapelapaz.png"
-                  alt="Logo Luta Pela Paz"
-                  priority
-                  quality={100}
-            />
-          </div>
+                    <div className="flex flex-column md:flex-row justify-content-center align-items-center">
+                        <Link href="https://criola.org.br/" legacyBehavior>
+                            <a target="blank">
+                                <Image
+                                    width={120}
+                                    height={150}
+                                    src="/parceiros/criola.png"
+                                    alt="Logo Criola"
+                                    priority
+                                    quality={100}
+                                />
+                            </a>
+                        </Link>
 
-        </div>
+                        <Link href="https://dara.org.br/" legacyBehavior>
+                            <a target="blank">
+                                <Image
+                                    width={230}
+                                    height={150}
+                                    src="/parceiros/institutodara.png"
+                                    alt="Logo Instituto Dara"
+                                    priority
+                                    quality={100}
+                                />
+                            </a>
+                        </Link>
 
-        <div className="flex flex-row bg-gray-900 text-center">
-          <div className="col-12 mt-6 mb-6">
-            <p className="text-xl text-white none" >
-						  Rua das Palmeiras, 65 - Botafogo, Rio de Janeiro, RJ - Brasil &emsp;&emsp;&emsp; CEP: 22270-070 	
-              &emsp;&emsp;&emsp; Contato: +55 (21)  22869988 / 30821632 &emsp;&emsp;&emsp; Email: manamano@manamano.org.br			
-            </p>
-          </div>
-        </div>
+                        <Link href="https://gastromotiva.org/" legacyBehavior>
+                            <a target="blank">
+                              <Image
+                                  width={200}
+                                  height={145}
+                                  src="/parceiros/gastromotiva.png"
+                                  alt="Logo Gastromotiva"
+                                  priority
+                                  quality={100}
+                              />
+                            </a>
+                        </Link>
 
-      </footer>
-    </>
-  );
+                        <Link href="https://lutapelapaz.org/" legacyBehavior>
+                            <a target="blank">
+                              <Image
+                                  width={155}
+                                  height={150}
+                                  src="/parceiros/lutapelapaz.png"
+                                  alt="Logo Luta Pela Paz"
+                                  priority
+                                  quality={100}
+                              />
+                            </a>
+                        </Link>
+
+                    </div>
+                </div>
+
+                <div className="flex flex-row bg-gray-900 text-center">
+                    <div className="col-12 mt-6 mb-6">
+                        <p className="text-xl text-white none">
+                            Rua das Palmeiras, 65 - Botafogo, Rio de Janeiro, RJ
+                            - Brasil &emsp;&emsp;&emsp; CEP: 22270-070
+                            &emsp;&emsp;&emsp; Contato: +55 (21) 22869988 /
+                            30821632 &emsp;&emsp;&emsp; Email:
+                            manamano@manamano.org.br
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </>
+    );
 }

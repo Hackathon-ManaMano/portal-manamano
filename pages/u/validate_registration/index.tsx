@@ -30,14 +30,14 @@ export default function ValidateRegistration() {
   const entrepreneurs: Empreendedora[] = [
     {
       nome: "Ellen Almeida",
-      data_cadastro: new Date("10-10-2022"),
+      data_cadastro: new Date(),
       email: "ellenas@dcc.ufrj.br",
       telefone: "(21)99999-9999",
       cadastro_aprovado: false,
     },
     {
       nome: "Kevin Sena",
-      data_cadastro: new Date("01-10-2022"),
+      data_cadastro: new Date(),
       email: "kevinsa@dcc.ufrj.br",
       telefone: "(21)88888-8888",
       cadastro_aprovado: false,

@@ -11,6 +11,7 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
     const items = [
         {
             label: "Sobre Nós",
+            command: () => router.push('/about')
         },
         {
             label: "Quem Apoiamos",

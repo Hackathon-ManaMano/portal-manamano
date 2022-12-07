@@ -17,6 +17,7 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
     },
     {
       label: "Contribua",
+      command: () => router.push("/contribute")
     },
   ];
 

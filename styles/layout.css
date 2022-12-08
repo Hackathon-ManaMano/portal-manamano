@@ -1,6 +1,7 @@
 .p-menubar {
   display: fixed;
   padding: 10px;
+  border-radius: 0px;
   background-color: white;
 }
 

@@ -21,7 +21,7 @@ export default function AboutUs() {
                     <Image
                         className="opacity-70"
                         fill
-                        src="/home-clareada.jpg"
+                        src="/background-quem-somos.jpg"
                         alt="Foto Fundo ManaMano"
                         style={{ objectFit: "cover" }}
                         priority
@@ -72,7 +72,7 @@ export default function AboutUs() {
                         <Link href="https://ufrj.br/" legacyBehavior>
                             <a target="_blank">
                                 <Image
-                                    width={475}
+                                    width={350}
                                     height={200}
                                     src="/logo/logo-ufrj.png"
                                     alt="Logo da UFRJ (Universidade Federal do Rio de Janeiro)"
@@ -291,7 +291,7 @@ export default function AboutUs() {
                     <Link href="https://www.dara.org.br/" legacyBehavior>
                             <a target="_blank">
                         <Image
-                            width={400}
+                            width={350}
                             height={300}
                             src="/logo/dara.jpeg"
                             alt="Logo instituto dara"

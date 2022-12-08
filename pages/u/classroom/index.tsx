@@ -1,5 +1,6 @@
 // React & Next
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 // Primereact
 import { Card } from "primereact/card";
@@ -12,7 +13,6 @@ import { InputText } from "primereact/inputtext";
 import C from "../../../utils/constants";
 // Templates
 import { paginatorTemplate } from "../../../components/Templates/templates";
-import { useRouter } from "next/router";
 
 export default function ClassRoom() {
     const router = useRouter();
@@ -132,7 +132,6 @@ export default function ClassRoom() {
             </Head>
             <DataView
                 value={classes}
-                className="p-2"
                 layout="grid"
                 header={headerDataView}
                 itemTemplate={itemTemplate}

@@ -64,11 +64,10 @@ export default function Profile() {
 
       <div className="flex gap-4 align-items-center p-3 flex-wrap">
         <Avatar
-          style={{ height: "180px", width: "180px" }}
-          image="/background-manamano.jpg"
+          style={{ height: "180px", width: "180px", fontSize:"8rem" }}
           size="xlarge"
           shape="circle"
-        />
+        > <span style={{fontSize:"5rem"}}> {nameUser[0]}</span></Avatar>
         <div>
           <h1 className="ml-3">{nameUser}</h1>
 

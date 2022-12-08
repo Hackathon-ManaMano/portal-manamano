@@ -1,6 +1,6 @@
 // React & Next
 import Head from "next/head";
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 // Primeract
 import { Avatar } from "primereact/avatar";
 import { Button } from "primereact/button";
@@ -11,6 +11,7 @@ import { TabView, TabPanel } from "primereact/tabview";
 import { InputTextarea } from "primereact/inputtextarea";
 // Supabase
 import { supabase } from "../../../services/supabase";
+import Link from "next/link";
 
 export default function Profile() {
     const [telefone, setTelefone] = useState("");
@@ -47,7 +48,6 @@ export default function Profile() {
                     .from("empreendedora")
                     .select("nome")
                     .filter("id_empreendedora", "eq", session.user.id);
-                //console.log(response)
                 if (response.data) setNameUser(response.data.shift()?.nome);
             }
         };
@@ -64,41 +64,39 @@ export default function Profile() {
             <Head>
                 <title>Perfil</title>
             </Head>
-
-            <div className="flex gap-4 align-items-center p-3 flex-wrap">
+            <div className="flex gap-4 align-items-center m-4 flex-wrap justify-content-center md:justify-content-start">
                 <Avatar
                     style={{ height: "180px", width: "180px" }}
                     size="xlarge"
                     shape="circle"
                 >
-                    <span style={{ fontSize: "5rem" }}> {nameUser[0]}</span>
+                    <span style={{ fontSize: "5rem" }}>
+                        {nameUser.charAt(0)}
+                    </span>
                 </Avatar>
 
                 <div>
                     <h1 className="ml-3">{nameUser}</h1>
 
                     <div className="ml-3 flex gap-2">
-                        <a target="_blank" href="https://instagram.com">
-                            <Button
-                                className="Instagram field"
-                                //onClick={() => router.push("www.facebook.com")}
-                                aria-label="Instagram"
-                            >
-                                <i className="pi pi-instagram px-2"></i>
-                                <span className="px-3">Instagram</span>
-                            </Button>
-                        </a>
-
-                        <a target="_blank" href="https://pt-br.facebook.com/">
-                            <Button
-                                className="facebook field "
-                                //onClick={() => router.push("www.facebook.com")}
-                                aria-label="Facebook"
-                            >
-                                <i className="pi pi-facebook px-2"></i>
-                                <span className="px-3">Facebook</span>
-                            </Button>
-                        </a>
+                        <Link href="https://instagram.com" legacyBehavior>
+                            <a target="blank" className="no-underline">
+                                <Button
+                                    label="Instagram"
+                                    icon="pi pi-instagram"
+                                    aria-label="Instagram"
+                                />
+                            </a>
+                        </Link>
+                        <Link href="https://pt-br.facebook.com/" legacyBehavior>
+                            <a target="_blank" className="no-underline">
+                                <Button
+                                    label="Facebook"
+                                    icon="pi pi-facebook"
+                                    aria-label="Facebook"
+                                />
+                            </a>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -106,12 +104,12 @@ export default function Profile() {
             <TabView
                 activeIndex={activeIndex}
                 onTabChange={(e) => setActiveIndex(e.index)}
-                className="p-3"
+                className="m-3"
             >
                 <TabPanel header="Perfil">
                     <form onSubmit={handleFormSubmit}>
                         <div className="grid p-fluid mt-3 ">
-                            <div className="field col-12 md:col-4">
+                            <div className="field col-12 md:col-6">
                                 <span className="p-float-label ">
                                     <InputText
                                         id="Nome"
@@ -124,7 +122,7 @@ export default function Profile() {
                                 </span>
                             </div>
 
-                            <div className="field col-12 md:col-4">
+                            <div className="field col-12 md:col-6">
                                 <span className="p-float-label">
                                     <InputMask
                                         mask="(99)99999-9999"
@@ -137,7 +135,7 @@ export default function Profile() {
                                     <label htmlFor="Telefone">Telefone</label>
                                 </span>
                             </div>
-                            <div className="field col-12 md:col-8">
+                            <div className="field col-12">
                                 <span className="p-float-label">
                                     <InputTextarea
                                         rows={5}
@@ -210,7 +208,7 @@ export default function Profile() {
                                 </span>
                             </div>
 
-                            <div className="field col-12 md:col-4">
+                            <div className="field col-12 md:col-6">
                                 <span className="p-float-label">
                                     <InputTextarea
                                         rows={5}
@@ -227,34 +225,36 @@ export default function Profile() {
                                     </label>
                                 </span>
                             </div>
-                            <div className="field col-12 md:col-4">
-                                <span className="p-float-label">
-                                    <InputText
-                                        id="Facebook"
-                                        value={facebook}
-                                        onChange={(e) =>
-                                            setFacebook(e.target.value)
-                                        }
-                                    />
-                                    <label htmlFor="Facebook">
-                                        Link do Facebook
-                                    </label>
-                                </span>
-                            </div>
+                            <div className="grid col-12 md:col-6">
+                                <div className="field col-12">
+                                    <span className="p-float-label">
+                                        <InputText
+                                            id="Facebook"
+                                            value={facebook}
+                                            onChange={(e) =>
+                                                setFacebook(e.target.value)
+                                            }
+                                        />
+                                        <label htmlFor="Facebook">
+                                            Link do Facebook
+                                        </label>
+                                    </span>
+                                </div>
 
-                            <div className="field col-12 md:col-4">
-                                <span className="p-float-label">
-                                    <InputText
-                                        id="Instagram"
-                                        value={instagram}
-                                        onChange={(e) =>
-                                            setInstagram(e.target.value)
-                                        }
-                                    />
-                                    <label htmlFor="Instagram">
-                                        Link do Instagram
-                                    </label>
-                                </span>
+                                <div className="field col-12">
+                                    <span className="p-float-label">
+                                        <InputText
+                                            id="Instagram"
+                                            value={instagram}
+                                            onChange={(e) =>
+                                                setInstagram(e.target.value)
+                                            }
+                                        />
+                                        <label htmlFor="Instagram">
+                                            Link do Instagram
+                                        </label>
+                                    </span>
+                                </div>
                             </div>
                         </div>
 

@@ -38,7 +38,7 @@ export default function AboutUs() {
                             />
                         </div>
                         <div className="text-center col-8 mb-6">
-                            <p className="text-7xl  font-semibold mb-5">
+                            <p className="text-7xl font-semibold mb-5">
                                 QU
                                 <span className="text-7xl  font-semibold mb-5 text-red-500">
                                     E
@@ -49,9 +49,10 @@ export default function AboutUs() {
                                 </span>
                                 S
                             </p>
-                            <p className="text-3xl line-height-2 font-semibold">
+                            <p className="text-3xl line-height-2 ">
+                                O
                                 <span className="text-3xl font-bold">
-                                    {"O MAN"}
+                                    {" MAN"}
                                     <span className="text-3xl font-bold text-red-500">
                                         A
                                     </span>
@@ -87,10 +88,10 @@ export default function AboutUs() {
                         </Link>
                     </div>
                     <div className="flex flex-column align-items-center justify-content-center col-12 md:col-6">
-                        <p className="text-center text-4xl md:text-5xl font-bold pt-5">
+                        <p className="text-center text-4xl md:text-5xl font-bold pt-5 line-height-4">
                             UFRJ
                         </p>
-                        <p className=" text-justify text-2xl line-height-3">
+                        <p className=" text-justify text-2xl line-height-4">
                             Ancorada no tripé ensino, pesquisa e extensão e
                             comprometida com a inovação, a Universidade Federal
                             do Rio de Janeiro é uma instituição pública e
@@ -108,10 +109,10 @@ export default function AboutUs() {
                 </div>
                 <div className="flex flex-column md:flex-row align-items-center justify-content-center px-7">
                     <div className="flex flex-column col-12 md:col-6 md:flex-order-0 flex-order-1">
-                        <p className="text-center text-4xl md:text-5xl font-bold">
+                        <p className="text-center text-4xl md:text-5xl font-bold line-height-4">
                             Ashoka Brasil
                         </p>
-                        <p className="text-justify text-2xl line-height-3 ">
+                        <p className="text-justify text-2xl line-height-4 ">
                             A Ashoka é uma organização civil global, pioneira na
                             promoção do empreendedorismo social. Dedica-se à
                             consolidação de um movimento mundial em que todas as
@@ -150,7 +151,7 @@ export default function AboutUs() {
                     </div>
                 </div>
                 <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-5 px-7">
-                    <div className="col-12 md:col-6 flex justify-content-center">
+                    <div className="col-12 md:col-6 flex justify-content-center ">
                         <Link href="http://www.asplande.org.br/" legacyBehavior>
                             <a target="_blank">
                                 <Image
@@ -169,10 +170,10 @@ export default function AboutUs() {
                         </Link>
                     </div>
                     <div className="flex flex-column align-items-center justify-content-center col-12 md:col-6">
-                        <p className="text-center text-4xl md:text-5xl font-bold pt-5">
+                        <p className="text-center text-4xl md:text-5xl font-bold pt-5 line-height-4">
                             Asplande
                         </p>
-                        <p className="text-justify text-2xl line-height-3">
+                        <p className="text-justify text-2xl line-height-4">
                             Criada em 1992, tem como missão instrumentalizar as
                             populações de baixa renda – especialmente grupos
                             formados por mulheres chefes de família – para o
@@ -187,10 +188,10 @@ export default function AboutUs() {
                 </div>
                 <div className="flex flex-column md:flex-row align-items-center justify-content-center px-7 gap-5">
                     <div className="flex flex-column col-12 md:col-6 md:flex-order-0 flex-order-1">
-                        <p className="text-center text-4xl md:text-5xl font-bold">
+                        <p className="text-center text-4xl md:text-5xl font-bold line-height-4">
                             Criola
                         </p>
-                        <p className="text-justify text-2xl line-height-3 ">
+                        <p className="text-justify text-2xl line-height-4 ">
                             Criola é uma organização da sociedade civil com 30
                             anos de trajetória na defesa e promoção dos direitos
                             das mulheres negras e na construção de uma sociedade
@@ -240,10 +241,10 @@ export default function AboutUs() {
                     </div>
 
                     <div className="flex flex-column align-items-center justify-content-center col-12 md:col-6">
-                        <p className="text-center text-4xl md:text-5xl font-bold">
+                        <p className="text-center text-4xl md:text-5xl font-bold line-height-4 line-height-4">
                             Gastromotiva
                         </p>
-                        <p className="text-justify text-2xl line-height-3">
+                        <p className="text-justify text-2xl line-height-4">
                             Fundada no Brasil em 2006 pelo chef e empreendedor
                             social David Hertz, a Gastromotiva tem como missão
                             transformar a vida de pessoas e comunidades através
@@ -267,10 +268,10 @@ export default function AboutUs() {
 
                 <div className="flex flex-column md:flex-row align-items-center justify-content-center px-7">
                     <div className="flex flex-column col-12 md:col-6 md:flex-order-0 flex-order-1">
-                        <p className="text-center text-4xl md:text-5xl font-bold ">
+                        <p className="text-center text-4xl md:text-5xl font-bold line-height-4">
                             Instituto Dara
                         </p>
-                        <p className="text-justify text-2xl line-height-3 ">
+                        <p className="text-justify text-2xl line-height-4 ">
                             O Instituto Dara, antigo Saúde Criança, é uma
                             organização da sociedade civil que atua para
                             promover a saúde e o desenvolvimento humano por meio
@@ -322,10 +323,10 @@ export default function AboutUs() {
                     </div>
 
                     <div className="flex flex-column align-items-center justify-content-center col-12 md:col-6">
-                        <p className="text-center text-4xl md:text-5xl font-bold pt-5">
+                        <p className="text-center text-4xl md:text-5xl font-bold pt-5 line-height-4">
                             Luta Pela Paz
                         </p>
-                        <p className="text-justify text-2xl line-height-3">
+                        <p className="text-justify text-2xl line-height-4">
                             A Luta pela Paz é uma organização sem fins
                             lucrativos fundada no ano de 2000, no Complexo da
                             Maré, no Rio de Janeiro. Nosso objetivo é promover

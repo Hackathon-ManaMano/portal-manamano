@@ -118,7 +118,6 @@ export default function RegisterScreen() {
     <>
       <Head>
         <title>Cadastre-se</title>
-        <link rel="icon" href="/icon-manamano.png" />
       </Head>
       <LayoutLoginRegister title="Faça seu cadastro">
         <form onSubmit={handleSubmit}>

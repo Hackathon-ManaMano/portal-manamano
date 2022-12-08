@@ -63,7 +63,6 @@ export default function Profile() {
         <>
             <Head>
                 <title>Perfil</title>
-                <link rel="icon" href="/icon-manamano.png" />
             </Head>
 
             <div className="flex gap-4 align-items-center p-3 flex-wrap">

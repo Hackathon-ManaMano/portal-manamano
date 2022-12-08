@@ -203,7 +203,7 @@ export default function RegisterScreen() {
             <div className="field col">
               <Button
                 className="p-button-primary"
-                label="Cadastre-se"
+                label="CADASTRE-SE"
                 type="submit"
                 loading={buttonLoading}
                 loadingIcon="pi pi-spin pi-sun"

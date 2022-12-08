@@ -217,6 +217,7 @@ export default function Profile() {
                                         cols={30}
                                         id="Sobre o negócio"
                                         value={descricaoNegocio}
+                                        autoResize
                                         onChange={(e) =>
                                             setDescricaoNegocio(e.target.value)
                                         }

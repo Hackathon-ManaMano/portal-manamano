@@ -28,11 +28,8 @@ export default function Contribute() {
                         quality={100}
                     />
 
-                    <div
-                        className="flex flex-column justify-content-center align-items-center z-5"
-                        style={{}}
-                    >
-                        <div className="field flex col-12 justify-content-center mt-8">
+                    <div className="flex flex-column justify-content-center align-items-center z-5">
+                        <div className="field flex col-12 justify-content-center mt-4">
                             <Image
                                 src="/logo/logo-basico.png"
                                 width={250}
@@ -46,11 +43,11 @@ export default function Contribute() {
                             <p className="text-7xl font-bold">
                                 C
                                 <span className="text-7xl font-bold text-red-500">
-                                O
+                                    O
                                 </span>
                                 NTR
                                 <span className="text-7xl font-bold text-red-500">
-                                I
+                                    I
                                 </span>
                                 BU
                                 <span className="text-7xl font-bold text-red-500">
@@ -62,9 +59,7 @@ export default function Contribute() {
                 </div>
 
                 <div className="px-7 mt-8 gap-2 flex flex-column">
-
                     <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-5">
-
                         <div className="flex flex-column align-items-center justify-content-center col-12 md:col-6">
                             <p className="text-center text-4xl md:text-5xl font-bold pt-5">
                                 P
@@ -105,11 +100,11 @@ export default function Contribute() {
                                     {" "}
                                     MAN
                                     <span className="text-2xl font-bold text-red-500">
-                                    A
+                                        A
                                     </span>
                                     MAN
                                     <span className="text-2xl font-bold text-red-500">
-                                    O
+                                        O
                                     </span>
                                 </span>
                                 , você estará apoiando essas famílias através da
@@ -121,7 +116,7 @@ export default function Contribute() {
                                 </span>
                             </p>
                         </div>
-                        
+
                         <Image
                             className="col-12 md:col-6 shadow-8"
                             width={600}
@@ -132,14 +127,17 @@ export default function Contribute() {
                             priority
                             quality={100}
                         />
-
                     </div>
 
                     <div className="text-center mt-8 mb-6 line-height-3">
                         <p className="text-3xl font-bold mt-6"> Banco Itaú: </p>
                         <p className="text-3xl"> Agência 0477 </p>
                         <p className="text-3xl"> CC 28107-5 </p>
-                        <p className="text-3xl"> Asplande - Assessoria & Planejamento p/ o Desenvolvimento </p>
+                        <p className="text-3xl">
+                            {" "}
+                            Asplande - Assessoria & Planejamento p/ o
+                            Desenvolvimento{" "}
+                        </p>
                     </div>
                 </div>
             </div>

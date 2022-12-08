@@ -27,12 +27,12 @@ export default function AboutUs() {
                         priority
                         quality={100}
                     />
-                    <div className="flex flex-column justify-content-center align-items-center gap-4 z-5">
+                    <div className="flex flex-column justify-content-center align-items-center z-5">
                         <div className="field flex col-12 justify-content-center mt-4">
                             <Image
-                                src="/logo/icon-manamano.png"
-                                width={200}
-                                height={200}
+                                src="/logo/logo-basico.png"
+                                width={250}
+                                height={250}
                                 alt="Logotipo ManaMano"
                                 priority
                             />
@@ -227,17 +227,20 @@ export default function AboutUs() {
                     <div className="col-12 md:col-6 flex justify-content-center">
                         <Link href="https://gastromotiva.org/" legacyBehavior>
                             <a target="_blank">
-                        <Image
-                            width={350}
-                            height={300}
-                            src="/logo/logo-gastromotiva.png"
-                            alt="Logo da Gastromotiva"
-                            style={{ objectFit: "cover", borderRadius: "10px" }}
-                            priority
-                            quality={100}
-                            />
-                        </a>
-                    </Link>
+                                <Image
+                                    width={350}
+                                    height={300}
+                                    src="/logo/logo-gastromotiva.png"
+                                    alt="Logo da Gastromotiva"
+                                    style={{
+                                        objectFit: "cover",
+                                        borderRadius: "10px",
+                                    }}
+                                    priority
+                                    quality={100}
+                                />
+                            </a>
+                        </Link>
                     </div>
 
                     <div className="flex flex-column align-items-center justify-content-center col-12 md:col-6">
@@ -288,18 +291,21 @@ export default function AboutUs() {
                         </p>
                     </div>
                     <div className="col-12 md:col-6 flex justify-content-center md:flex-order-1 flex-order-0">
-                    <Link href="https://www.dara.org.br/" legacyBehavior>
+                        <Link href="https://www.dara.org.br/" legacyBehavior>
                             <a target="_blank">
-                        <Image
-                            width={350}
-                            height={300}
-                            src="/logo/dara.jpeg"
-                            alt="Logo instituto dara"
-                            style={{ objectFit: "cover", borderRadius: "10px" }}
-                            sizes="(max-width: 320px) 280px,(max-width: 480px)320px,400px"
-                            priority
-                            quality={100}
-                            />
+                                <Image
+                                    width={350}
+                                    height={300}
+                                    src="/logo/dara.jpeg"
+                                    alt="Logo instituto dara"
+                                    style={{
+                                        objectFit: "cover",
+                                        borderRadius: "10px",
+                                    }}
+                                    sizes="(max-width: 320px) 280px,(max-width: 480px)320px,400px"
+                                    priority
+                                    quality={100}
+                                />
                             </a>
                         </Link>
                     </div>
@@ -307,17 +313,20 @@ export default function AboutUs() {
 
                 <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-5 px-7">
                     <div className="col-12 md:col-6 flex justify-content-center">
-                    <Link href="https://lutapelapaz.org/" legacyBehavior>
+                        <Link href="https://lutapelapaz.org/" legacyBehavior>
                             <a target="_blank">
-                        <Image
-                            width={300}
-                            height={300}
-                            src="/logo/logo-luta-pela-paz.png"
-                            alt="Logo da Luta Pela Paz"
-                            style={{ objectFit: "cover", borderRadius: "10px" }}
-                            priority
-                            quality={100}
-                            />
+                                <Image
+                                    width={300}
+                                    height={300}
+                                    src="/logo/logo-luta-pela-paz.png"
+                                    alt="Logo da Luta Pela Paz"
+                                    style={{
+                                        objectFit: "cover",
+                                        borderRadius: "10px",
+                                    }}
+                                    priority
+                                    quality={100}
+                                />
                             </a>
                         </Link>
                     </div>

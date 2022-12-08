@@ -40,17 +40,17 @@ export default function Contribute() {
                         </div>
 
                         <div className="text-center mb-8">
-                            <p className="text-7xl font-bold">
+                            <p className="text-7xl font-semibold">
                                 C
-                                <span className="text-7xl font-bold text-red-500">
+                                <span className="text-7xl font-semibold text-red-500">
                                     O
                                 </span>
                                 NTR
-                                <span className="text-7xl font-bold text-red-500">
+                                <span className="text-7xl font-semibold text-red-500">
                                     I
                                 </span>
                                 BU
-                                <span className="text-7xl font-bold text-red-500">
+                                <span className="text-7xl font-semibold text-red-500">
                                     A
                                 </span>
                             </p>

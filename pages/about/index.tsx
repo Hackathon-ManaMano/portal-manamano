@@ -37,14 +37,14 @@ export default function AboutUs() {
                                 priority
                             />
                         </div>
-                        <div className="text-center col-8 mb-6">
+                        <div className="text-center col-8 mb-8">
                             <p className="text-7xl font-semibold mb-5">
                                 QU
-                                <span className="text-7xl  font-semibold mb-5 text-red-500">
+                                <span className="text-7xl font-semibold mb-5 text-red-500">
                                     E
                                 </span>
                                 M SOM
-                                <span className="text-7xl  font-semibold mb-5 text-red-500">
+                                <span className="text-7xl font-semibold mb-5 text-red-500">
                                     O
                                 </span>
                                 S

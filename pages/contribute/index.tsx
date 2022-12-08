@@ -21,7 +21,7 @@ export default function Contribute() {
                     <Image
                         className="opacity-70"
                         fill
-                        src="/home-clareada.jpg"
+                        src="/empreendedoras-encontro.jpg"
                         alt="Foto Fundo ManaMano"
                         style={{ objectFit: "cover" }}
                         priority
@@ -46,9 +46,13 @@ export default function Contribute() {
                             <p className="text-7xl font-bold">
                                 C
                                 <span className="text-7xl font-bold text-red-500">
-                                    O
+                                O
                                 </span>
-                                NTRIBU
+                                NTR
+                                <span className="text-7xl font-bold text-red-500">
+                                I
+                                </span>
+                                BU
                                 <span className="text-7xl font-bold text-red-500">
                                     A
                                 </span>
@@ -67,19 +71,23 @@ export default function Contribute() {
                                 <span className="text-4xl md:text-5xl font-bold text-red-500">
                                     O
                                 </span>
-                                R QU
-                                <span className="text-4xl md:text-5xl font-bold text-red-500">
-                                    E
-                                </span>
-                                {" C"}
-                                <span className="text-4xl md:text-5xl font-bold text-red-500">
-                                    O
-                                </span>
-                                NTRIB
+                                R Q
                                 <span className="text-4xl md:text-5xl font-bold text-red-500">
                                     U
                                 </span>
-                                IR?
+                                E C
+                                <span className="text-4xl md:text-5xl font-bold text-red-500">
+                                    O
+                                </span>
+                                NTR
+                                <span className="text-4xl md:text-5xl font-bold text-red-500">
+                                    I
+                                </span>
+                                BU
+                                <span className="text-4xl md:text-5xl font-bold text-red-500">
+                                    I
+                                </span>
+                                R?
                             </p>
 
                             <p className="mt-4 text-justify text-2xl line-height-3">

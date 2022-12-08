@@ -7,66 +7,23 @@ import { Menubar } from "primereact/menubar";
 import { Button } from "primereact/button";
 
 export default function LayoutPublic({ children }: React.PropsWithChildren) {
-  const router = useRouter();
-  const items = [
-    {
-      label: "Quem Somos",
-      command: () => router.push('/about')
-    },
-    {
-      label: "Quem Apoiamos",
-    },
-    {
-      label: "Contribua",
-      command: () => router.push("/contribute")
-    },
-  ];
-
-  const start = (
-    <Link href="/">
-      <Image
-        src="/logo/logo-manamano.png"
-        alt="Logo ManaMano"
-        height={60}
-        width={140}
-        priority
-        quality={100}
-        style={{ aspectRatio: 1 }}
-      />
-    </Link>
-  );
-
-  const end = (
-    <Button
-      label="Entrar"
-      iconPos="right"
-      icon="pi pi-sign-in"
-      className="p-button-primary"
-      onClick={() => router.push("/login")}
-    />
-  );
-  return (
-    <>
-      <Menubar model={items} start={start} end={end} />
-      {children}
-	
-      <footer className="site-footer pt-6">
-
-        <div className="flex flex-column xl:flex-row justify-content-center align-items-center md:col-10 md:col-offset-1 mt-4">
-
-          <div className="flex flex-column md:flex-row justify-content-center align-items-center">
-
-            <Image 
-                  width={110}
-                  height={150}
-                  src="/parceiros/ashoka.png"
-                  alt="Logo ASHOKA"
-                  priority
-                  quality={100}
-            />
+    const router = useRouter();
+    const items = [
+        {
+            label: "Quem Somos",
+            command: () => router.push("/about"),
+        },
+        {
+            label: "Quem Apoiamos",
+        },
+        {
+            label: "Contribua",
+            command: () => router.push("/contribute"),
+        },
+    ];
 
     const start = (
-        <Link href="https://portal-manamano.vercel.app/">
+        <Link href="/">
             <Image
                 src="/logo/logo-manamano.png"
                 alt="Logo ManaMano"
@@ -88,6 +45,7 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
             onClick={() => router.push("/login")}
         />
     );
+
     return (
         <>
             <Menubar model={items} start={start} end={end} />
@@ -168,30 +126,29 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
 
                         <Link href="https://gastromotiva.org/" legacyBehavior>
                             <a target="blank">
-                              <Image
-                                  width={200}
-                                  height={145}
-                                  src="/parceiros/gastromotiva.png"
-                                  alt="Logo Gastromotiva"
-                                  priority
-                                  quality={100}
-                              />
+                                <Image
+                                    width={200}
+                                    height={145}
+                                    src="/parceiros/gastromotiva.png"
+                                    alt="Logo Gastromotiva"
+                                    priority
+                                    quality={100}
+                                />
                             </a>
                         </Link>
 
                         <Link href="https://lutapelapaz.org/" legacyBehavior>
                             <a target="blank">
-                              <Image
-                                  width={155}
-                                  height={150}
-                                  src="/parceiros/lutapelapaz.png"
-                                  alt="Logo Luta Pela Paz"
-                                  priority
-                                  quality={100}
-                              />
+                                <Image
+                                    width={155}
+                                    height={150}
+                                    src="/parceiros/lutapelapaz.png"
+                                    alt="Logo Luta Pela Paz"
+                                    priority
+                                    quality={100}
+                                />
                             </a>
                         </Link>
-
                     </div>
                 </div>
 

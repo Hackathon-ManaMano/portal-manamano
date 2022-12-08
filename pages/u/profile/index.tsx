@@ -144,6 +144,7 @@ export default function Profile() {
                                         rows={5}
                                         cols={30}
                                         id="Sobre mim"
+                                        autoResize
                                         value={descricao}
                                         onChange={(e) =>
                                             setDescricao(e.target.value)

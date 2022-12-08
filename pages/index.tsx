@@ -9,6 +9,7 @@ export default function Home() {
       <Head>
         <title>ManaMano</title>
       </Head>
+
       <div className="text-indigo-900">
         <div
           className="flex flex-column bg-bluegray-300 justify-content-center align-items"
@@ -105,8 +106,8 @@ export default function Home() {
         </div>
 
         <div className="px-7 mt-8 mb-6">
-          <div className="flex flex-column md:flex-row align-items-center justify-content-center">
-            <div className="flex flex-column col-12 md:col-6 ">
+          <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-2">
+            <div className="flex flex-column col-12 md:col-6 flex-order-1 sm:flex-order-0">
               <p className="text-center text-4xl md:text-5xl font-bold">C
                 <span className="text-4xl md:text-5xl font-bold text-red-500">
                 O
@@ -135,13 +136,12 @@ export default function Home() {
             </div>
 
             <Image
-              className="col-12 md:col-6 shadow-8 ml-4"
+              className="col-12 md:col-6 shadow-8 ml-4 flex flex-order-0 sm:flex-order-1"
               width={617}
               height={320}
               src="/empreendedoras-feira.jpg"
               alt="Empreendedoras em evento"
               style={{ objectFit: "cover", borderRadius: "10px" }}
-              sizes="(max-width: 320px) 280px,(max-width: 480px)440px,800px"
               priority
               quality={100}
             />

@@ -164,7 +164,7 @@ export default function Profile() {
                     </form>
                 </TabPanel>
                 <TabPanel header="Negócio">
-                    <form>
+                    <form onSubmit={handleFormSubmit}>
                         <div className="grid p-fluid mt-3">
                             <div className="field col-12 md:col-4">
                                 <span className="p-float-label">

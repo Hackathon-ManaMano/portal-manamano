@@ -43,7 +43,11 @@ export default function AboutUs() {
                                 <span className="text-7xl font-semibold mb-5 text-red-500">
                                     E
                                 </span>
-                                M SOM
+                                M S
+                                <span className="text-7xl font-semibold mb-5 text-red-500">
+                                    O
+                                </span>
+                                M
                                 <span className="text-7xl font-semibold mb-5 text-red-500">
                                     O
                                 </span>

@@ -65,7 +65,7 @@ export default function LayoutLogged({ children }: React.PropsWithChildren) {
         },
         {
             label: "Sair",
-            icon: "pi pi-fw pi-power-off",
+            icon: "pi pi-fw pi-sign-out",
             command: async () => {
                 await ManaManoService.SignOut();
                 router.push("/");

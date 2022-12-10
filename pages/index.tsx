@@ -10,8 +10,8 @@ export default function Home() {
         <title>ManaMano</title>
       </Head>
 
-      <div className="text-indigo-900">
-        <div
+      <main className="text-indigo-900">
+        <section
           className="flex flex-column bg-bluegray-300 justify-content-center align-items"
           style={{
             position: "relative",
@@ -30,7 +30,6 @@ export default function Home() {
 
           <div
             className="flex flex-column justify-content-center align-items-center gap-4 z-5"
-            style={{}}
           >
             <div className="field flex col-12 justify-content-center mt-6">
               <Image
@@ -57,9 +56,9 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="px-7 mt-7 gap-2">
+        <section className="px-4 md:px-7 mt-7 gap-2">
           <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-5">
             <Image
               className="col-12 md:col-6 shadow-8"
@@ -103,12 +102,12 @@ export default function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className="px-7 mt-8 mb-6">
+        <section className="px-4 md:px-7 mt-8 mb-6">
           <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-2">
             <div className="flex flex-column col-12 md:col-6 flex-order-1 sm:flex-order-0">
-              <p className="text-center text-4xl md:text-5xl font-bold">C
+              <p className="text-center text-4xl md:text-5xl font-bold pt-5">C
                 <span className="text-4xl md:text-5xl font-bold text-red-500">
                 O
                 </span>
@@ -146,8 +145,8 @@ export default function Home() {
               quality={100}
             />
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 }

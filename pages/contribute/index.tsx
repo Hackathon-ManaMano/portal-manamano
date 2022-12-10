@@ -58,10 +58,10 @@ export default function Contribute() {
                     </div>
                 </div>
 
-                <div className="px-7 mt-8 gap-2 flex flex-column">
+                <div className="px-4 md:px-7 mt-8 gap-2 flex flex-column">
                     <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-5">
                         <div className="flex flex-column align-items-center justify-content-center col-12 md:col-6">
-                            <p className="text-center text-4xl md:text-5xl font-bold pt-5">
+                            <p className="text-center text-4xl md:text-5xl font-bold">
                                 P
                                 <span className="text-4xl md:text-5xl font-bold text-red-500">
                                     O

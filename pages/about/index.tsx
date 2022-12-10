@@ -67,13 +67,13 @@ export default function AboutUs() {
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-5 px-7">
+                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-4">
                     <div className="col-12 md:col-6 flex justify-content-center">
                         <Link href="https://ufrj.br/" legacyBehavior>
                             <a target="_blank">
                                 <Image
-                                    width={350}
-                                    height={200}
+                                    width={310}
+                                    height={190}
                                     src="/logo/logo-ufrj.png"
                                     alt="Logo da UFRJ (Universidade Federal do Rio de Janeiro)"
                                     style={{
@@ -107,7 +107,7 @@ export default function AboutUs() {
                         </p>
                     </div>
                 </div>
-                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-7">
+                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-4">
                     <div className="flex flex-column col-12 md:col-6 md:flex-order-0 flex-order-1">
                         <p className="text-center text-4xl md:text-5xl font-bold line-height-4">
                             Ashoka Brasil
@@ -134,8 +134,8 @@ export default function AboutUs() {
                         >
                             <a target="_blank">
                                 <Image
-                                    width={300}
-                                    height={300}
+                                    width={290}
+                                    height={290}
                                     src="/logo/ashoka.png"
                                     alt="Logo ashoka"
                                     style={{
@@ -150,14 +150,14 @@ export default function AboutUs() {
                         </Link>
                     </div>
                 </div>
-                <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-5 px-7">
+                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-4">
                     <div className="col-12 md:col-6 flex justify-content-center ">
                         <Link href="http://www.asplande.org.br/" legacyBehavior>
                             <a target="_blank">
                                 <Image
-                                    width={350}
-                                    height={350}
-                                    src="/logo/logo-asplande.jpg"
+                                    width={300}
+                                    height={300}
+                                    src="/parceiros/asplande.jpg"
                                     alt="Logo da Asplande"
                                     style={{
                                         objectFit: "cover",
@@ -186,7 +186,7 @@ export default function AboutUs() {
                         </p>
                     </div>
                 </div>
-                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-7 gap-5">
+                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-4">
                     <div className="flex flex-column col-12 md:col-6 md:flex-order-0 flex-order-1">
                         <p className="text-center text-4xl md:text-5xl font-bold line-height-4">
                             Criola
@@ -223,14 +223,14 @@ export default function AboutUs() {
                     </div>
                 </div>
 
-                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-7">
+                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-4">
                     <div className="col-12 md:col-6 flex justify-content-center">
                         <Link href="https://gastromotiva.org/" legacyBehavior>
                             <a target="_blank">
                                 <Image
-                                    width={350}
-                                    height={300}
-                                    src="/logo/logo-gastromotiva.png"
+                                    width={290}
+                                    height={200}
+                                    src="/parceiros/gastromotiva.png"
                                     alt="Logo da Gastromotiva"
                                     style={{
                                         objectFit: "cover",
@@ -269,7 +269,7 @@ export default function AboutUs() {
                     </div>
                 </div>
 
-                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-7">
+                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-4">
                     <div className="flex flex-column col-12 md:col-6 md:flex-order-0 flex-order-1">
                         <p className="text-center text-4xl md:text-5xl font-bold line-height-4">
                             Instituto Dara
@@ -294,9 +294,9 @@ export default function AboutUs() {
                         <Link href="https://www.dara.org.br/" legacyBehavior>
                             <a target="_blank">
                                 <Image
-                                    width={350}
-                                    height={300}
-                                    src="/logo/dara.jpeg"
+                                    width={290}
+                                    height={200}
+                                    src="/parceiros/institutodara.png"
                                     alt="Logo instituto dara"
                                     style={{
                                         objectFit: "cover",
@@ -311,13 +311,13 @@ export default function AboutUs() {
                     </div>
                 </div>
 
-                <div className="flex flex-column md:flex-row align-items-center justify-content-center gap-5 px-7">
+                <div className="flex flex-column md:flex-row align-items-center justify-content-center px-4">
                     <div className="col-12 md:col-6 flex justify-content-center">
                         <Link href="https://lutapelapaz.org/" legacyBehavior>
                             <a target="_blank">
                                 <Image
-                                    width={300}
-                                    height={300}
+                                    width={280}
+                                    height={280}
                                     src="/logo/logo-luta-pela-paz.png"
                                     alt="Logo da Luta Pela Paz"
                                     style={{

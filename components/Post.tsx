@@ -12,7 +12,6 @@ import Commentary from "./Commentary";
 import { supabase } from "../services/supabase";
 import commentService from "../services/comment_service";
 
-// https://www.primefaces.org/primereact/carousel/
 
 export interface PostProps {
     id_publicacao: number;
@@ -23,6 +22,7 @@ export interface PostProps {
     };
     legenda: string;
     data_hora: string;
+    pinado: boolean
 }
 export interface CommentProps {
     id_comentario_publicacao: number;
@@ -31,15 +31,6 @@ export interface CommentProps {
     data_hora: string;
     id_empreendedora: string;
 }
-
-const profilePhoto = {
-    backgroundColor: "white",
-    width: 50,
-    height: 50,
-    borderRadius: 100,
-    marginTop: 15,
-    marginLeft: 35,
-};
 
 function PostContainer({
     id_publicacao,
@@ -88,13 +79,13 @@ function PostContainer({
     const cardHeader = (
         <header className="flex align-items-center gap-6 pt-3 pl-3">
             <Avatar
-                label={empreendedora.nome[0]}
+                label={empreendedora?.nome[0]}
                 shape="circle"
                 size="xlarge"
                 style={{ color: "black" }}
             />
             <div className="flex gap-6">
-                <span className="text-lg">{empreendedora.nome}</span>
+                <span className="text-lg">{empreendedora?.nome}</span>
                 <span className="text-lg">{data_hora}</span>
             </div>
         </header>

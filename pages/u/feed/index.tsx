@@ -12,12 +12,13 @@ import { changeFormatDate } from "../../../utils/utils";
 import Head from "next/head";
 import { Button } from "primereact/button";
 
+
 export default function Feed() {
+    const [postPinado, setPostPinado] = useState<PostProps[]>([])
     const [post, setPost] = useState<PostProps[]>([]);
     const [user, setUser] = useState<InputProps[]>([]);
     const [search, setSearch] = useState<string>("");
 
-   
     const updatePosts = () => {
         supabase
             .from("publicacao")
@@ -28,9 +29,10 @@ export default function Feed() {
           nome,
           id_empreendedora
         )
-      `)
+      `
+            )
             .then((response) => setPost(response?.data as any));
-    }
+    };
     useEffect(() => {
         const getNomeEmpreendedora = async () => {
             const EmpUser = await userLogged();
@@ -40,6 +42,18 @@ export default function Feed() {
                     .select("*")
                     .eq("id_empreendedora", EmpUser)
                     .then((response) => setUser(response?.data as any));
+
+                    supabase
+                    .from("publicacao")
+                    .select(
+                        `*,
+                            empreendedora(
+                            nome,
+                            id_empreendedora
+                            )`
+                    )
+                    .eq("pinado", "true")
+                    .then((response) => setPostPinado(response?.data as any))
         };
         getNomeEmpreendedora();
         updatePosts();
@@ -93,6 +107,12 @@ export default function Feed() {
                 .then((response) => setPost(response?.data as any));
         }
     };
+    const Click = () => {
+        const getPostImportante = async () => {
+            setPost(postPinado);
+        };
+        getPostImportante();
+    };
     return (
         <>
             <Head>
@@ -118,6 +138,12 @@ export default function Feed() {
                                     onClick={pesquisa}
                                 />
                             </div>
+
+                            <Button type="button" label="PUBLICAÇÕES IMPORTANTES" 
+                            badge={postPinado.length+""} 
+                            style={{marginBottom:"2%"}}
+                            onClick={Click}/>
+
                             {user?.map((postInfo, index) => (
                                 <InputWrapper
                                     key={index}
@@ -128,9 +154,10 @@ export default function Feed() {
                                         (infoPost, index) =>
                                             infoPost.id_publicacao
                                     )}
-                                    updatePost = {updatePosts}
+                                    updatePost={updatePosts}
                                 />
                             ))}
+
                             {post?.length > 0
                                 ? post
                                       ?.slice(0)
@@ -149,6 +176,7 @@ export default function Feed() {
                                               data_hora={changeFormatDate(
                                                   postInfo.data_hora
                                               )}
+                                              pinado={postInfo.pinado}
                                           />
                                       ))
                                 : " "}

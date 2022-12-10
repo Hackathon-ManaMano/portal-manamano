@@ -8,6 +8,7 @@ import { Toast } from "primereact/toast";
 import postServ from "../services/postService";
 import { useRef } from "react";
 import {showMessage} from "../utils/utils"
+import { FileUpload } from 'primereact/fileupload';
 // Models
 import { newPost, Post } from "../models/PostModel";
 import { Card } from "primereact/card";
@@ -20,21 +21,7 @@ export interface InputProps {
     updatePost: Function;
 }
 
-const profilePhoto = {
-    backgroundColor: "white",
-    width: 60,
-    height: 60,
-    color: "black",
-    marginTop: "20%",
-    marginLeft: "5%",
-};
-
-const myIcon = (
-    <button className="p-dialog-titlebar-icon p-link">
-        <span className="pi pi-search"></span>
-    </button>
-);
-
+const Options = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn', style: 'display=none'};
 function InputWrapper({
     nome,
     id_empreendedora,
@@ -85,6 +72,9 @@ function InputWrapper({
     const change = (event: ChangeEvent<HTMLTextAreaElement>) => {
         setText(event.target.value);
     };
+    const uploadOptions = { className: 'hidden'};
+    const cancelOptions = { className: 'hidden'};
+
     var str = "Compartilhe novidades! Faça uma publicação, ";
     const cardHeader = (
         <header className="flex align-items-center gap-5 p-5">
@@ -146,24 +136,14 @@ function InputWrapper({
                             />
                         </div>
                         <Divider />
-                        <div className="flex align-items-center p-3">
-                            <Button
-                                label="Adicionar mídia à publicação"
-                                style={{
-                                    backgroundColor: "white",
-                                    color: "gray",
-                                    borderColor: "white",
-                                }}
-                            >
-                                <i
-                                    className="pi pi-paperclip"
-                                    style={{
-                                        fontSize: "1.7rem",
-                                        paddingLeft: 5,
-                                    }}
-                                />
-                            </Button>
+                        <div style={{padding:3}}>
+                            <div style={{marginBottom:10, marginLeft:"5%", display:"flex"}}>
+                            <span> Adicionar mídia à publicação</span> 
+                            </div>
+                            <FileUpload name="demo[]" url="./upload" multiple 
+                            uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
                         </div>
+                        
                     </Dialog>
                 </span>
             </div>

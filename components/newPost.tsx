@@ -141,7 +141,7 @@ function InputWrapper({
                             <span> Adicionar mídia à publicação</span> 
                             </div>
                             <FileUpload name="demo[]" url="./upload" multiple 
-                            uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                            uploadOptions={uploadOptions} cancelOptions={cancelOptions} chooseLabel={"Escolher arquivo"}/>
                         </div>
                         
                     </Dialog>

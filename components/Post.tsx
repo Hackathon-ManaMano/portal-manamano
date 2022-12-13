@@ -8,11 +8,12 @@ import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { InputTextarea } from "primereact/inputtextarea";
 import Commentary from "./Commentary";
+
 // Service
 import { supabase } from "../services/supabase";
 import commentService from "../services/comment_service";
-
-
+import { InputProps } from "../components/newPost";
+import { showMessage } from "../utils/utils";
 export interface PostProps {
     id_publicacao: number;
     id_usuario: string;
@@ -22,7 +23,9 @@ export interface PostProps {
     };
     legenda: string;
     data_hora: string;
-    pinado: boolean
+    pinado: boolean;
+    usuario: InputProps;
+    toast: any;
 }
 export interface CommentProps {
     id_comentario_publicacao: number;
@@ -37,35 +40,37 @@ function PostContainer({
     data_hora,
     legenda,
     empreendedora,
+    usuario,
+    toast
 }: PostProps) {
     const [text, setText] = useState("");
     const [comment, setComment] = useState<CommentProps[]>([]);
-    
+
     useEffect(() => {
+        updateComment();
+    }, []);
+
+    const updateComment = () => {
         supabase
             .from("comentario_empreendedora_publicacao")
             .select("*")
             .eq("id_publicacao", id_publicacao)
-            .then(
-                (response) => (
-                    setComment(response?.data as any)
-                )
-            );
-    }, []);
+            .then((response) => setComment(response?.data as any));
+    };
 
     const postComment = () => {
         var today = new Date();
         try {
+            console.log(usuario)
             commentService
                 .newComment(
                     text,
                     today.toISOString(),
-                    empreendedora.id_empreendedora,
+                    usuario.id_empreendedora,
                     id_publicacao
                 )
                 .then((res) => {
-                    alert("Comentario adicionado com sucesso"),
-                        console.log(res);
+                 updateComment(); setText(""); showMessage("success","sucesso","Comentário criado com sucesso",toast);
                 });
         } catch (err) {
             alert(err);
@@ -93,21 +98,23 @@ function PostContainer({
 
     const cardFooter = (
         <div className="grid">
-            <Divider/>
-            {
-                comment?.map((commentInfo, index) =>
-                id_publicacao == comment[index].id_publicacao?  
-                <Commentary
-                    key={index}
-                    id_comentario_publicacao={commentInfo.id_comentario_publicacao}
-                    id_publicacao={commentInfo.id_publicacao}
-                    id_empreendedora={commentInfo.id_empreendedora}
-                    data_hora={commentInfo.data_hora}
-                    comentario={commentInfo.comentario}
-                 />: " "
+            <Divider />
+            {comment?.map((commentInfo, index) =>
+                id_publicacao == comment[index].id_publicacao ? (
+                    <Commentary
+                        key={index}
+                        id_comentario_publicacao={
+                            commentInfo.id_comentario_publicacao
+                        }
+                        id_publicacao={commentInfo.id_publicacao}
+                        id_empreendedora={commentInfo.id_empreendedora}
+                        data_hora={commentInfo.data_hora}
+                        comentario={commentInfo.comentario}
+                    />
+                ) : (
+                    " "
                 )
-              
-            }
+            )}
             <Divider />
             <div style={{ marginLeft: "5%", width: "70%" }}>
                 <InputTextarea
@@ -119,7 +126,11 @@ function PostContainer({
                 />
             </div>
             <div style={{ marginLeft: 20, marginTop: "1%" }}>
-                <Button label="Enviar" icon="pi pi-check" onClick={postComment} />
+                <Button
+                    label="Enviar"
+                    icon="pi pi-check"
+                    onClick={postComment}
+                />
             </div>
         </div>
     );
@@ -144,7 +155,6 @@ function PostContainer({
                 }}
             />
         </Card>
-        
     );
 }
 

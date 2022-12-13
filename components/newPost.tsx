@@ -4,9 +4,7 @@ import { Avatar } from "primereact/avatar";
 import { ChangeEvent, useState } from "react";
 import { Dialog } from "primereact/dialog";
 import { Divider } from "primereact/divider";
-import { Toast } from "primereact/toast";
 import postServ from "../services/postService";
-import { useRef } from "react";
 import {showMessage} from "../utils/utils"
 import { FileUpload } from 'primereact/fileupload';
 // Models
@@ -19,6 +17,7 @@ export interface InputProps {
     email: string;
     postIndex: number[];
     updatePost: Function;
+    toast: any
 }
 
 const Options = {icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn', style: 'display=none'};
@@ -27,6 +26,7 @@ function InputWrapper({
     id_empreendedora,
     postIndex,
     updatePost,
+    toast
 }: InputProps) {
     const [text, setText] = useState("");
     const [post, setPost] = useState<Post>(newPost);
@@ -46,7 +46,6 @@ function InputWrapper({
             </div>
         );
     };
-    const toast = useRef(null);
     const Click = () => {
         var today = new Date();
         try {
@@ -55,11 +54,9 @@ function InputWrapper({
                 .newPost(
                     text,
                     today.toISOString(),
-                    id_empreendedora,
-                    Math.max.apply(null, postIndex) + 1
+                    id_empreendedora
                 )
                 .then((res) => {
-                    // alert("Publicação criada com sucesso")
                     updatePost();
                     closeDialog()
                     showMessage("success","sucesso","Publicação criada com sucesso",toast)
@@ -79,7 +76,6 @@ function InputWrapper({
    
     return (
         <>
-            <Toast ref={toast} position="bottom-left" />
             <Card className="shadow-4">
             <header className="flex align-items-center gap-5">
             <div>

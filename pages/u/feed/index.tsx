@@ -1,5 +1,5 @@
 // React & Next
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 // Primereact
 import { InputText } from "primereact/inputtext";
 // Componentes
@@ -11,12 +11,15 @@ import { supabase } from "../../../services/supabase";
 import { changeFormatDate } from "../../../utils/utils";
 import Head from "next/head";
 import { Button } from "primereact/button";
+import { Toast } from "primereact/toast";
 
 export default function Feed() {
     const [postPinado, setPostPinado] = useState<PostProps[]>([]);
     const [post, setPost] = useState<PostProps[]>([]);
     const [user, setUser] = useState<InputProps[]>([]);
     const [search, setSearch] = useState<string>("");
+
+    const toast = useRef(null);
 
     const updatePosts = () => {
         supabase
@@ -29,7 +32,9 @@ export default function Feed() {
           id_empreendedora
         )
       `
-            )
+            ).order("data_hora", {
+                ascending: false,
+            })
             .then((response) => setPost(response?.data as any));
     };
     useEffect(() => {
@@ -52,6 +57,9 @@ export default function Feed() {
                             )`
                 )
                 .eq("pinado", "true")
+                .order("data_hora", {
+                    ascending: false,
+                })
                 .then((response) => setPostPinado(response?.data as any));
         };
         getNomeEmpreendedora();
@@ -81,6 +89,8 @@ export default function Feed() {
                     )
                     .textSearch("legenda", search.toUpperCase(), {
                         type: "websearch",
+                    }).order("data_hora", {
+                        ascending: false,
                     })
                     .then((response) => {
                         let newPostList = [...post];
@@ -102,7 +112,9 @@ export default function Feed() {
               id_empreendedora
             )
           `
-                )
+                ).order("data_hora", {
+                    ascending: false,
+                })
                 .then((response) => setPost(response?.data as any));
         }
     };
@@ -149,6 +161,7 @@ export default function Feed() {
                                             infoPost.id_publicacao
                                     )}
                                     updatePost={updatePosts}
+                                    toast={toast}
                                 />
                             ))}
                             <Button
@@ -160,31 +173,27 @@ export default function Feed() {
                                 onClick={Click}
                             />
                             {post?.length > 0
-                                ? post
-                                      ?.slice(0)
-                                      .reverse()
-                                      .map((postInfo, index) => (
-                                          <PostContainer
-                                              key={index}
-                                              id_publicacao={
-                                                  postInfo.id_publicacao
-                                              }
-                                              id_usuario={postInfo.id_usuario}
-                                              empreendedora={
-                                                  postInfo.empreendedora
-                                              }
-                                              legenda={postInfo.legenda}
-                                              data_hora={changeFormatDate(
-                                                  postInfo.data_hora
-                                              )}
-                                              pinado={postInfo.pinado}
-                                          />
-                                      ))
+                                ? post.map((postInfo, index) => (
+                                      <PostContainer
+                                          key={index}
+                                          id_publicacao={postInfo.id_publicacao}
+                                          id_usuario={postInfo.id_usuario}
+                                          empreendedora={postInfo.empreendedora}
+                                          usuario={user[0]}
+                                          legenda={postInfo.legenda}
+                                          data_hora={changeFormatDate(
+                                              postInfo.data_hora
+                                          )}
+                                          pinado={postInfo.pinado}
+                                          toast={toast}
+                                      />
+                                  ))
                                 : " "}
                         </div>
                     </div>
                 </div>
             </main>
+            <Toast ref={toast} position="bottom-left" />
         </>
     );
 }

@@ -59,22 +59,24 @@ export default function Profile() {
         evento.preventDefault();
     };
 
-  return (
-    <>
-      <Head>
-        <title>Perfil</title>
-        <link rel="icon" href="/icon-manamano.png" />
-      </Head>
+    return (
+        <>
+            <Head>
+                <title>Perfil</title>
+            </Head>
+            <div className="flex gap-4 align-items-center m-4 flex-wrap justify-content-center md:justify-content-start">
+                <Avatar
+                    style={{ height: "180px", width: "180px" }}
+                    size="xlarge"
+                    shape="circle"
+                >
+                    <span style={{ fontSize: "5rem" }}>
+                        {nameUser.charAt(0)}
+                    </span>
+                </Avatar>
 
-      <div className="flex gap-4 align-items-center p-3 flex-wrap">
-        <Avatar
-          style={{ height: "180px", width: "180px" }}
-          image="/background-manamano.jpg"
-          size="xlarge"
-          shape="circle"
-        />
-        <div>
-          <h1 className="ml-3">{nameUser}</h1>
+                <div>
+                    <h1 className="ml-3">{nameUser}</h1>
 
                     <div className="ml-3 flex gap-2">
                         <Link href="https://instagram.com" legacyBehavior>

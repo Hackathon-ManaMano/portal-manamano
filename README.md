@@ -1,34 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Hackathon ManaMano 
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<h4>Este repositório é destinado ao desenvolvimento de um portal para proporcionar interações entre o pessoal envolvido no projeto ManaMano na forma de uma rede de compartilhamento livre de experiências, conhecimentos e conteúdos</h4>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+​
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## Tecnologias utilizadas
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- <a href="https://pt-br.reactjs.org/docs/getting-started.html"> React </a>
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- <a href="https://www.primefaces.org/primereact/"> PrimeReact </a>
+
+
+
+- <a href="https://nextjs.org/"> Next </a> 
+
+
+
+- <a href="https://supabase.com/"> Supabase </a>
+
+
+
+- <a href="https://vercel.com/"> Vercel </a>
+
+
+
+​
+
+
+
+## Versão final da aplicação
+
+
+
+​
+
+
+
+<a href="https://portal-manamano.vercel.app/">Portal ManaMano </a>
+
+
+
+​
+
+
+
+## Documentação
+
+
+
+
+<a href="https://docs.google.com/document/d/1DP7afe189jATYvA_0OswHDPoDZrIXur1BboIk7lwWlw/edit#heading=h.5g9qmwy3b351"> Documento de visão </a>
+
+
+
+​
+
+
+
+## Equipe de desenvolvimento
+
+
+| <a href="https://github.com/EllenSouza"><img src="https://github.com/EllenSouza.png" height="80px" width="80px" alt="ellen-avatar" /><br><sub>Ellen Almeida</b></sub></a><br/> | <a href="https://github.com/jhaysonj"><img src="https://github.com/jhaysonj.png" height="80px" width="80px" alt="jhayson-avatar" /><br><sub>Jhayson Jales</b></sub></a><br/>| <a href="https://github.com/keviinsna"><img src="https://github.com/keviinsna.png" height="80px" width="80px" alt="kevin-avatar" /><br><sub>Kevin Sena</b></sub></a><br/> | <a href="https://github.com/riquelmegomes"><img src="https://github.com/riquelmegomes.png" height="80px" width="80px" alt="riquelme-avatar" /><br><sub>Riquelme Gomes</b></sub></a><br/> | <a href="https://github.com/VitoriaSerafim"><img src="https://github.com/VitoriaSerafim.png" height="80px" width="80px" alt="vitoria-avatar" /><br><sub>Vitória Serafim</b></sub></a><br/>|
+|:---: | :---: | :---: | :---: | :---: | 
+
+

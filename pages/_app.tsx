@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         >
             <div className={font.className}>
                 <Head>
-                    <link rel="icon" href="/icon-manamano.png" />
+                    <link rel="icon" href="/logo/icon-manamano.png" />
                 </Head>
                 {router.pathname.startsWith("/u/") ? (
                     <LayoutLogged>

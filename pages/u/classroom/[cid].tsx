@@ -1,18 +1,26 @@
 // React & Next
 import Head from "next/head";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { GetServerSidePropsContext } from "next";
 // Primereact
 import { Card } from "primereact/card";
 import { Avatar } from "primereact/avatar";
 import { Button } from "primereact/button";
 import { DataView } from "primereact/dataview";
 import { Dropdown, DropdownChangeParams } from "primereact/dropdown";
+// Models
+import { Class } from "../../../models/class_models";
 // Utils
 import { formatViewDate } from "../../../utils/utils";
+// Service
+import { ClassService } from "../../../services/class_service";
 
-export default function Class() {
-    const router = useRouter();
+interface ClassProps {
+    query: { cid: number };
+    currentClass: Class;
+}
+
+export default function CurrentClass({ currentClass }: ClassProps) {
     const [selectedCategory, setSelectedCategory] = useState({
         id_categoria: 0,
         descricao: "Categorias",
@@ -106,22 +114,24 @@ export default function Class() {
     return (
         <>
             <Head>
-                <title>{`Turma ${router.query.cid}`}</title>
-                <link rel="icon" href="/icon-manamano.png" />
+                <title>{currentClass.descricao}</title>
             </Head>
             <div className="flex flex-column py-4 px-2 sm:px-8 gap-4">
-                <header>
-                    <Card
-                        className="flex align-items-end"
-                        style={{
-                            backgroundColor: `var(--indigo-900)`,
-                            height: "200px",
-                        }}
-                    >
-                        <p className="text-3xl sm:text-5xl text-white">
-                            {`TURMA ${router.query.cid}`}
-                        </p>
-                    </Card>
+                <header
+                    className="flex align-items-end justify-content-between p-4 border-round-md"
+                    style={{
+                        backgroundColor: `var(--indigo-900)`,
+                        height: "200px",
+                    }}
+                >
+                    <p className="text-3xl sm:text-5xl text-white">
+                        {currentClass.descricao}
+                    </p>
+                    <Button
+                        className="p-button-outlined text-white new-user"
+                        icon="pi pi-user-plus"
+                        label="Adicionar aluna"
+                    />
                 </header>
                 <main className="flex flex-column gap-5">
                     <article className="flex gap-4">
@@ -162,6 +172,27 @@ export default function Class() {
                     </article>
                 </main>
             </div>
+            <style jsx global>
+                {`
+                    .new-user:focus {
+                        box-shadow: 0 0 0px 2px white;
+                    }
+                `}
+            </style>
         </>
     );
+}
+export async function getServerSideProps({ query }: GetServerSidePropsContext) {
+    try {
+        const classService = new ClassService();
+        const classes = await classService.getClasses(Number(query.cid));
+        const currentClass = classes?.shift();
+        return {
+            props: { query, currentClass }, // will be passed to the page component as props
+        };
+    } catch (error) {
+        return {
+            props: {}, // will be passed to the page component as props
+        };
+    }
 }

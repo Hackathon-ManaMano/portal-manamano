@@ -13,11 +13,11 @@
 ## Tecnologias utilizadas
 
 
-- <a href="https://pt-br.reactjs.org/docs/getting-started.html" target="_blank"> React </a>
+- <a href="https://pt-br.reactjs.org/docs/getting-started.html" > React </a>
 
 
 
-- <a target="_blank" href="https://www.primefaces.org/primereact/"> PrimeReact </a>
+- <a  href="https://www.primefaces.org/primereact/"> PrimeReact </a>
 
 
 

@@ -76,8 +76,12 @@ function InputWrapper({
     const cancelOptions = { className: 'hidden'};
 
     var str = "Compartilhe novidades! Faça uma publicação, ";
-    const cardHeader = (
-        <header className="flex align-items-center gap-5 p-5">
+   
+    return (
+        <>
+            <Toast ref={toast} position="bottom-left" />
+            <Card className="shadow-4">
+            <header className="flex align-items-center gap-5">
             <div>
                 <Avatar
                     label={nome[0]}
@@ -92,7 +96,6 @@ function InputWrapper({
                         style={{
                             width: "100%",
                             minWidth: 200,
-                            maxWidth: 550,
                             borderRadius: 20,
                             backgroundColor: "white",
                             color: "#495057bf",
@@ -148,12 +151,7 @@ function InputWrapper({
                 </span>
             </div>
         </header>
-    );
-
-    return (
-        <>
-            <Toast ref={toast} position="bottom-left" />
-            <Card className="shadow-4" header={cardHeader} />
+            </Card>
         </>
     );
 }

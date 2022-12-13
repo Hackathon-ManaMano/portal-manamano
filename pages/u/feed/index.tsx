@@ -12,9 +12,8 @@ import { changeFormatDate } from "../../../utils/utils";
 import Head from "next/head";
 import { Button } from "primereact/button";
 
-
 export default function Feed() {
-    const [postPinado, setPostPinado] = useState<PostProps[]>([])
+    const [postPinado, setPostPinado] = useState<PostProps[]>([]);
     const [post, setPost] = useState<PostProps[]>([]);
     const [user, setUser] = useState<InputProps[]>([]);
     const [search, setSearch] = useState<string>("");
@@ -43,17 +42,17 @@ export default function Feed() {
                     .eq("id_empreendedora", EmpUser)
                     .then((response) => setUser(response?.data as any));
 
-                    supabase
-                    .from("publicacao")
-                    .select(
-                        `*,
+            supabase
+                .from("publicacao")
+                .select(
+                    `*,
                             empreendedora(
                             nome,
                             id_empreendedora
                             )`
-                    )
-                    .eq("pinado", "true")
-                    .then((response) => setPostPinado(response?.data as any))
+                )
+                .eq("pinado", "true")
+                .then((response) => setPostPinado(response?.data as any));
         };
         getNomeEmpreendedora();
         updatePosts();
@@ -139,11 +138,6 @@ export default function Feed() {
                                 />
                             </div>
 
-                            <Button type="button" label="PUBLICAÇÕES IMPORTANTES" 
-                            badge={postPinado.length+""} 
-                            style={{marginBottom:"2%"}}
-                            onClick={Click}/>
-
                             {user?.map((postInfo, index) => (
                                 <InputWrapper
                                     key={index}
@@ -157,7 +151,14 @@ export default function Feed() {
                                     updatePost={updatePosts}
                                 />
                             ))}
-
+                            <Button
+                                type="button"
+                                label="PUBLICAÇÕES IMPORTANTES"
+                                badge={postPinado.length + ""}
+                                style={{ marginTop: "2%" }}
+                                icon={"pi pi-chevron-down"}
+                                onClick={Click}
+                            />
                             {post?.length > 0
                                 ? post
                                       ?.slice(0)

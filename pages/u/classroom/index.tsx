@@ -1,28 +1,60 @@
 // React & Next
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 // Primereact
 import { Card } from "primereact/card";
+import { Toast } from "primereact/toast";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { DataView } from "primereact/dataview";
-import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
+import { Calendar, CalendarChangeParams } from "primereact/calendar";
+// Models
+import { Class, emptyClass } from "../../../models/class_models";
 // Utils
 import C from "../../../utils/constants";
+import { formatViewDate, showMessage } from "../../../utils/utils";
 // Templates
 import { paginatorTemplate } from "../../../components/Templates/templates";
+// Service
+import { ClassService } from "../../../services/class_service";
 
 export default function ClassRoom() {
+    const toast = useRef(null);
     const router = useRouter();
-    const [endDate, setEndDate] = useState<Date>();
-    const [startDate, setStartDate] = useState<Date>();
-    const [description, setDescription] = useState<string>("");
+    const classService = new ClassService();
+    const [classes, setClasses] = useState<Class[]>([]);
+    const [newClass, setNewClass] = useState<Class>(emptyClass);
     const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
 
-    const handleCreateClassroomSubmit = (event: FormEvent<HTMLFormElement>) => {
-        // console.log("tentou criar turma");
+    useEffect(() => {
+        updateClasses();
+    }, []);
+
+    const updateClasses = async () => {
+        try {
+            const classes = await classService.getClasses();
+            setClasses(classes as Class[]);
+        } catch (e: any) {}
+    };
+
+    const handleNewClassSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        try {
+            const error = await classService.createClass(newClass);
+            if (error == null) {
+                // Deu certo!
+                updateClasses();
+                showMessage(
+                    C.SERVER_SUCCESS,
+                    "Sucesso",
+                    "Turma criada com sucesso.",
+                    toast
+                );
+                closeDialog();
+            }
+        } catch (e: any) {}
     };
 
     const openDialog = () => {
@@ -31,68 +63,26 @@ export default function ClassRoom() {
 
     const closeDialog = () => {
         setIsDialogVisible(false);
-        setDescription("");
-        setStartDate(undefined);
-        setEndDate(undefined);
+        setNewClass(emptyClass);
     };
 
-    const renderFooter = () => {
-        return (
-            <div>
-                <Button
-                    label="Cancelar"
-                    icon="pi pi-times"
-                    onClick={() => closeDialog()}
-                    className="p-button-text p-button-danger"
-                />
-                <Button
-                    type="submit"
-                    label="Confirmar"
-                    icon="pi pi-check"
-                    onClick={() => closeDialog()}
-                    autoFocus
-                />
-            </div>
-        );
-    };
-
-    const classes = [
-        {
-            id_turma: 1,
-            legenda: "Turma 1",
-            descricao: "Descrição da turma 1",
-        },
-        {
-            id_turma: 2,
-            legenda: "Turma 2",
-            descricao: "Descrição da turma 2",
-        },
-        {
-            id_turma: 3,
-            legenda: "Turma 3",
-            descricao: "Descrição da turma 3",
-        },
-        {
-            id_turma: 4,
-            legenda: "Turma 4",
-            descricao: "Descrição da turma 4",
-        },
-        {
-            id_turma: 5,
-            legenda: "Turma 5",
-            descricao: "Descrição da turma 5",
-        },
-        {
-            id_turma: 6,
-            legenda: "Turma 6",
-            descricao: "Descrição da turma 6",
-        },
-        {
-            id_turma: 7,
-            legenda: "Turma 7",
-            descricao: "Descrição da turma 7",
-        },
-    ];
+    const dialogFooter = (
+        <footer>
+            <Button
+                label="Cancelar"
+                icon="pi pi-times"
+                onClick={closeDialog}
+                className="p-button-text p-button-danger"
+            />
+            <Button
+                type="submit"
+                form="create-class"
+                label="Confirmar"
+                icon="pi pi-check"
+                autoFocus
+            />
+        </footer>
+    );
 
     const headerDataView = (
         <div className="flex justify-content-between align-items-center">
@@ -101,16 +91,16 @@ export default function ClassRoom() {
                 label="Adicionar turma"
                 icon="pi pi-plus"
                 className="p-button-text p-button-sm"
-                onClick={() => openDialog()}
+                onClick={openDialog}
             />
         </div>
     );
 
-    const itemTemplate = (data: any) => {
+    const itemTemplate = (data: Class) => {
         return (
             <Card
                 className="card col-12 md:col-3 m-5 p-4 hover:shadow-5 cursor-pointer"
-                title={data.legenda}
+                title={data.descricao}
                 style={{
                     width: "250px",
                     color: "white",
@@ -118,9 +108,13 @@ export default function ClassRoom() {
                         C.COLORS[data.id_turma % C.COLORS.length]
                     }`,
                 }}
-                onClick={(e) => router.push(`/u/classroom/${data.id_turma}`)}
+                onClick={() => router.push(`/u/classroom/${data.id_turma}`)}
             >
-                <span>{data.descricao}</span>
+                <span>
+                    {`Início: ${formatViewDate(
+                        (data.data_inicio as Date).toString()
+                    )}`}
+                </span>
             </Card>
         );
     };
@@ -131,7 +125,7 @@ export default function ClassRoom() {
                 <title>Turmas</title>
             </Head>
             <DataView
-                value={classes}
+                value={classes.sort((a, b) => a.id_turma - b.id_turma)}
                 layout="grid"
                 header={headerDataView}
                 itemTemplate={itemTemplate}
@@ -139,6 +133,7 @@ export default function ClassRoom() {
                 rows={10}
                 rowsPerPageOptions={[5, 10, 15]}
                 paginatorTemplate={paginatorTemplate}
+                emptyMessage="Não há turmas cadastradas"
             />
             <Dialog
                 header="Criar nova turma"
@@ -147,12 +142,12 @@ export default function ClassRoom() {
                 blockScroll
                 draggable={false}
                 onHide={() => closeDialog()}
-                footer={renderFooter()}
+                footer={dialogFooter}
             >
                 <form
                     id="create-class"
                     className="grid flex-column"
-                    onSubmit={handleCreateClassroomSubmit}
+                    onSubmit={handleNewClassSubmit}
                 >
                     <div className="field p-inputgroup mt-6">
                         <span className="p-inputgroup-addon">
@@ -161,10 +156,17 @@ export default function ClassRoom() {
                         <span className="p-float-label">
                             <InputText
                                 id="description"
-                                value={description}
+                                value={newClass.descricao}
                                 required
                                 name="description"
-                                onChange={(e) => setDescription(e.target.value)}
+                                onChange={(
+                                    e: ChangeEvent<HTMLInputElement>
+                                ) => {
+                                    setNewClass({
+                                        ...newClass,
+                                        descricao: e.target.value,
+                                    });
+                                }}
                             />
                             <label htmlFor="description">Nome da turma</label>
                         </span>
@@ -176,10 +178,15 @@ export default function ClassRoom() {
                         <span className="p-float-label">
                             <Calendar
                                 dateFormat="dd/mm/yy"
-                                value={startDate}
+                                value={newClass.data_inicio}
+                                required
                                 inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
-                                onChange={(e) => {
-                                    if (e.value) setStartDate(e.value as Date);
+                                onChange={(e: CalendarChangeParams) => {
+                                    if (e.value)
+                                        setNewClass({
+                                            ...newClass,
+                                            data_inicio: e.value as Date,
+                                        });
                                 }}
                             />
                             <label htmlFor="startDate">Data de início</label>
@@ -192,10 +199,14 @@ export default function ClassRoom() {
                         <span className="p-float-label">
                             <Calendar
                                 dateFormat="dd/mm/yy"
-                                value={endDate}
+                                value={newClass.data_fim}
                                 inputStyle={{ borderRadius: "0px 6px 6px 0px" }}
-                                onChange={(e) => {
-                                    if (e.value) setEndDate(e.value as Date);
+                                onChange={(e: CalendarChangeParams) => {
+                                    if (e.value)
+                                        setNewClass({
+                                            ...newClass,
+                                            data_fim: e.value as Date,
+                                        });
                                 }}
                             />
                             <label htmlFor="endDate">Data de fim</label>
@@ -203,6 +214,7 @@ export default function ClassRoom() {
                     </div>
                 </form>
             </Dialog>
+            <Toast ref={toast} position="bottom-right" />
         </>
     );
 }

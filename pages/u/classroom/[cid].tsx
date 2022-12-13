@@ -111,7 +111,7 @@ export default function Class() {
             </Head>
             <div className="flex flex-column py-4 px-2 sm:px-8 gap-4">
                 <header
-                    className="flex align-items-end justify-content-between p-4 border-round-m template"
+                    className="flex align-items-end justify-content-between p-4 border-round-md"
                     style={{
                         backgroundColor: `var(--indigo-900)`,
                         height: "200px",

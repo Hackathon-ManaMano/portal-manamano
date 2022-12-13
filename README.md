@@ -40,11 +40,6 @@
 ## Versão final da aplicação
 
 
-
-​
-
-
-
 <a href="https://portal-manamano.vercel.app/">Portal ManaMano </a>
 
 
@@ -54,8 +49,6 @@
 
 
 ## Documentação
-
-
 
 
 <a href="https://docs.google.com/document/d/1DP7afe189jATYvA_0OswHDPoDZrIXur1BboIk7lwWlw/edit#heading=h.5g9qmwy3b351"> Documento de visão </a>

@@ -8,7 +8,6 @@ export default function Auth({ children }: React.PropsWithChildren) {
       let {
         data: { session },
       } = await supabase.auth.getSession();
-      console.log(session)
       if (session) {
         if (!router.pathname.startsWith("/u/")) {
           router.push("/u/feed");

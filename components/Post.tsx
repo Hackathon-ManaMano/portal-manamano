@@ -7,14 +7,13 @@ import { Avatar } from "primereact/avatar";
 import { Button } from "primereact/button";
 import { Divider } from "primereact/divider";
 import { InputTextarea } from "primereact/inputtextarea";
+import Commentary from "./Commentary";
+
 // Service
 import { supabase } from "../services/supabase";
 import commentService from "../services/comment_service";
-// Models
-import { newComment, Comment } from "../models/comment_model";
-
-// https://www.primefaces.org/primereact/carousel/
-
+import { InputProps } from "../components/newPost";
+import { showMessage } from "../utils/utils";
 export interface PostProps {
     id_publicacao: number;
     id_usuario: string;
@@ -24,6 +23,9 @@ export interface PostProps {
     };
     legenda: string;
     data_hora: string;
+    pinado: boolean;
+    usuario: InputProps;
+    toast: any;
 }
 export interface CommentProps {
     id_comentario_publicacao: number;
@@ -33,68 +35,42 @@ export interface CommentProps {
     id_empreendedora: string;
 }
 
-const profilePhoto = {
-    backgroundColor: "white",
-    width: 50,
-    height: 50,
-    borderRadius: 100,
-    marginTop: 15,
-    marginLeft: 35,
-};
-// export const info = {
-//   color: "black",
-//   paddingLeft: 20,
-//   paddingTop: "3%",
-//   marginLeft: 15,
-// };
-
-const responsiveOptions = [
-    {
-        breakpoint: "1024px",
-        numVisible: 5,
-    },
-    {
-        breakpoint: "768px",
-        numVisible: 3,
-    },
-    {
-        breakpoint: "560px",
-        numVisible: 1,
-    },
-];
-
-function PostContainer(
-    { id_publicacao, data_hora, legenda, empreendedora }: PostProps,
-    { id_comentario_publicacao }: CommentProps
-) {
+function PostContainer({
+    id_publicacao,
+    data_hora,
+    legenda,
+    empreendedora,
+    usuario,
+    toast
+}: PostProps) {
     const [text, setText] = useState("");
-    const [comment, setComment] = useState<Comment>(newComment);
+    const [comment, setComment] = useState<CommentProps[]>([]);
+
     useEffect(() => {
+        updateComment();
+    }, []);
+
+    const updateComment = () => {
         supabase
             .from("comentario_empreendedora_publicacao")
             .select("*")
-            .then(
-                (response) => (
-                    setComment(response?.data as any),
-                    console.log(response?.data)
-                )
-            );
-    }, []);
-    const Comment = () => {
+            .eq("id_publicacao", id_publicacao)
+            .then((response) => setComment(response?.data as any));
+    };
+
+    const postComment = () => {
         var today = new Date();
         try {
+            console.log(usuario)
             commentService
                 .newComment(
                     text,
                     today.toISOString(),
-                    empreendedora.id_empreendedora,
-                    id_publicacao,
-                    id_comentario_publicacao + 1
+                    usuario.id_empreendedora,
+                    id_publicacao
                 )
                 .then((res) => {
-                    alert("Comentario adicionado com sucesso"),
-                        console.log(res);
-                    //window.location.reload();
+                 updateComment(); setText(""); showMessage("success","sucesso","Comentário criado com sucesso",toast);
                 });
         } catch (err) {
             alert(err);
@@ -108,13 +84,13 @@ function PostContainer(
     const cardHeader = (
         <header className="flex align-items-center gap-6 pt-3 pl-3">
             <Avatar
-                label={empreendedora.nome[0]}
+                label={empreendedora?.nome[0]}
                 shape="circle"
                 size="xlarge"
                 style={{ color: "black" }}
             />
             <div className="flex gap-6">
-                <span className="text-lg">{empreendedora.nome}</span>
+                <span className="text-lg">{empreendedora?.nome}</span>
                 <span className="text-lg">{data_hora}</span>
             </div>
         </header>
@@ -122,6 +98,23 @@ function PostContainer(
 
     const cardFooter = (
         <div className="grid">
+            <Divider />
+            {comment?.map((commentInfo, index) =>
+                id_publicacao == comment[index].id_publicacao ? (
+                    <Commentary
+                        key={index}
+                        id_comentario_publicacao={
+                            commentInfo.id_comentario_publicacao
+                        }
+                        id_publicacao={commentInfo.id_publicacao}
+                        id_empreendedora={commentInfo.id_empreendedora}
+                        data_hora={commentInfo.data_hora}
+                        comentario={commentInfo.comentario}
+                    />
+                ) : (
+                    " "
+                )
+            )}
             <Divider />
             <div style={{ marginLeft: "5%", width: "70%" }}>
                 <InputTextarea
@@ -133,7 +126,11 @@ function PostContainer(
                 />
             </div>
             <div style={{ marginLeft: 20, marginTop: "1%" }}>
-                <Button label="Enviar" icon="pi pi-check" onClick={Comment} />
+                <Button
+                    label="Enviar"
+                    icon="pi pi-check"
+                    onClick={postComment}
+                />
             </div>
         </div>
     );

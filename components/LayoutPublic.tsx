@@ -161,8 +161,57 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
                     </div>
                 </div>
 
+                <div className="flex flex-row bg-gray-900 justify-content-center">
+                    <div className="flex gap-7 md:gap-8 my-6">
+                        <Link
+                            href="https://www.facebook.com/fundomanamano"
+                            legacyBehavior
+                        >
+                            <a target="_blank">
+                                <i
+                                    className="text-white pi pi-facebook hover:text-gray-500"
+                                    style={{ fontSize: "1.8em" }}
+                                />
+                            </a>
+                        </Link>
+                        <Link
+                            href="https://www.instagram.com/fundomanamano/"
+                            legacyBehavior
+                        >
+                            <a target="_blank">
+                                <i
+                                    className="text-white pi pi-instagram hover:text-gray-500"
+                                    style={{ fontSize: "1.8em" }}
+                                />
+                            </a>
+                        </Link>
+                        <Link
+                            href="https://www.youtube.com/@manamano8916"
+                            legacyBehavior
+                        >
+                            <a target="_blank">
+                                <i
+                                    className="text-white pi pi-youtube hover:text-gray-500"
+                                    style={{ fontSize: "1.8em" }}
+                                />
+                            </a>
+                        </Link>
+                        <Link
+                            href="https://www.linkedin.com/company/fundomanamano/"
+                            legacyBehavior
+                        >
+                            <a target="_blank">
+                                <i
+                                    className="text-white pi pi-linkedin hover:text-gray-500"
+                                    style={{ fontSize: "1.8em" }}
+                                />
+                            </a>
+                        </Link>
+                    </div>
+                </div>
+                
                 <div className="flex flex-row bg-gray-900 text-center ">
-                    <div className="flex flex-column xl:flex-row justify-content-evenly align-items-center col-12 mt-6 mb-6 line-height-4">
+                    <div className="flex flex-column xl:flex-row justify-content-evenly align-items-center col-12 mb-5 line-height-4">
                         <p className="text-xl text-white">
                             Rua das Palmeiras, 65 - Botafogo, Rio de Janeiro, RJ
                             - Brasil

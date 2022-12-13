@@ -1,10 +1,10 @@
 // React & Next
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 // Primereact
 import { InputText } from "primereact/inputtext";
 // Componentes
-import PostContainer, { PostProps } from "../../../components/PostContainer";
-import InputWrapper, { InputProps } from "../../../components/InputWrapper";
+import PostContainer, { PostProps } from "../../../components/Post";
+import InputWrapper, { InputProps } from "../../../components/newPost";
 // Supabase
 import { supabase } from "../../../services/supabase";
 // Utils
@@ -13,11 +13,12 @@ import Head from "next/head";
 import { Button } from "primereact/button";
 
 export default function Feed() {
+    const [postPinado, setPostPinado] = useState<PostProps[]>([]);
     const [post, setPost] = useState<PostProps[]>([]);
     const [user, setUser] = useState<InputProps[]>([]);
     const [search, setSearch] = useState<string>("");
 
-    useEffect(() => {
+    const updatePosts = () => {
         supabase
             .from("publicacao")
             .select(
@@ -30,8 +31,7 @@ export default function Feed() {
       `
             )
             .then((response) => setPost(response?.data as any));
-    }, []);
-
+    };
     useEffect(() => {
         const getNomeEmpreendedora = async () => {
             const EmpUser = await userLogged();
@@ -41,8 +41,21 @@ export default function Feed() {
                     .select("*")
                     .eq("id_empreendedora", EmpUser)
                     .then((response) => setUser(response?.data as any));
+
+            supabase
+                .from("publicacao")
+                .select(
+                    `*,
+                            empreendedora(
+                            nome,
+                            id_empreendedora
+                            )`
+                )
+                .eq("pinado", "true")
+                .then((response) => setPostPinado(response?.data as any));
         };
         getNomeEmpreendedora();
+        updatePosts();
     }, []);
 
     const userLogged = async () => {
@@ -52,21 +65,53 @@ export default function Feed() {
         return usuario;
     };
 
-    // Alguém me ajuda, sou uma cadela do styled components e o arquivo css externo não tava funfando
-    const profilePhoto = {
-        backgroundColor: "white",
-        width: 50,
-        height: 50,
-        borderRadius: 100,
-        marginTop: 15,
-        marginLeft: 30,
+    const pesquisa = async () => {
+        if (search != "") {
+            try {
+                await supabase
+                    .from("publicacao")
+                    .select(
+                        `
+               *,
+                empreendedora(
+                  nome,
+                  id_empreendedora
+                )
+              `
+                    )
+                    .textSearch("legenda", search.toUpperCase(), {
+                        type: "websearch",
+                    })
+                    .then((response) => {
+                        let newPostList = [...post];
+                        newPostList = response?.data as any;
+                        setPost(newPostList);
+                        console.log(newPostList);
+                    });
+            } catch (err) {
+                alert(err);
+            }
+        } else {
+            supabase
+                .from("publicacao")
+                .select(
+                    `
+           *,
+            empreendedora(
+              nome,
+              id_empreendedora
+            )
+          `
+                )
+                .then((response) => setPost(response?.data as any));
+        }
     };
-
-    //   const avatarFile = event.target.files[0];
-    //   const { data, error } = await supabase.storage
-    //     .from("avatars")
-    //     .upload("public/avatar1.png", avatarFile);
-
+    const Click = () => {
+        const getPostImportante = async () => {
+            setPost(postPinado);
+        };
+        getPostImportante();
+    };
     return (
         <>
             <Head>
@@ -87,17 +132,33 @@ export default function Feed() {
                                         e: ChangeEvent<HTMLInputElement>
                                     ) => setSearch(e.target.value)}
                                 />
-                                <Button icon="pi pi-search" />
+                                <Button
+                                    icon="pi pi-search"
+                                    onClick={pesquisa}
+                                />
                             </div>
+
                             {user?.map((postInfo, index) => (
                                 <InputWrapper
                                     key={index}
                                     id_empreendedora={postInfo.id_empreendedora}
                                     nome={postInfo.nome}
                                     email={postInfo.email}
-                                    postIndex={post.length}
+                                    postIndex={post?.map(
+                                        (infoPost, index) =>
+                                            infoPost.id_publicacao
+                                    )}
+                                    updatePost={updatePosts}
                                 />
                             ))}
+                            <Button
+                                type="button"
+                                label="PUBLICAÇÕES IMPORTANTES"
+                                badge={postPinado.length + ""}
+                                style={{ marginTop: "2%" }}
+                                icon={"pi pi-chevron-down"}
+                                onClick={Click}
+                            />
                             {post?.length > 0
                                 ? post
                                       ?.slice(0)
@@ -116,6 +177,7 @@ export default function Feed() {
                                               data_hora={changeFormatDate(
                                                   postInfo.data_hora
                                               )}
+                                              pinado={postInfo.pinado}
                                           />
                                       ))
                                 : " "}

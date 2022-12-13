@@ -6,11 +6,11 @@ export default {
     data_hora: string,
     id_empreendedora: string,
     id_publicacao: number,
-    id_comentario_publicacao: number
+    // id_comentario_publicacao: number
   ) {
     try {
       const response = await supabase.from("comentario_empreendedora_publicacao").insert({
-        id_comentario_publicacao,
+        // id_comentario_publicacao,
         id_publicacao,
         comentario,
         data_hora,

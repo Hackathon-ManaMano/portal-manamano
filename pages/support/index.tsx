@@ -99,7 +99,6 @@ export default function Support() {
                         width={300}
                         src="https://www.youtube.com/embed/MOp0zMYVEew"
                         title="YouTube video player"
-                        frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                     ></iframe>

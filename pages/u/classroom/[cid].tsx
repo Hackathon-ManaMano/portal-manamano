@@ -109,18 +109,21 @@ export default function Class() {
                 <title>{`Turma ${router.query.cid}`}</title>
             </Head>
             <div className="flex flex-column py-4 px-2 sm:px-8 gap-4">
-                <header>
-                    <Card
-                        className="flex align-items-end"
-                        style={{
-                            backgroundColor: `var(--indigo-900)`,
-                            height: "200px",
-                        }}
-                    >
-                        <p className="text-3xl sm:text-5xl text-white">
-                            {`TURMA ${router.query.cid}`}
-                        </p>
-                    </Card>
+                <header
+                    className="flex align-items-end justify-content-between p-4 border-round-m template"
+                    style={{
+                        backgroundColor: `var(--indigo-900)`,
+                        height: "200px",
+                    }}
+                >
+                    <p className="text-3xl sm:text-5xl text-white">
+                        {`TURMA ${router.query.cid}`}
+                    </p>
+                    <Button
+                        className="p-button-outlined text-white new-user"
+                        icon="pi pi-user-plus"
+                        label="Adicionar aluna"
+                    />
                 </header>
                 <main className="flex flex-column gap-5">
                     <article className="flex gap-4">
@@ -161,6 +164,13 @@ export default function Class() {
                     </article>
                 </main>
             </div>
+            <style jsx global>
+                {`
+                    .new-user:focus {
+                        box-shadow: 0 0 0px 2px white;
+                    }
+                `}
+            </style>
         </>
     );
 }

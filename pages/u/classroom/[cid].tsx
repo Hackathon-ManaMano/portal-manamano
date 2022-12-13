@@ -107,7 +107,6 @@ export default function Class() {
         <>
             <Head>
                 <title>{`Turma ${router.query.cid}`}</title>
-                <link rel="icon" href="/icon-manamano.png" />
             </Head>
             <div className="flex flex-column py-4 px-2 sm:px-8 gap-4">
                 <header

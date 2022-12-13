@@ -67,7 +67,6 @@ export default function LoginScreen() {
     <>
       <Head>
         <title>ManaMano login</title>
-        <link rel="icon" href="/icon-manamano.png" />
       </Head>
 
       <LayoutLoginRegister

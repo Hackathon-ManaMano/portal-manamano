@@ -15,6 +15,7 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
         },
         {
             label: "Quem Apoiamos",
+            command: () => router.push("/support"),
         },
         {
             label: "Contribua",

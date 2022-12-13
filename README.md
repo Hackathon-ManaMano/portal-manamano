@@ -13,7 +13,7 @@
 ## Tecnologias utilizadas
 
 
-- <a target="_blank" href="https://pt-br.reactjs.org/docs/getting-started.html"> React </a>
+- <a href="https://pt-br.reactjs.org/docs/getting-started.html" target="_blank"> React </a>
 
 
 
@@ -21,15 +21,15 @@
 
 
 
-- <a target="_blank" href="https://nextjs.org/"> Next </a> 
+- <a href="https://nextjs.org/"> Next </a> 
 
 
 
-- <a target="_blank" href="https://supabase.com/"> Supabase </a>
+- <a href="https://supabase.com/"> Supabase </a>
 
 
 
-- <a target="_blank" href="https://vercel.com/"> Vercel </a>
+- <a href="https://vercel.com/"> Vercel </a>
 
 
 
@@ -40,7 +40,7 @@
 ## Versão final da aplicação
 
 
-<a target="_blank" href="https://portal-manamano.vercel.app/">Portal ManaMano </a>
+<a href="https://portal-manamano.vercel.app/">Portal ManaMano </a>
 
 
 
@@ -51,7 +51,7 @@
 ## Documentação
 
 
-<a target="_blank" href="https://docs.google.com/document/d/1DP7afe189jATYvA_0OswHDPoDZrIXur1BboIk7lwWlw/edit#heading=h.5g9qmwy3b351"> Documento de visão </a>
+<a href="https://docs.google.com/document/d/1DP7afe189jATYvA_0OswHDPoDZrIXur1BboIk7lwWlw/edit#heading=h.5g9qmwy3b351"> Documento de visão </a>
 
 
 

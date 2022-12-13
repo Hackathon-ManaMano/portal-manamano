@@ -4,12 +4,10 @@ export default {
   async newPost(
     legenda: string,
     data_hora: string,
-    id_empreendedora: string,
-    id_publicacao: number
+    id_empreendedora: string
   ) {
     try {
       const response = await supabase.from("publicacao").insert({
-        id_publicacao,
         legenda,
         data_hora,
         id_empreendedora,

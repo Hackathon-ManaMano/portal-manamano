@@ -160,21 +160,6 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
                     </div>
                 </div>
 
-                <div className="flex flex-row bg-gray-900 text-center ">
-                    <div className="flex flex-column xl:flex-row justify-content-evenly align-items-center col-12 mt-6 line-height-4">
-                        <p className="text-xl text-white">
-                            Rua das Palmeiras, 65 - Botafogo, Rio de Janeiro, RJ
-                            - Brasil
-                        </p>
-                        <p className="text-xl text-white">CEP: 22270-070</p>
-                        <p className="text-xl text-white">
-                            Contato: +55 (21) 22869988 / 30821632
-                        </p>
-                        <p className="text-xl text-white">
-                            Email: manamano@manamano.org.br
-                        </p>
-                    </div>
-                </div>
                 <div className="flex flex-row bg-gray-900 justify-content-center">
                     <div className="flex gap-7 md:gap-8 my-6">
                         <Link
@@ -221,6 +206,22 @@ export default function LayoutPublic({ children }: React.PropsWithChildren) {
                                 />
                             </a>
                         </Link>
+                    </div>
+                </div>
+                
+                <div className="flex flex-row bg-gray-900 text-center ">
+                    <div className="flex flex-column xl:flex-row justify-content-evenly align-items-center col-12 mb-5 line-height-4">
+                        <p className="text-xl text-white">
+                            Rua das Palmeiras, 65 - Botafogo, Rio de Janeiro, RJ
+                            - Brasil
+                        </p>
+                        <p className="text-xl text-white">CEP: 22270-070</p>
+                        <p className="text-xl text-white">
+                            Contato: +55 (21) 22869988 / 30821632
+                        </p>
+                        <p className="text-xl text-white">
+                            Email: manamano@manamano.org.br
+                        </p>
                     </div>
                 </div>
             </footer>

@@ -34,20 +34,25 @@ export interface CommentProps {
     data_hora: string;
     id_empreendedora: string;
 }
-
+export interface ImagesProps {
+    id_midia_publicacao: number;
+    id_publicacao: number;
+    anexo: string;
+}
 function PostContainer({
     id_publicacao,
     data_hora,
     legenda,
     empreendedora,
     usuario,
-    toast
+    toast,
 }: PostProps) {
     const [text, setText] = useState("");
     const [comment, setComment] = useState<CommentProps[]>([]);
-
+    const [image, setImageUrl] = useState<ImagesProps[]>([]);
     useEffect(() => {
         updateComment();
+        getImage();
     }, []);
 
     const updateComment = () => {
@@ -57,19 +62,21 @@ function PostContainer({
             .eq("id_publicacao", id_publicacao)
             .then((response) => setComment(response?.data as any));
     };
-    // const image = "https://cyhjgzfbnbfnvrbjfsvw.supabase.co/storage/v1/object/sign/midia-manamano/publicacao/Captura%20de%20tela_20221103_172610.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJtaWRpYS1tYW5hbWFuby9wdWJsaWNhY2FvL0NhcHR1cmEgZGUgdGVsYV8yMDIyMTEwM18xNzI2MTAucG5nIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcwOTc2NDU2LCJleHAiOjE5ODYzMzY0NTZ9.XBCebmO97gbpFPh6aUxXJSyln6ZcVaPKyHiYOI8IDjk"
-    // const getImage =() => {
-    //     supabase.
-    //     storage
-    //     .from("midia-manamano")
-    //     .select("*")
-    //     .eq("id_publicacao", id_publicacao)
-    //     .then((response) => setComment(response?.data as any));
-    // }
+
+    const getImage = () => {
+        supabase
+            .from("midia_publicacao")
+            .select("*")
+            .eq("id_publicacao", id_publicacao)
+            .then((response) => {
+                setImageUrl(response?.data as any);
+                console.log(response?.data as any);
+            });
+    };
     const postComment = () => {
         var today = new Date();
         try {
-            console.log(usuario)
+            console.log(usuario);
             commentService
                 .newComment(
                     text,
@@ -78,7 +85,14 @@ function PostContainer({
                     id_publicacao
                 )
                 .then((res) => {
-                 updateComment(); setText(""); showMessage("success","sucesso","Comentário criado com sucesso",toast);
+                    updateComment();
+                    setText("");
+                    showMessage(
+                        "success",
+                        "sucesso",
+                        "Comentário criado com sucesso",
+                        toast
+                    );
                 });
         } catch (err) {
             alert(err);
@@ -106,7 +120,7 @@ function PostContainer({
 
     const cardFooter = (
         <div className="grid">
-            
+             {comment?.length > 0? <Divider /> : ""}
             {comment?.map((commentInfo, index) =>
                 id_publicacao == comment[index].id_publicacao ? (
                     <Commentary
@@ -123,6 +137,7 @@ function PostContainer({
                     " "
                 )
             )}
+            
             <Divider />
             <div style={{ marginLeft: "5%", width: "70%" }}>
                 <InputTextarea
@@ -138,6 +153,7 @@ function PostContainer({
                     label="Enviar"
                     icon="pi pi-check"
                     onClick={postComment}
+                    
                 />
             </div>
         </div>
@@ -149,9 +165,9 @@ function PostContainer({
             footer={cardFooter}
         >
             <span>{legenda}</span>
-            {/* <Image
+            <Image
                 className="mt-4"
-                src = {image}
+                src={image[0]?.anexo}
                 alt="Empreendedoras"
                 width="100%"
                 height="100%"
@@ -161,7 +177,7 @@ function PostContainer({
                     objectFit: "cover",
                     overflow: "hidden",
                 }}
-            /> */}
+            />
         </Card>
     );
 }

@@ -106,7 +106,7 @@ function PostContainer({
 
     const cardFooter = (
         <div className="grid">
-            <Divider />
+            
             {comment?.map((commentInfo, index) =>
                 id_publicacao == comment[index].id_publicacao ? (
                     <Commentary

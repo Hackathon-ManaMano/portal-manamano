@@ -57,7 +57,15 @@ function PostContainer({
             .eq("id_publicacao", id_publicacao)
             .then((response) => setComment(response?.data as any));
     };
-
+    // const image = "https://cyhjgzfbnbfnvrbjfsvw.supabase.co/storage/v1/object/sign/midia-manamano/publicacao/Captura%20de%20tela_20221103_172610.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJtaWRpYS1tYW5hbWFuby9wdWJsaWNhY2FvL0NhcHR1cmEgZGUgdGVsYV8yMDIyMTEwM18xNzI2MTAucG5nIiwidHJhbnNmb3JtYXRpb25zIjoiIiwiaWF0IjoxNjcwOTc2NDU2LCJleHAiOjE5ODYzMzY0NTZ9.XBCebmO97gbpFPh6aUxXJSyln6ZcVaPKyHiYOI8IDjk"
+    // const getImage =() => {
+    //     supabase.
+    //     storage
+    //     .from("midia-manamano")
+    //     .select("*")
+    //     .eq("id_publicacao", id_publicacao)
+    //     .then((response) => setComment(response?.data as any));
+    // }
     const postComment = () => {
         var today = new Date();
         try {
@@ -141,9 +149,9 @@ function PostContainer({
             footer={cardFooter}
         >
             <span>{legenda}</span>
-            <Image
+            {/* <Image
                 className="mt-4"
-                src="/empreendedoras-feira.jpg"
+                src = {image}
                 alt="Empreendedoras"
                 width="100%"
                 height="100%"
@@ -153,7 +161,7 @@ function PostContainer({
                     objectFit: "cover",
                     overflow: "hidden",
                 }}
-            />
+            /> */}
         </Card>
     );
 }

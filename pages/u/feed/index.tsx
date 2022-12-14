@@ -3,8 +3,9 @@ import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 // Primereact
 import { InputText } from "primereact/inputtext";
 // Componentes
-import PostContainer, { PostProps } from "../../../components/Post";
+import PostContainer, { PostProps, ImagesProps } from "../../../components/Post";
 import InputWrapper, { InputProps } from "../../../components/newPost";
+
 // Supabase
 import { supabase } from "../../../services/supabase";
 // Utils
@@ -18,7 +19,6 @@ export default function Feed() {
     const [post, setPost] = useState<PostProps[]>([]);
     const [user, setUser] = useState<InputProps[]>([]);
     const [search, setSearch] = useState<string>("");
-
     const toast = useRef(null);
 
     const updatePosts = () => {
@@ -36,6 +36,7 @@ export default function Feed() {
                 ascending: false,
             })
             .then((response) => setPost(response?.data as any));
+
     };
     useEffect(() => {
         const getNomeEmpreendedora = async () => {

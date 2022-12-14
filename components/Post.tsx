@@ -50,9 +50,10 @@ function PostContainer({
     const [text, setText] = useState("");
     const [comment, setComment] = useState<CommentProps[]>([]);
     const [image, setImageUrl] = useState<ImagesProps[]>([]);
+
     useEffect(() => {
         updateComment();
-        getImage();
+        getImage(id_publicacao);
     }, []);
 
     const updateComment = () => {
@@ -63,11 +64,11 @@ function PostContainer({
             .then((response) => setComment(response?.data as any));
     };
 
-    const getImage = () => {
+    const getImage = (id: number) => {
         supabase
             .from("midia_publicacao")
             .select("*")
-            .eq("id_publicacao", id_publicacao)
+            .eq("id_publicacao", id)
             .then((response) => {
                 setImageUrl(response?.data as any);
                 console.log(response?.data as any);
@@ -119,65 +120,72 @@ function PostContainer({
     );
 
     const cardFooter = (
-        <div className="grid">
-             {comment?.length > 0? <Divider /> : ""}
-            {comment?.map((commentInfo, index) =>
-                id_publicacao == comment[index].id_publicacao ? (
-                    <Commentary
-                        key={index}
-                        id_comentario_publicacao={
-                            commentInfo.id_comentario_publicacao
-                        }
-                        id_publicacao={commentInfo.id_publicacao}
-                        id_empreendedora={commentInfo.id_empreendedora}
-                        data_hora={commentInfo.data_hora}
-                        comentario={commentInfo.comentario}
-                    />
-                ) : (
-                    " "
-                )
-            )}
-            
-            <Divider />
-            <div style={{ marginLeft: "5%", width: "70%" }}>
-                <InputTextarea
-                    style={{ width: "100%", marginBottom: 25, marginLeft: 10 }}
-                    placeholder="Escreva um comentário..."
-                    autoResize
-                    value={text}
-                    onChange={change}
-                />
+        <div>
+            <div className="grid">
+                {comment?.length > 0 ? <Divider /> : ""}
+                {comment?.map((commentInfo, index) =>
+                    id_publicacao == comment[index].id_publicacao ? (
+                        <Commentary
+                            key={index}
+                            id_comentario_publicacao={
+                                commentInfo.id_comentario_publicacao
+                            }
+                            id_publicacao={commentInfo.id_publicacao}
+                            id_empreendedora={commentInfo.id_empreendedora}
+                            data_hora={commentInfo.data_hora}
+                            comentario={commentInfo.comentario}
+                        />
+                    ) : (
+                        " "
+                    )
+                )}
+
+                <Divider />
             </div>
-            <div style={{ marginLeft: 20, marginTop: "1%" }}>
-                <Button
-                    label="Enviar"
-                    icon="pi pi-check"
-                    onClick={postComment}
-                    
-                />
+            <div className="flex align-items-center gap-2">
+                <div className="col-8">
+                    <InputTextarea
+                        placeholder="Escreva um comentário..."
+                        value={text}
+                        onChange={change}
+                        autoResize
+                        style={{ width: "100%" }}
+                    />
+                </div>
+                <div className="col-4 align-items-center">
+                    <Button
+                        label="Enviar"
+                        icon="pi pi-check"
+                        onClick={postComment}
+                    />
+                </div>
             </div>
         </div>
     );
     return (
         <Card
-            className="shadow-4 my-6 border"
+            className="shadow-4 my-5 border"
             header={cardHeader}
             footer={cardFooter}
         >
             <span>{legenda}</span>
-            <Image
-                className="mt-4"
-                src={image[0]?.anexo}
-                alt="Empreendedoras"
-                width="100%"
-                height="100%"
-                preview
-                style={{
-                    width: "100%",
-                    objectFit: "cover",
-                    overflow: "hidden",
-                }}
-            />
+            {image?.length > 0 ? (
+                <Image
+                    className="mt-4"
+                    src={image[0]?.anexo}
+                    alt="Empreendedoras"
+                    width="100%"
+                    height="100%"
+                    preview
+                    style={{
+                        width: "100%",
+                        objectFit: "cover",
+                        overflow: "hidden",
+                    }}
+                />
+            ) : (
+                ""
+            )}
         </Card>
     );
 }
